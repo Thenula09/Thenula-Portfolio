@@ -51,6 +51,31 @@ const items: TimelineItem[] = [
     date: "2016",
     desc: "Implemented interactive React components, optimized bundle size and accessibility, and added unit/integration tests to increase stability.",
   },
+  // duplicates to reach 4 items per kind (total 8 cards)
+  {
+    id: 6,
+    kind: "Experience",
+    title: "Product Designer (Contract)",
+    org: "Beta Labs",
+    date: "2015 — 2016",
+    desc: "Short-term contract delivering UI components and interaction patterns — focused on accessibility and performance optimizations.",
+  },
+  {
+    id: 7,
+    kind: "Education",
+    title: "MSc — Human Computer Interaction (Distinction)",
+    org: "University of Colombo",
+    date: "2019 — 2021",
+    desc: "Expanded thesis work with additional user studies and accessibility audits; coursework included UX research and prototyping.",
+  },
+  {
+    id: 8,
+    kind: "Education",
+    title: "BSc — Computer Science (Honours)",
+    org: "University of Peradeniya",
+    date: "2013 — 2017",
+    desc: "Graduated with honours; projects in web performance and accessibility; capstone focused on progressive web apps.",
+  },
 ];
 
 type Props = {
@@ -65,14 +90,35 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
 
   useEffect(() => {
     const cards = ref.current?.querySelectorAll<HTMLElement>(".timeline-card") ?? [];
-    gsap.set(cards, { opacity: 0, y: 30, scale: 0.99 });
+    const mover = ref.current?.querySelector<HTMLElement>(".moving-dot") ?? null;
 
+    gsap.set(cards, { opacity: 0, y: 30, scale: 0.99 });
+    if (mover) gsap.set(mover, { opacity: 0, top: 0 });
+
+    const setMoverToIndex = (index: number) => {
+      if (!ref.current || !mover) return;
+      const card = cards[index];
+      if (!card) return;
+      const containerRect = ref.current.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const y = cardRect.top - containerRect.top + cardRect.height / 2 - mover.offsetHeight / 2;
+      gsap.to(mover, { top: `${y}px`, opacity: 1, duration: 0.45, ease: "power3.out" });
+    };
+
+    // position on first render
+    if (cards.length > 0) setMoverToIndex(0);
+
+    let currentIndex = 0;
+    let ticking = false;
+
+    // reveal animation (run once per card) — keep observing so we still get onEnter events
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
+          const idx = Array.from(cards).indexOf(el);
+
           if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const idx = Array.from(cards).indexOf(el);
             gsap.to(el, {
               opacity: 1,
               y: 0,
@@ -81,26 +127,88 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
               ease: "power3.out",
               delay: idx * 0.06,
             });
-            io.unobserve(el);
           }
+
+          // whenever intersection state changes, pick the card closest to the container center
+          const pickClosest = () => {
+            if (!ref.current) return;
+            const containerRect = ref.current.getBoundingClientRect();
+            const containerCenter = containerRect.top + containerRect.height / 2;
+            let closestIdx = 0;
+            let closestDist = Infinity;
+            cards.forEach((card, i) => {
+              const r = card.getBoundingClientRect();
+              const cardCenter = r.top + r.height / 2;
+              const dist = Math.abs(cardCenter - containerCenter);
+              if (dist < closestDist) {
+                closestDist = dist;
+                closestIdx = i;
+              }
+            });
+            if (closestIdx !== currentIndex) {
+              currentIndex = closestIdx;
+              setMoverToIndex(closestIdx);
+            }
+          };
+
+          pickClosest();
         });
       },
-      { threshold: 0.12 },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
 
     cards.forEach((c) => io.observe(c));
-    return () => io.disconnect();
+
+    // also update on scroll for smooth follow when user scrolls past cards
+    const onScroll = () => {
+      if (ticking || !ref.current) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const containerRect = ref.current!.getBoundingClientRect();
+        const containerCenter = containerRect.top + containerRect.height / 2;
+        let closestIdx = 0;
+        let closestDist = Infinity;
+        cards.forEach((card, i) => {
+          const r = card.getBoundingClientRect();
+          const cardCenter = r.top + r.height / 2;
+          const dist = Math.abs(cardCenter - containerCenter);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIdx = i;
+          }
+        });
+        if (closestIdx !== currentIndex) {
+          currentIndex = closestIdx;
+          setMoverToIndex(closestIdx);
+        }
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [kind]);
 
   if (filtered.length === 0) return null;
 
   return (
-    <section className="w-full mt-6 md:mt-12">
-      <h3 className="mb-6 text-2xl md:text-3xl font-semibold text-colorDark">{title}</h3>
+    <section className="w-full mt-6 md:mt-12 py-24 md:py-48">
+      <h3 className="mb-6 text-3xl md:text-5xl font-semibold text-colorDark">{title}</h3>
 
-      <div ref={ref} className="relative max-w-maxWidth mx-auto">
-        {/* center line */}
-        <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-colorSecondary/20 -translate-x-1/2" />
+      <div ref={ref} className="relative max-w-[7080px] mx-auto px-6 md:px-12 overflow-visible">
+        {/* center line (now black) */}
+        <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-colorDark -translate-x-1/2 z-0" />
+
+        {/* moving dot (single) — follows the currently visible card */}
+        <div className="moving-dot absolute left-1/2 -translate-x-1/2 top-0 z-30 pointer-events-none">
+          <div className="h-6 w-6 md:h-12 md:w-12 rounded-full bg-colorPrimary border-4 border-white shadow-lg opacity-0" />
+        </div>
 
         <div className="space-y-8">
           {filtered.map((it, idx) => (
@@ -112,27 +220,25 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
                     : "md:col-start-7 md:col-end-13 md:pl-6 flex justify-start"
                 }
               >
-                <article className="timeline-card w-full md:w-[520px] relative z-10 transform-gpu rounded-3xl bg-white/60 border border-gray-100 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-transform duration-300">
+                <article className="timeline-card w-full md:w-[1560px] relative z-10 transform-gpu rounded-3xl bg-white/60 border border-gray-100 p-8 md:p-12 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-transform duration-300">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-colorSecondaryDark">{it.kind}</p>
-                      <h4 className="mt-2 text-lg font-semibold text-colorDark">{it.title}</h4>
-                      <p className="text-sm text-colorSecondaryLight">{it.org} • {it.date}</p>
+                      <p className="text-sm md:text-base uppercase tracking-wide text-colorSecondaryDark">{it.kind}</p>
+                      <h4 className="mt-2 text-lg md:text-3xl font-semibold text-colorDark">{it.title}</h4>
+                      <p className="text-sm md:text-lg text-colorSecondaryLight">{it.org} • {it.date}</p>
                     </div>
 
-                    <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-colorSecondary/10 flex items-center justify-center text-colorDark font-semibold shadow-inner">
+                    <div className="flex-shrink-0 h-20 w-20 md:h-28 md:w-28 rounded-2xl bg-colorSecondary/10 flex items-center justify-center text-colorDark text-lg md:text-3xl font-bold shadow-inner">
                       {idx + 1}
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm text-colorSecondaryDark leading-relaxed">{it.desc}</p>
+                  <p className="mt-6 text-sm md:text-lg text-colorSecondaryDark leading-relaxed">{it.desc}</p>
                 </article>
               </div>
 
-              {/* center dot */}
-              <div className="md:col-start-6 md:col-end-8 flex justify-center hidden md:flex">
-                <span className={`timeline-dot inline-block h-4 w-4 rounded-full bg-colorDark border-4 border-white ${idx % 2 === 0 ? 'translate-x-2' : '-translate-x-2'}`} />
-              </div>
+              {/* spacer for center column (dots removed) */}
+              <div className={`md:col-start-6 md:col-end-8 flex ${it.id === 1 ? "items-end" : "items-center"} justify-center hidden md:flex`} aria-hidden="true" />
             </div>
           ))}
         </div>

@@ -35,7 +35,7 @@ export function AboutSection({}) {
   }, []);
 
   return (
-    <section className="section section__2 second lightGradient items-center justify-center  px-paddingX pb-10 pt-paddingY text-colorDark">
+    <section className="section section__2 second lightGradient items-center justify-center px-paddingX pt-[calc(var(--paddingY)*2)] pb-[calc(var(--paddingY)*2)] text-colorDark">
       <Bulge type="Dark" />
       
       <header className="nav__container anime px-paddingX absolute z-[5000] left-0 top-0 w-full">

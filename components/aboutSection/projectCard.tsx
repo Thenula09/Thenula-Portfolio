@@ -2,30 +2,65 @@ import React from "react";
 
 type ProjectCardProps = {
   imgSrc: string;
+  index?: number;
+  title?: string;
+  category?: string;
+  footer?: string;
+  width?: string | number; // e.g. '190px' or 190
+  height?: string | number; // e.g. '254px' or 254
 };
 
-export default function ProjectCard({ imgSrc }: ProjectCardProps) {
+export default function ProjectCard({
+  imgSrc,
+  index = 0,
+  title = "Project Title",
+  category = "Project",
+  footer = "—",
+  width = "190px",
+  height = "254px",
+}: ProjectCardProps) {
+  const style: React.CSSProperties = {
+    width: typeof width === "number" ? `${width}px` : width,
+    height: typeof height === "number" ? `${height}px` : height,
+  };
+
   return (
-    <article className="relative aspect-video overflow-hidden rounded-3xl px-16 py-[1.5em]  md:rounded-[0rem] md:p-[0.2em] ">
-      {/* <div className="testimonialHeader flex items-center gap-[1em] md:block">
-        <div
-          // src={imgSrc}
-          // alt=""
-          className="h-[60px] w-[60px] rounded-full bg-colorLight md:mt-2.5 md:h-[106px] md:w-[106px]"
-        ></div>
-        <p className="max-w-fit justify-center whitespace-nowrap rounded-[30px] bg-colorSecondaryDark px-4 py-2 text-sm font-medium leading-5 tracking-normal text-stone-100 md:mt-5">
-          {clientName}
-        </p>
+    <div className="project-card" style={style}>
+      <div className="content">
+        {/* VISIBLE SIDE: image */}
+        <div className="back">
+          <div className="img">
+            <img src={imgSrc} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+            <div className="circle" />
+            <div className="circle" id="right" />
+            <div className="circle" id="bottom" />
+          </div>
+
+          {/* number badge on image (visible side) */}
+          <div className="project-number absolute left-4 top-4 z-20 rounded-full bg-colorDark text-colorLight w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-semibold text-sm md:text-base">
+            {index}
+          </div>
+        </div>
+
+        {/* FLIPPED SIDE: about / description */}
+        <div className="front">
+          <div className="front-content">
+            <small className="badge">{category}</small>
+            <div className="description">
+              <div className="title">
+                <p className="title-text">
+                  <strong>{title}</strong>
+                </p>
+              </div>
+              <p className="card-footer">{footer}</p>
+            </div>
+
+            <div className="mt-4">
+              <span className="back-cta px-3 py-2 rounded-md bg-colorPrimary text-colorDark text-sm font-semibold">Open</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <p className="mt-[1em] text-[0.8em]  tracking-tight  max-md:max-w-full  ">
-        “{testimonial}”
-      </p>*/}
-      <img
-        src={imgSrc}
-        alt=""
-        className="relative z-10 h-full w-full rounded-[0rem]"
-      />
-      <div className="mask absolute left-0 top-0 -z-10 h-full w-full bg-colorSecondaryLight opacity-80"></div>
-    </article>
+    </div>
   );
 }

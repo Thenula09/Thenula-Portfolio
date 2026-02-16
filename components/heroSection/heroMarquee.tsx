@@ -13,12 +13,15 @@ export function HeroMarquee({}) {
       const tl = gsap.timeline({
           repeat: -1,
           onReverseComplete() {
-            this.totalTime(this.rawTime() + this.duration() * 10); // otherwise when the playhead gets back to the beginning, it'd stop. So push the playhead forward 10 iterations (it could be any number)
+            // advance playhead forward without triggering callbacks to avoid recursion
+            this.totalTime(this.rawTime() + this.duration() * 10, true); // otherwise when the playhead gets back to the beginning, it'd stop — push it forward several iterations
           },
         }),
         elements = gsap.utils.toArray(targets) as HTMLElement[],
         clones = elements.map((el) => {
-          let clone = el.cloneNode(true);
+          let clone = el.cloneNode(true) as HTMLElement;
+          // mark clones so we can remove them later
+          clone.setAttribute("data-clone", "true");
           el.parentNode?.appendChild(clone);
           return clone;
         }),
@@ -35,18 +38,35 @@ export function HeroMarquee({}) {
       elements.forEach((el, i) =>
         tl.to([el, clones[i]], { xPercent: reverse ? 100 : -100, ...vars }, 0),
       );
-      window.addEventListener("resize", () => {
+
+      const resizeHandler = () => {
         let time = tl.totalTime(); // record the current time
         tl.totalTime(0); // rewind and clear out the timeline
         positionClones(); // reposition
         tl.totalTime(time); // jump back to the proper time
-      });
+      };
+
+      window.addEventListener("resize", resizeHandler);
+
+      // attach helpers to the timeline for external cleanup
+      (tl as any)._clones = clones;
+      (tl as any)._resizeHandler = resizeHandler;
+
       return tl;
     }
 
-    roll(".rollingText", { duration: 15 });
+    const marqueeTl = roll(".rollingText", { duration: 15 });
 
     return () => {
+      // kill timeline
+      marqueeTl && marqueeTl.kill();
+      // remove clones appended by roll
+      const clones = (marqueeTl as any)?._clones as HTMLElement[] | undefined;
+      clones?.forEach((c) => c.parentNode?.removeChild(c));
+      // remove resize handler
+      const handler = (marqueeTl as any)?._resizeHandler as (() => void) | undefined;
+      if (handler) window.removeEventListener("resize", handler);
+      // fallback: kill any tweens on selector
       gsap.killTweensOf(".rollingText");
     };
   }, []);

@@ -9,6 +9,7 @@ export function Main() {
     <div className="w-full">
       <HeroSection />
       <AboutSection />
+     
       {/* <WorkSection /> */}
       <ContactSection />
     </div>

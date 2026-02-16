@@ -429,3 +429,191 @@ input:-webkit-autofill:active {
   text-align: left;
   white-space: nowrap;
 }
+
+/* ---------- project flip-card (scoped to .project-card) ---------- */
+.project-card {
+  overflow: visible;
+  perspective: 1000px;
+  --project-card-width: 190px;
+  --project-card-height: 254px;
+  width: var(--project-card-width);
+  height: var(--project-card-height);
+}
+
+.project-card .content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* smoother & slower flip */
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 8px;
+  position: relative;
+}
+
+.project-card .front,
+.project-card .back {
+  background-color: #151515;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-card .back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card .back::before {
+  position: absolute;
+  content: ' ';
+  display: block;
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #ff9966, #ff9966, #ff9966, #ff9966, transparent);
+  /* smoother, faster rotation */
+  will-change: transform;
+  transform-origin: center;
+  animation: project-rotation 2200ms infinite linear;
+}
+
+.project-card .back-content {
+  position: absolute;
+  width: 96%;
+  height: 96%;
+  background-color: rgba(21,21,21,0.98);
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  /* prepare children for animated entrance */
+}
+
+/* back-side entrance animation (staggered) */
+.project-card .back-content .badge,
+.project-card .back-content h4,
+.project-card .back-content .card-footer,
+.project-card .back-content .back-cta {
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  transition: opacity 420ms cubic-bezier(.2,.9,.2,1), transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* skill-card (glass style) */
+.skill-cards {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.skill-card {
+  --r: -10;
+  /* smaller size */
+  width: 110px;
+  height: 130px;
+  background: linear-gradient(#ffffff12, rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 12px 16px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.44s cubic-bezier(.2,.9,.2,1);
+  border-radius: 10px;
+  margin: 0 -12px;
+  backdrop-filter: blur(6px);
+  transform: rotate(calc(var(--r) * 1deg));
+}
+.skill-card:hover { transform: rotate(0deg) scale(1.03); margin: 0 6px; }
+
+/* when the user moves the mouse over the row, straighten all cards */
+.skill-cards:hover .skill-card {
+  transform: rotate(0deg) scale(1);
+  margin: 0 6px;
+  transition: transform 360ms cubic-bezier(.2,.9,.2,1), margin 360ms cubic-bezier(.2,.9,.2,1);
+}
+/* small positional nudge so the spread looks natural */
+.skill-cards:hover .skill-card:nth-child(1) { transform: translateX(-3px) rotate(0deg) scale(1); }
+.skill-cards:hover .skill-card:nth-child(3) { transform: translateX(3px) rotate(0deg) scale(1); }
+.skill-card::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.skill-card .icon { color: var(--colorPrimary); }
+
+
+.project-card:hover .back-content .badge { transition-delay: 80ms; }
+.project-card:hover .back-content h4 { transition-delay: 140ms; }
+.project-card:hover .back-content .card-footer { transition-delay: 200ms; }
+.project-card:hover .back-content .back-cta { transition-delay: 260ms; }
+
+.project-card:hover .back-content .badge,
+.project-card:hover .back-content h4,
+.project-card:hover .back-content .card-footer,
+.project-card:hover .back-content .back-cta {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.project-card:hover .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes project-rotation {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+.project-card .front { transform: rotateY(180deg); color: white; }
+
+.project-card .front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card .front .img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.project-card .circle { width: 90px; height: 90px; border-radius: 50%; background-color: transparent; position: relative; filter: blur(15px); will-change: transform; animation: project-floating 1800ms infinite ease-in-out; }
+.project-card .circle#bottom { background-color:transparent; left: 50px; top: 0px; width: 150px; height: 150px; animation-delay: -800ms; }
+.project-card .circle#right { background-color: transparent; left: 160px; top: -80px; width: 30px; height: 30px; animation-delay: -1800ms; }
+
+@keyframes project-floating { 0% { transform: translateY(0px); } 50% { transform: translateY(10px); } 100% { transform: translateY(0px); } }
+
+.project-card .description { box-shadow: 0px 0px 10px 5px #00000088; width: 100%; padding: 10px; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); border-radius: 6px; }
+.project-card .badge { background-color: rgba(0,0,0,0.34); padding: 4px 8px; border-radius: 10px; backdrop-filter: blur(2px); width: fit-content; }
+.project-card .title-text { font-size: 11px; max-width: 100%; display:flex; justify-content:space-between; }
+.project-card .card-footer { color: #ffffff88; margin-top: 5px; font-size: 10px; }
+
+.project-card .project-number { position: absolute; left: 8px; top: 8px; z-index: 20; border-radius: 9999px; background: var(--colorDark); color: var(--colorLight); width: 32px; height: 32px; display:flex; align-items:center; justify-content:center; font-weight:600; }
+.project-card .project-number { transition: transform .45s cubic-bezier(.2,.9,.2,1); transform-origin: center; }
+
+.project-card .front img { width:100%; height:100%; object-fit:cover; transition: transform 480ms cubic-bezier(.2,.9,.2,1); }
+.project-card:hover .front img { transform: scale(1.12); }
+.project-card:hover .project-number { transform: scale(1.05); }
+
+/* end project flip-card */
