@@ -60,6 +60,38 @@ const items: TimelineItem[] = [
     date: "2013 — 2017",
     desc: "Software engineering major; capstone focused on progressive web apps and accessibility.",
   },
+  {
+    id: 7,
+    kind: "Experience",
+    title: "AI / ML Engineer (Contract)",
+    org: "Freelance",
+    date: "2020 — 2021",
+    desc: "Prototyped machine‑learning features and integrated models into production web apps; focused on inference optimisation and UX for ML-driven flows.",
+  },
+  {
+    id: 8,
+    kind: "Experience",
+    title: "Project Planner & Designer",
+    org: "Independent",
+    date: "2018 — 2020",
+    desc: "Ran product planning, design sprints and cross-functional coordination for early-stage products and prototypes.",
+  },
+  {
+    id: 9,
+    kind: "Education",
+    title: "Professional Certificate — Machine Learning",
+    org: "Coursera / Stanford",
+    date: "2020",
+    desc: "Specialization coursework in applied machine learning and model evaluation techniques.",
+  },
+  {
+    id: 10,
+    kind: "Experience",
+    title: "Open Source Contributor",
+    org: "Various",
+    date: "2015 — Present",
+    desc: "Contributed to UI libraries and developer tooling; authored utilities adopted by community projects.",
+  },
 ];
 
 type Props = {
@@ -186,8 +218,8 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
       <h3 className="mb-6 text-3xl md:text-5xl font-semibold text-colorDark text-center md:text-center">{title}</h3>
 
       <div ref={ref} className="relative max-w-[7080px] mx-auto px-6 md:px-12 overflow-visible">
-        {/* center line (now black) */}
-        <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-colorDark -translate-x-1/2 z-0" />
+        {/* center line — visible on all sizes (subtle on small screens) */}
+        <div className="absolute left-1/2 top-0 h-full w-[1px] md:w-[2px] bg-colorDark/30 md:bg-colorDark -translate-x-1/2 z-0 pointer-events-none" />
 
         {/* moving dot (single) — follows the currently visible card */}
         <div className="moving-dot absolute left-1/2 -translate-x-1/2 top-0 z-30 pointer-events-none">

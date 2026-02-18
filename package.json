@@ -21,6 +21,7 @@
     "@splinetool/r3f-spline": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "framer-motion": "^12.34.2",
     "fullpage.js": "^4.0.20",
     "gsap": "^3.12.4",
     "lottie-react": "^2.4.0",
