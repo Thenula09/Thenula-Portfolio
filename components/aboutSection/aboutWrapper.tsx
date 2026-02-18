@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Magentic from "../ui/magentic";
 import { gsap } from "gsap";
 import { AboutMarquee } from "./aboutMarquee";
@@ -58,6 +58,8 @@ export function AboutWrapper({}) {
     return () => io.disconnect();
   }, []);
 
+  const [timelineKind, setTimelineKind] = useState<"All" | "Experience" | "Education">("All");
+
   return (
     <div className="w-full">
       <main className="flex h-full w-full max-w-maxWidth grow flex-col md:flex-row items-center justify-center gap-8 mt-8 px-paddingX text-[5.8vw] md:text-[clamp(20px,_1vw_+_14px,_32px)]">
@@ -85,9 +87,23 @@ export function AboutWrapper({}) {
         </div>
       </main>
 
-      {/* Combined Experience & Education */}
+      {/* Small tab control: All / Experience / Education (under About) */}
       <div className="max-w-maxWidth mx-auto px-paddingX mt-8">
-        <ExperienceEducation kind="All" />
+        <div className="flex items-center justify-center gap-6 mb-6">
+          {(["All", "Experience", "Education"] as const).map((k) => (
+            <button
+              key={k}
+              onClick={() => setTimelineKind(k)}
+              className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
+                timelineKind === k ? "bg-colorPrimary text-colorDark shadow-md" : "text-colorSecondaryLight hover:opacity-80"
+              }`}
+            >
+              {k}
+            </button>
+          ))}
+        </div>
+
+        <ExperienceEducation kind={timelineKind} />
       </div>
 
       {/* Skills & Tools (moved above Projects) */}
@@ -96,7 +112,7 @@ export function AboutWrapper({}) {
       </div>
 
       {/* My Works & Projects (3x3 grid) */}
-      <div className="max-w-maxWidth mx-auto px-paddingX mt-[80px] relative overflow-visible">
+      <div className="max-w-maxWidth mx-auto px-paddingX mt-[120px] md:mt-[160px] relative overflow-visible projects-wrapper">
         <DecorativeCard className="absolute inset-0 -z-10 pointer-events-none" />
 
         <h3 className="mb-6 text-2xl md:text-3xl font-semibold text-colorLight text-center projects-title anime">My Latest Projects and Works</h3>
@@ -125,8 +141,8 @@ export function AboutWrapper({}) {
           </a>
         </article>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative z-10 justify-items-center">
-          {/* map projects (responsive cards) — 8 items in two rows on md+ (centered) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10 justify-items-center">
+          {/* map projects (responsive cards) — 1 / 2 / 3 / 4 columns depending on breakpoint */}
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/" },
             { title: "Simple Font Replacer", category: "Figma plugin", footer: "Figma plugin published", image: "/img/projects/2.avif", link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer" },
@@ -138,7 +154,8 @@ export function AboutWrapper({}) {
             { title: "Project 8", category: "Other", footer: "Description here", image: "/img/projects/1.avif", link: "#" },
           ].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noreferrer">
-              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} width={"360px"} height={"270px"} />
+              {/* rely on CSS variables for sizing so cards adapt at each breakpoint */}
+              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} />
             </a>
           ))}
         </div>

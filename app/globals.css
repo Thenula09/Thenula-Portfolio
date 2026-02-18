@@ -650,7 +650,8 @@ input:-webkit-autofill:active {
   --r: -8;
   /* compact size per request */
   width: 110px;
-  height: 80px;
+  height: auto; /* allow height to expand */
+  min-height: 80px;
   background: linear-gradient(#ffffff12, rgba(255,255,255,0.02));
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 8px 10px rgba(0,0,0,0.12);
@@ -658,13 +659,55 @@ input:-webkit-autofill:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: 0.28s cubic-bezier(.2,.9,.2,1);
+  transition: transform 0.28s cubic-bezier(.2,.9,.2,1), margin 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 280ms;
   border-radius: 10px;
   margin: 0 -6px;
   backdrop-filter: blur(6px);
   transform: rotate(calc(var(--r) * 1deg));
+  overflow: visible;
 }
 .skill-card:hover { transform: rotate(0deg) scale(1.02); margin: 0 6px; }
+
+/* expanded state — increases height smoothly via JS, add visual emphasis */
+.skill-card.expanded {
+  transform: rotate(0deg) scale(1.02);
+  margin: 6px;
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 18px 30px rgba(0,0,0,0.18);
+}
+
+/* details area inside card — JS animates height for smooth layout shift */
+.skill-details {
+  height: 0;
+  opacity: 0;
+  transition: height 300ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease-in-out;
+}
+.skill-details-inner {
+  padding: 6px 0px 8px;
+}
+
+/* ensure skill cards can wrap and expand without overlapping */
+@media (min-width: 640px) {
+  .skill-card { width: 140px; }
+}
+@media (min-width: 1024px) {
+  .skill-card { width: 160px; }
+}
+
+/* Projects wrapper — when any skill card is expanded we add extra vertical space (+80px) */
+.projects-wrapper {
+  transition: margin-top 320ms cubic-bezier(.2,.9,.2,1);
+  /* ensure this rule can override utility margin classes */
+  margin-top: 120px;
+}
+@media (min-width: 768px) {
+  .projects-wrapper { margin-top: 160px; }
+}
+
+body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
+@media (min-width: 768px) {
+  body.skill-expanded .projects-wrapper { margin-top: calc(160px + 80px); }
+}
 
 /* when the user moves the mouse over the row, straighten all cards */
 .skill-cards:hover .skill-card {
@@ -745,6 +788,40 @@ input:-webkit-autofill:active {
 .project-card .front img { width:100%; height:100%; object-fit:cover; transition: transform 480ms cubic-bezier(.2,.9,.2,1); }
 .project-card:hover .front img { transform: scale(1.12); }
 .project-card:hover .project-number { transform: scale(1.05); }
+
+/* responsive sizes for project cards (mobile → laptop → desktop) */
+:root {
+  /* sensible mobile-first defaults are already set on the .project-card rule, these media queries override via the CSS variables */
+}
+
+@media (min-width: 640px) {
+  .project-card {
+    --project-card-width: 220px;
+    --project-card-height: 270px;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    --project-card-width: 260px;
+    --project-card-height: 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* laptop: a bit wider but shorter height for horizontal layouts */
+  .project-card {
+    --project-card-width: 320px;
+    --project-card-height: 270px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .project-card {
+    --project-card-width: 360px;
+    --project-card-height: 270px;
+  }
+}
 
 /* decorative background card (used behind Projects & Work) */
 .decorative-card { pointer-events: none; position: absolute; inset: 0; display: block; z-index: -10; }

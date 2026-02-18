@@ -9,6 +9,7 @@ export default function SkillsSection() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [skills, setSkills] = useState<Skill[]>(initialSkills);
   const [tools, setTools] = useState<string[]>(initialTools);
+  const [expandedSet, setExpandedSet] = useState<Record<string, boolean>>({});
 
   // form state
   const [newSkillName, setNewSkillName] = useState("");
@@ -36,6 +37,20 @@ export default function SkillsSection() {
     chips.forEach((c) => io.observe(c));
     return () => io.disconnect();
   }, [skills, tools]);
+
+  // toggle body class when any skill card is expanded (used to push Projects down)
+  useEffect(() => {
+    const anyExpanded = Object.values(expandedSet).some(Boolean);
+    document.body.classList.toggle('skill-expanded', anyExpanded);
+    return () => {
+      // cleanup when component unmounts
+      document.body.classList.remove('skill-expanded');
+    };
+  }, [expandedSet]);
+
+  const handleCardToggle = (label: string, isExpanded: boolean) => {
+    setExpandedSet((prev) => ({ ...prev, [label]: isExpanded }));
+  };
 
   const addSkill = () => {
     const name = newSkillName.trim();
@@ -139,7 +154,7 @@ export default function SkillsSection() {
             <h4 className="mb-4 text-lg font-semibold text-colorDark">{section.title}</h4>
             <div className="skill-cards mb-6">
               {section.items.map((label) => (
-                <SkillCard key={label} label={label} r={-8} />
+                <SkillCard key={label} label={label} r={-8} onToggle={(isExpanded) => handleCardToggle(label, isExpanded)} />
               ))}
             </div>
           </div>
