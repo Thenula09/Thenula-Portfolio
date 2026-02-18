@@ -228,6 +228,7 @@ textPath {
 .wrapperRollingText {
   white-space: nowrap;
   position: absolute;
+  margin-left: 300px;
   bottom: 5%;
   /* width: 100vw; */
 
@@ -256,47 +257,71 @@ textPath {
   position: absolute;
   left: 0;
   bottom: 50%;
+  color: #ffffff !important;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+ 
+  width: 100%;
+  margin-right : 130px;
 }
 
 .section__1 .left .free {
   white-space: nowrap;
 }
 
+.section__1 .left .hero-name {
+  position: relative;
+  z-index: 30;
+  margin-bottom: 30px;
+}
+
+.section__1 .left .hero-name .animate__this {
+  position: relative !important;
+  transform: translate(0%, 0%) !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: bold;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
 .section__1 .left .animation__wrapper {
   overflow: hidden;
   position: relative;
+  color: #ffffff !important;
+  z-index: 50;
+  height: 100px;
+  display: block;
+  width: 100%;
 }
 
 .section__1 .left .animate__this {
-  display: inline-block;
+  display: block;
   position: absolute;
-  /* margin-left: 20px; */
-  /* left: 50%; */
-  transform: translate(0%, 200%) scale(1, 1);
-  transform-origin: 50% 100%;
+  top: 40px;
+  left: 0;
   white-space: nowrap;
   opacity: 0;
-  color: #ffffff; /* force white for hero titles */
-  -webkit-text-fill-color: #ffffff;
-  /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 90%); */
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  font-size: clamp(25px, 3.5vw, 50px);
+  font-weight: bold;
+  z-index: 60;
+  letter-spacing: -0.02em;
 }
 
 /* fallback: show the first title if JS/GSAP hasn't run yet */
 .section__1 .left .animation__wrapper .animate__this:first-child {
-  transform: translate(0%, 0%) !important;
   opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
-.section__1 .left:before {
-  display: block;
-  content: "";
-  background-image: url(/svg/arrow2.svg);
-  background-size: cover;
-  height: 0.8em;
-  width: 0.8em;
-  position: absolute;
-  transform: translate(0px, -2em);
-}
+
 
 /* explicit element fallback for the hero arrow (ensures visibility) */
 .section__1 .left .hero-arrow {
@@ -306,9 +331,11 @@ textPath {
   height: 0.8em;
   width: 0.8em;
   position: absolute;
-  transform: translate(0px, -2em);
+  transform: translate(0px, -1.5em);
   left: 0.25rem;
-  top: 0;
+  margin-left: 0px;
+  top: 120px;
+
   pointer-events: none;
 }
 
@@ -316,6 +343,8 @@ textPath {
   position: absolute;
   right: 0;
   bottom: 50%;
+  transform: translateY(20px);
+  margin-top: 50px;
 }
 
 .email_section1 .round {
@@ -358,6 +387,7 @@ textPath {
     right: 0px;
     bottom: 0px;
     left: auto;
+    transform: translateY(20px);
   }
 
   .email_section1 .round {

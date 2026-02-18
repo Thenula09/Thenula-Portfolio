@@ -12,35 +12,48 @@ export function HeroWrapper({}) {
     if (!root) return;
     const titles = Array.from(root.querySelectorAll<HTMLElement>(".animation__wrapper .animate__this"));
 
-    if (titles.length <= 1) {
-      if (titles[0]) gsap.set(titles[0], { y: "0%", opacity: 1 });
-      titlesTl.current = gsap.timeline({ repeat: -1 });
-      return;
-    }
+    console.log("Found titles:", titles.length);
+    console.log("Titles:", titles);
 
-    gsap.set(titles, { y: "140%", opacity: 0 });
-    gsap.set(titles[0], { y: "0%", opacity: 1 });
+    if (titles.length === 0) return;
 
-    const tl = gsap.timeline({ repeat: -1 });
-    const ease = "power3.inOut";
+    // Hide all titles initially
+    gsap.set(titles, { opacity: 0 });
+    
+    // Show first title
+    gsap.set(titles[0], { opacity: 1 });
 
-    // show each title for 2s, transition duration 0.6s
-    const HOLD = 2; // visible time per title (seconds)
-    const TRANS = 0.6; // transition duration
+    console.log("First title set to visible");
 
-    titles.forEach((el, i) => {
-      const next = titles[(i + 1) % titles.length];
+    let currentIndex = 0;
 
-      // current item moves up and fades out after a HOLD
-      tl.to(el, { y: "-140%", opacity: 0, duration: TRANS, delay: HOLD, ease });
+    const showNextTitle = () => {
+      console.log("Switching from title:", currentIndex);
+      // Hide current title
+      gsap.to(titles[currentIndex], { 
+        opacity: 0, 
+        duration: 1.0,
+        onComplete: () => {
+          // Show next title
+          currentIndex = (currentIndex + 1) % titles.length;
+          console.log("Showing next title:", currentIndex, titles[currentIndex]?.textContent);
+          gsap.fromTo(titles[currentIndex], 
+            { opacity: 0 },
+            { opacity: 1, duration: 1.0 }
+          );
+        }
+      });
+    };
 
-      // next item comes from below, overlap the transition
-      tl.fromTo(next, { y: "140%", opacity: 0 }, { y: "0%", opacity: 1, duration: TRANS, ease }, `-=${TRANS}`);
-    });
-
-    titlesTl.current = tl;
-
-    return () => { titlesTl.current?.kill(); };
+    // Start animation cycle immediately
+    console.log("Starting animation cycle immediately");
+    // set to 4000ms so each title is fully visible for 2s (interval = visible time + fadeOut + fadeIn)
+    const interval = setInterval(showNextTitle, 4000);
+      
+    return () => {
+      clearInterval(interval);
+      if (titlesTl.current) titlesTl.current.kill();
+    };
   }, []);
 
   return (
@@ -51,15 +64,26 @@ export function HeroWrapper({}) {
         <span className="hero-arrow" aria-hidden="true" />
         <div className="free anime sr-only">Hero titles</div>
 
-        <div className="animation__wrapper anime">
+        <div className="animation__wrapper anime" style={{ height: '100px', position: 'relative', zIndex: 50 }}>
           {[
+            "  ",
             "Full‑stack developer",
             "Mobile application developer",
             "Web developer",
             "AI / ML engineer",
             "Project planner & designer",
           ].map((title, i) => (
-            <span key={i} className={`animate__this animate__this${i + 1} left-0`}>
+            <span key={i} className={`animate__this animate__this${i + 1} left-0`} style={{ 
+              display: 'block', 
+              position: 'absolute', 
+              top: '20px',
+              left: '0',
+              color: '#ffffff',
+              fontSize: 'clamp(25px, 3.5vw, 50px)',
+              fontWeight: 'bold',
+              zIndex: 60,
+              opacity: i === 0 ? 1 : 0
+            }}>
               {title}
               <span className="yellow__it">.</span>
               <br />
