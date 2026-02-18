@@ -16,8 +16,8 @@ export default function ProjectCard({
   title = "Project Title",
   category = "Project",
   footer = "—",
-  width = "190px",
-  height = "254px",
+  width = "160px",
+  height = "224px",
 }: ProjectCardProps) {
   const style: React.CSSProperties = {
     width: typeof width === "number" ? `${width}px` : width,

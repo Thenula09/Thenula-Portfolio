@@ -276,7 +276,15 @@ textPath {
   transform-origin: 50% 100%;
   white-space: nowrap;
   opacity: 0;
+  color: #ffffff; /* force white for hero titles */
+  -webkit-text-fill-color: #ffffff;
   /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 90%); */
+}
+
+/* fallback: show the first title if JS/GSAP hasn't run yet */
+.section__1 .left .animation__wrapper .animate__this:first-child {
+  transform: translate(0%, 0%) !important;
+  opacity: 1 !important;
 }
 
 .section__1 .left:before {
@@ -288,6 +296,20 @@ textPath {
   width: 0.8em;
   position: absolute;
   transform: translate(0px, -2em);
+}
+
+/* explicit element fallback for the hero arrow (ensures visibility) */
+.section__1 .left .hero-arrow {
+  display: block;
+  background-image: url(/svg/arrow2.svg);
+  background-size: cover;
+  height: 0.8em;
+  width: 0.8em;
+  position: absolute;
+  transform: translate(0px, -2em);
+  left: 0.25rem;
+  top: 0;
+  pointer-events: none;
 }
 
 .email_section1 {

@@ -165,64 +165,34 @@ const FullpageProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const ease = CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 ");
-    about.current = gsap
-      .timeline({ defaults: { ease: "none" }, repeat: -1 })
-      .fromTo(
-        ".left .animate__this1",
-        {
-          y: "0%",
-          opacity: 1,
-        },
-        {
-          y: "-140%",
-          opacity: 0,
-          duration: 0.9,
-          delay: 1.7,
-          ease,
-        },
-      )
-      .fromTo(
-        ".left .animate__this2",
-        {
-          y: "140%",
-          opacity: 0,
-        },
-        {
-          y: "0%",
-          opacity: 1,
-          duration: 0.9,
-          ease,
-        },
-        "-=0.9",
-      )
-      .fromTo(
-        ".left .animate__this2",
-        {
-          y: "0%",
-          opacity: 1,
-        },
-        {
-          y: "-140%",
-          opacity: 0,
-          delay: 1.7,
-          duration: 0.9,
-          ease,
-        },
-      )
-      .fromTo(
-        ".left .animate__this1",
-        {
-          y: "140%",
-          opacity: 0,
-        },
-        {
-          y: "0%",
-          opacity: 1,
-          duration: 0.9,
-          ease,
-        },
-        "-=0.9",
-      );
+    // rotate any number of `.animate__this` items (works with 1..n). Uses the existing GSAP timeline
+    const titles = gsap.utils.toArray<HTMLElement>(".left .animate__this");
+
+    if (titles.length <= 1) {
+      // nothing to rotate — show single item if present
+      if (titles[0]) gsap.set(titles[0], { y: "0%", opacity: 1 });
+      about.current = gsap.timeline({ defaults: { ease: "none" }, repeat: -1 });
+    } else {
+      // set initial state: all below, first visible
+      gsap.set(titles, { y: "140%", opacity: 0 });
+      gsap.set(titles[0], { y: "0%", opacity: 1 });
+
+      const HOLD = 2; // visible time per title (seconds)
+      const TRANS = 0.6; // transition duration (s)
+      const tl = gsap.timeline({ defaults: { ease: "none" }, repeat: -1 });
+
+      titles.forEach((el, i) => {
+        const next = titles[(i + 1) % titles.length];
+
+        // current item moves up and fades out after HOLD
+        tl.to(el, { y: "-140%", opacity: 0, duration: TRANS, delay: HOLD, ease });
+
+        // next item comes from below, overlapping the previous animation
+        tl.fromTo(next, { y: "140%", opacity: 0 }, { y: "0%", opacity: 1, duration: TRANS, ease }, `-=${TRANS}`);
+      });
+
+      about.current = tl;
+    }
 
     const myText = new SplitType("#my-text", { types: "lines" });
     const myText2 = new SplitType("#my-text .line", {

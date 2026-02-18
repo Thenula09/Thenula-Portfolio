@@ -38,7 +38,7 @@ export function HeroButton({}) {
           chars: "-x",
         },
         {
-          text: "Latest Work",
+          text: "Sri Lanka",
           chars: "-x",
         },
       ]}
@@ -47,9 +47,9 @@ export function HeroButton({}) {
         <div className="round hidden items-center justify-center md:flex">
           <p className="absolute left-[37%] whitespace-nowrap text-[21px]">
             <span>
-              <span className="scrambleText">Check out</span>
+              <span className="scrambleText">Location at </span>
               <br />
-              <span className="scrambleText">Latest Work</span>
+              <span className="scrambleText">Sri Lanka</span>
             </span>
           </p>
         </div>

@@ -1,9 +1,16 @@
 import { links } from "@/data/data";
 import React from "react";
+import DecorativeCard from "@/components/ui/DecorativeCard";
 export function WorkWrapper({}) {
   return (
     <main className="relative flex h-full w-full max-w-maxWidth grow items-center justify-center">
-      <div className="flex flex-col items-center justify-center">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="max-w-maxWidth mx-auto h-full px-paddingX relative">
+          <DecorativeCard className="absolute inset-0 -z-10 pointer-events-none" />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center z-10">
         <div className="anime">
           <h2 className="work_heading mask">
             Recent <br />
@@ -44,7 +51,7 @@ export function WorkWrapper({}) {
           </div>
         </a>
       </div>
-      <div className="section3__video anime ">
+      <div className="section3__video anime z-10 ">
         <video
           className="rounded-3xl  md:rounded-[3rem]"
           id="video"

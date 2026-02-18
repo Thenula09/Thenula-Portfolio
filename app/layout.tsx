@@ -52,7 +52,7 @@ export default function RootLayout({
         <GoogleAnalytics />
       </head>
 
-      <body className={helvetica.className}>
+      <body className={`${helvetica.className} overflow-x-hidden`}>
         <StoreProvider>{children}</StoreProvider>
       </body>
       <Script src="https://cdn.jsdelivr.net/gh/vipulkumar-dev/gsap@2024/ScrambleTextPlugin.min.js" />

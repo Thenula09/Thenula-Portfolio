@@ -83,6 +83,10 @@ export function HeaderNavigation() {
       href: links.work,
     },
     {
+      name: "Blogs",
+      href: links.blog,
+    },
+    {
       name: "Contact",
       href: links.email,
     },

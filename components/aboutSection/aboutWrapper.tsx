@@ -14,6 +14,8 @@ import ThenulaAbout from "./Thenulabaout.jpg";
 import ExperienceEducation from "./experienceEducation";
 import ProjectCard from "./projectCard";
 import SkillsSection from "./skillsSection";
+import DecorativeCard from "@/components/ui/DecorativeCard";
+import DiscoverButton from "@/components/ui/DiscoverButton";
 
 export function AboutWrapper({}) {
   useEffect(() => {
@@ -88,36 +90,43 @@ export function AboutWrapper({}) {
         <ExperienceEducation kind="All" />
       </div>
 
+      {/* Skills & Tools (moved above Projects) */}
+      <div className="max-w-maxWidth mx-auto px-paddingX mt-10">
+        <SkillsSection />
+      </div>
+
       {/* My Works & Projects (3x3 grid) */}
-      <div className="max-w-maxWidth mx-auto px-paddingX mt-12">
-        <h3 className="mb-6 text-2xl md:text-3xl font-semibold text-colorDark">My Latest Projects and Works</h3>
+      <div className="max-w-maxWidth mx-auto px-paddingX mt-[80px] relative overflow-visible">
+        <DecorativeCard className="absolute inset-0 -z-10 pointer-events-none" />
+
+        <h3 className="mb-6 text-2xl md:text-3xl font-semibold text-colorLight text-center projects-title anime">My Latest Projects and Works</h3>
 
         {/* Featured (latest) project */}
-        <article className="group relative mb-8 overflow-hidden rounded-3xl bg-card/60 border border-border">
+        <article className="group relative mb-8 overflow-hidden rounded-3xl bg-card/60 border border-border z-10">
           <a
             href="https://www.yieldstone.ai/"
             target="_blank"
             rel="noreferrer"
             className="block md:flex items-center gap-6"
           >
-            <div className="w-full md:w-1/2 h-[220px] md:h-[360px] overflow-hidden rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none">
+            <div className="w-full md:w-3/5 h-[150px] md:h-[300px] overflow-hidden rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none">
               <img src="/img/projects/1.avif" alt="YieldStone" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
 
-            <div className="p-6 md:p-8 md:w-1/2">
-              <p className="mb-3 text-xs uppercase tracking-wide text-colorSecondaryDark">Featured • Latest</p>
-              <h4 className="text-xl md:text-2xl font-semibold text-colorDark">YieldStone — Page</h4>
-              <p className="mt-3 text-sm md:text-base text-colorSecondaryLight">Webflow site — landing & marketing pages built for YieldStone.</p>
+            <div className="p-4 md:p-6 md:w-2/5 flex flex-col justify-center h-[150px] md:h-[300px]">
+              <p className="mb-2 text-xs uppercase tracking-wide text-colorSecondaryDark">Featured • Latest</p>
+              <h4 className="text-lg md:text-xl font-semibold text-colorDark">YieldStone — Page</h4>
+              <p className="mt-2 text-sm md:text-sm text-colorSecondaryLight">Webflow site — landing & marketing pages built for YieldStone.</p>
 
-              <div className="mt-6">
-                <span className="inline-block rounded-md bg-colorPrimary px-4 py-2 text-sm font-semibold text-colorDark">View Project</span>
+              <div className="mt-4">
+                <span className="inline-block rounded-md bg-colorPrimary px-3 py-2 text-sm font-semibold text-colorDark">View Project</span>
               </div>
             </div>
           </a>
         </article>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {/* map projects (400x300 sized cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative z-10 justify-items-center">
+          {/* map projects (responsive cards) — 8 items in two rows on md+ (centered) */}
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/" },
             { title: "Simple Font Replacer", category: "Figma plugin", footer: "Figma plugin published", image: "/img/projects/2.avif", link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer" },
@@ -127,23 +136,17 @@ export function AboutWrapper({}) {
             { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/projects/6.avif", link: "#" },
             { title: "Project 7", category: "Other", footer: "Description here", image: "/img/projects/7.avif", link: "#" },
             { title: "Project 8", category: "Other", footer: "Description here", image: "/img/projects/1.avif", link: "#" },
-            { title: "Project 9", category: "Other", footer: "Description here", image: "/img/projects/2.avif", link: "#" },
           ].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noreferrer">
-              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} width={"400px"} height={"300px"} />
+              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} width={"360px"} height={"270px"} />
             </a>
           ))}
         </div>
 
-        <div className="mt-6">
-          <a href="/work" className="inline-block text-sm text-colorSecondaryDark underline">
-            View all projects →
-          </a>
-        </div>
-
-        {/* Skills & Tools */}
-        <div className="mt-10">
-          <SkillsSection />
+        <div className="mt-6 z-10 flex justify-center">
+          <div>
+            <DiscoverButton href="/work">View all projects</DiscoverButton>
+          </div>
         </div>
       </div>
     </div>

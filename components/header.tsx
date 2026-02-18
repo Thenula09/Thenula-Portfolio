@@ -113,6 +113,18 @@ export function Header({ color, className, mode = "hamburger" }: HeaderProps) {
             </Magentic>
             
             <Magentic
+              href={links.blog}
+              strength={40}
+              className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
+              scrambleParams={{
+                text: "Blogs",
+                chars: "-x",
+              }}
+            >
+              <span className="mask scrambleText">Blogs</span>
+            </Magentic>
+
+            <Magentic
               href={links.contact}
               strength={40}
               className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}

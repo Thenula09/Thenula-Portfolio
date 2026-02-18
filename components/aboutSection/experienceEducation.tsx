@@ -198,8 +198,8 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
   if (filtered.length === 0) return null;
 
   return (
-    <section className="w-full mt-6 md:mt-12 py-24 md:py-48">
-      <h3 className="mb-6 text-3xl md:text-5xl font-semibold text-colorDark">{title}</h3>
+    <section className="w-full mt-[80px] md:mt-[80px] py-24 md:py-48">
+      <h3 className="mb-6 text-3xl md:text-5xl font-semibold text-colorDark text-center md:text-center">{title}</h3>
 
       <div ref={ref} className="relative max-w-[7080px] mx-auto px-6 md:px-12 overflow-visible">
         {/* center line (now black) */}
@@ -220,20 +220,20 @@ export default function ExperienceEducation({ kind = "All" }: Props) {
                     : "md:col-start-7 md:col-end-13 md:pl-6 flex justify-start"
                 }
               >
-                <article className="timeline-card w-full md:w-[1560px] relative z-10 transform-gpu rounded-3xl bg-white/60 border border-gray-100 p-8 md:p-12 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-transform duration-300">
+                <article className="timeline-card w-full md:max-w-[720px] relative z-10 transform-gpu rounded-3xl p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-sm md:text-base uppercase tracking-wide text-colorSecondaryDark">{it.kind}</p>
-                      <h4 className="mt-2 text-lg md:text-3xl font-semibold text-colorDark">{it.title}</h4>
-                      <p className="text-sm md:text-lg text-colorSecondaryLight">{it.org} • {it.date}</p>
+                      <h4 className="mt-2 text-base md:text-2xl font-semibold text-colorDark">{it.title}</h4>
+                      <p className="text-sm md:text-base text-colorSecondaryLight">{it.org} • {it.date}</p>
                     </div>
 
-                    <div className="flex-shrink-0 h-20 w-20 md:h-28 md:w-28 rounded-2xl bg-colorSecondary/10 flex items-center justify-center text-colorDark text-lg md:text-3xl font-bold shadow-inner">
+                    <div className="flex-shrink-0 h-16 w-16 md:h-20 md:w-20 rounded-2xl bg-colorSecondary/10 flex items-center justify-center text-colorDark text-base md:text-2xl font-bold shadow-inner">
                       {idx + 1}
                     </div>
                   </div>
 
-                  <p className="mt-6 text-sm md:text-lg text-colorSecondaryDark leading-relaxed">{it.desc}</p>
+                  <p className="mt-4 text-sm md:text-base text-colorSecondaryDark leading-relaxed">{it.desc}</p>
                 </article>
               </div>
 

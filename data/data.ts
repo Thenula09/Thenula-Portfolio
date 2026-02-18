@@ -2,6 +2,7 @@ export const links = {
   home: "/",
   about: "/about",
   work: "/work",
+  blog: "/blogs",
   contact: "#",
   email: "mailto:your-email@example.com",
   resume: "/resume",
