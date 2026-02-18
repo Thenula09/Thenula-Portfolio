@@ -5,6 +5,7 @@ import { Cursor } from "@/components/cursor";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import "../work.css";
 import "../header.css";
+import "./about.css";
 import { AboutSection } from "@/components/aboutSection/aboutSection";
 
 export default function AboutPage() {
@@ -12,10 +13,9 @@ export default function AboutPage() {
     <>
       <Cursor />
       <HeaderNavigation />
-      <AboutSection />
-      <h1 className="text-center mt-12">Experience and Education</h1>
 
-
+        <AboutSection />
+      
     </>
   );
 }

@@ -74,7 +74,7 @@ export function AboutWrapper({}) {
 
         {/* Image on the RIGHT (swapped) */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="w-[220px] h-[220px] md:w-[320px] md:h-[320px] rounded-3xl overflow-hidden shadow-lg">
+          <div className="w-[220px] h-[220px] md:w-[320px] md:h-[320px] rounded-3xl overflow-hidden shadow-lg about-photo">
             <Image
               src={ThenulaAbout}
               alt="Thenula Saja"
@@ -89,12 +89,13 @@ export function AboutWrapper({}) {
 
       {/* Small tab control: All / Experience / Education (under About) */}
       <div className="max-w-maxWidth mx-auto px-paddingX mt-8">
-        <div className="flex items-center justify-center gap-6 mb-6">
+        <div className="about-tabs-container flex items-center justify-center gap-6 mb-6">
           {(["All", "Experience", "Education"] as const).map((k) => (
             <button
               key={k}
               onClick={() => setTimelineKind(k)}
-              className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
+              aria-pressed={timelineKind === k}
+              className={`about-tab px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
                 timelineKind === k ? "bg-colorPrimary text-colorDark shadow-md" : "text-colorSecondaryLight hover:opacity-80"
               }`}
             >
