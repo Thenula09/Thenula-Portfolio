@@ -24,6 +24,15 @@ const timelineData = [
     desc: "Advanced research in cloud computing and distributed systems.",
     icon: <GraduationCap size={22} />,
   },
+  {
+    id: 100,
+    type: "cert",
+    title: "Placeholder Certification",
+    institution: "Provider",
+    link: "#",
+    date: "2024",
+    desc: "Placeholder — update details.",
+  },
    {
     id: 101,
     type: "cert",
