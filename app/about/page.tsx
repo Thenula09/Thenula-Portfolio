@@ -15,33 +15,59 @@ import { Footer } from "@/components/contactSection/footer";
 import "./about.css";
 
 const timelineData = [
+
+
   {
-    id: 1,
-    type: "main",
-    title: "MSc in Software Engineering",
-    institution: "University of Colombo",
-    date: "2024 - Present",
-    desc: "Advanced research in cloud computing and distributed systems.",
-    icon: <GraduationCap size={22} />,
+    id: 98,
+    type: "cert",
+    title: "DevOps Pre-Requisite Course",
+    institution: "KodeKloud (Certifications)",
+    link: "#",
+    date: "2024",
+    desc: "DevOps Pre-Requisite Course — KodeKloud (completed).",
+    image: "/assets/KodeKloud.png",
   },
+  {
+    id: 99,
+    type: "cert",
+    title: "AI‑Powered DevOps (Crash Course)",
+    institution: "KodeKloud (Certifications)",
+    link: "#",
+    date: "2025",
+    desc: "Crash Course — AI‑Powered DevOps (completed).",
+    image: "/assets/KodeKloud.png",
+  },
+  
+  {
+    id: 5,
+    type: "main",
+    title: "BSc (Hons) Computer Science with Software",
+    institution: "Coventry University",
+    date: "2026-2028 - Present (3rd year)",
+    desc: "Undergraduate program focusing on software development and systems.",
+    image: "/assets/coventry.jpeg",
+  },
+   
   {
     id: 100,
     type: "cert",
-    title: "Placeholder Certification",
-    institution: "Provider",
+    title: "Stock Market Basics",
+    institution: "Udemy (Certifications)",
     link: "#",
-    date: "2024",
-    desc: "Placeholder — update details.",
+    date: "May 2025 (Completed)",
+    desc: "Financial Analysis · Stock Market (completed May 2025)",
+    image: "/assets/udemy.png",
   },
 
   {
     id: 104,
     type: "cert",
-    title: "Placeholder Certification A",
-    institution: "Provider A",
+    title: "Getting Started with C# (Microsoft Learn)",
+    institution: "Microsoft Learn Student Ambassadors",
     link: "#",
     date: "2024",
-    desc: "Placeholder — replace with real cert details.",
+    desc: "Program: Microsoft Learn Student Ambassadors — Host: Dineth Janitha.",
+    image: "/assets/microsoft.jpeg",
   },
   {
     id: 105,
@@ -252,7 +278,7 @@ export default function AboutPage() {
               <div className="timeline-dot" aria-hidden="true"></div>
 
               {item.type === "main" ? (
-                <div className={`timeline-card ${item.featured ? "featured" : ""} ${item.id === 3 ? 'card-id-3' : ''} ${item.id === 4 ? 'card-id-4' : ''}`}>
+                <div className={`timeline-card ${item.featured ? "featured" : ""} ${item.id === 3 ? 'card-id-3' : ''} ${item.id === 4 ? 'card-id-4' : ''} ${item.id === 5 ? 'card-id-5' : ''}`}>
                   {/* optional logo/image for institutions (e.g. school crest) */}
                   {item.image && (
                     <div className="timeline-card-logo">
@@ -261,6 +287,7 @@ export default function AboutPage() {
                   )}
 
                   <span className="card-date">{item.date}</span>
+                  {item.id === 5 && <span className="present-badge">Present</span>}
 
                   <h3 className="card-title">{item.title}</h3>
                   <h4 className="card-subtitle">{item.institution}</h4>
