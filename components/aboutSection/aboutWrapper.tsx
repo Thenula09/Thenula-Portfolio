@@ -13,6 +13,7 @@ import Image from "next/image";
 import ThenulaAbout from "./Thenulabaout.jpg";
 import ExperienceEducation from "./experienceEducation";
 import ProjectCard from "./projectCard";
+import TrueFocus from "@/components/ui/TrueFocus";
 import SkillsSection from "./skillsSection";
 import DecorativeCard from "@/components/ui/DecorativeCard";
 import DiscoverButton from "@/components/ui/DiscoverButton";
@@ -64,7 +65,17 @@ export function AboutWrapper({}) {
       <main className="flex h-full w-full max-w-maxWidth grow flex-col md:flex-row items-center justify-center gap-8 mt-8 px-paddingX text-[5.8vw] md:text-[clamp(20px,_1vw_+_14px,_32px)]">
         {/* About text on the LEFT (swapped) */}
         <div className="w-full md:w-1/2 flex flex-col items-start text-colorLight">
-          <h3 className="mb-3 text-[clamp(24px,_2.6vw,_42px)] font-semibold">About Me</h3>
+          <h3 className="sr-only">About Me</h3>
+
+          <TrueFocus
+            sentence="About Me"
+            manualMode={false}
+            blurAmount={4}
+            borderColor="#5227FF"
+            animationDuration={0.45}
+            pauseBetweenAnimations={1}
+          />
+
           <p className="max-w-prose text-base md:text-xl">
             Hi — I'm Thenula. Replace this short bio with your real content in
             `aboutWrapper.tsx` or in your data source.

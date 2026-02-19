@@ -207,7 +207,6 @@ export default function AboutPage() {
         <div className="container">
           <div className="profile-grid">
             <div className="orbit-loader-container">
-              <OrbitLoader />
             </div>
             <motion.div 
               ref={imgRef}

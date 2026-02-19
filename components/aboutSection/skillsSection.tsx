@@ -97,11 +97,6 @@ export default function SkillsSection() {
               "TypeScript",
               "JavaScript",
               "HTML5",
-              "CSS3",
-              "Tailwind CSS",
-              "Redux (RTK)",
-              "GSAP",
-              "Three.js",
             ],
           },
           {
@@ -109,14 +104,10 @@ export default function SkillsSection() {
             items: [
               "Node.js",
               "Express",
-              "NestJS",
               "REST APIs",
-              "GraphQL",
               "TypeScript (server)",
               "Authentication",
               "Prisma / ORM",
-              "Socket.IO",
-              "Microservices",
             ],
           },
           {
