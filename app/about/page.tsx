@@ -9,6 +9,7 @@ import { Cursor } from "@/components/cursor";
 import { Header } from "@/components/header";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import SolarLoader from "@/components/solarLoader";
+import LeftFazerLoader from "@/components/leftFazerLoader";
 import "./about.css";
 
 const timelineData = [
@@ -66,25 +67,83 @@ const timelineData = [
 ];
 
 export default function AboutPage() {
+  const imgRef = React.useRef<HTMLDivElement | null>(null);
+  const lastScrollY = React.useRef<number>(0);
+  const scrollTimeout = React.useRef<number | null>(null);
+  const [tilt, setTilt] = React.useState({ rotateX: 0, rotateY: 0, translateY: 0 });
+
+  React.useEffect(() => {
+    const onScroll = () => {
+      const el = imgRef.current;
+      if (!el) return;
+      const current = window.scrollY || window.pageYOffset;
+      const delta = current - lastScrollY.current;
+      lastScrollY.current = current;
+
+      const offset = Math.max(Math.min(-delta * 0.45, 40), -40);
+      setTilt((t) => ({ ...t, translateY: offset }));
+
+      if (scrollTimeout.current) window.clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = window.setTimeout(() => {
+        setTilt((t) => ({ ...t, translateY: 0 }));
+        scrollTimeout.current = null;
+      }, 260);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollTimeout.current) window.clearTimeout(scrollTimeout.current);
+    };
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const el = imgRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    
+    // Mouse position relative to center of image (-1 to 1)
+    const px = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+    const py = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+    // rotateX: Mouse udata yaddi (py < 0) rotateX positive wenna ona (pahala balanna)
+    // rotateY: Mouse dakunata yaddi (px > 0) rotateY positive wenna ona (dakuna balanna)
+    const rotateY = px * 12; 
+    const rotateX = -py * 12; // Inverted for natural tilt
+
+    setTilt({ rotateX, rotateY, translateY: tilt.translateY });
+  };
+
+  const handleMouseLeave = () => setTilt({ rotateX: 0, rotateY: 0, translateY: 0 });
+
   return (
     <div className="about-page-container">
       <Cursor />
       <Header color="Light" />
       <HeaderNavigation />
 
-      {/* --- Personal Profile Section --- */}
       <section className="profile-hero-section">
-        <div className="section-solar-bg">
-          
-        </div>
+        <LeftFazerLoader />
         <div className="container">
           <div className="profile-grid">
             <motion.div 
+              ref={imgRef}
               className="profile-image-container"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
+              style={{
+                transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(${tilt.translateY}px)`,
+                transition: "transform 0.1s ease-out" // ensures smooth tracking
+              }}
             >
+              {/* Solar background specifically behind the profile photo */}
+              <div className="photo-solar-bg1" aria-hidden="true">
+                <SolarLoader className="top" />
+              </div>
+
               <div className="image-border-decoration"></div>
               <Image 
                 src={ThenulaAbout}
@@ -102,7 +161,6 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              
               <h1 className="main-heading">About Me</h1>
               <p className="description">
                 Hello! I'm a passionate developer dedicated to creating high-quality web experiences. 
@@ -117,7 +175,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* --- Timeline Section --- */}
       <div className="experience-education-section">
         <div className="section-solar-bg">
           <SolarLoader />
@@ -140,7 +197,6 @@ export default function AboutPage() {
               </div>
 
               {item.type === "main" ? (
-                /* Main Large Card */
                 <div className="timeline-card">
                   <span className="card-date">{item.date}</span>
                   <h3 className="card-title">{item.title}</h3>
@@ -148,7 +204,6 @@ export default function AboutPage() {
                   <p className="card-text">{item.desc}</p>
                 </div>
               ) : (
-                /* Small Certification Card */
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="mini-cert-card">
                    <div className="cert-header">
                       <span className="cert-issuer">{item.institution}</span>

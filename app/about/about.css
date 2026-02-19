@@ -37,6 +37,45 @@
   position: relative;
   width: 100%;
   max-width: 513px; /* ~+35% */
+  perspective: 1200px;
+  will-change: transform;
+  transition: transform 360ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.profile-image-container .profile-img {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  position: relative;
+  z-index: 2; /* keep image above the solar background */
+}
+
+/* Solar specifically behind the profile photo */
+.photo-solar-bg {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-35%, -25%);
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+}
+
+.photo-solar-bg .solar {
+  width: 220px;
+  height: 220px;
+  transform: none;
+  animation: glow 3s linear infinite;
+}
+
+.photo-solar-bg .solar i.mercury { width: 36px; height: 36px; margin-left: -18px; left: 50%; top: 50%; margin-top: -18px; -webkit-animation: orbit 1.2s linear infinite; animation: orbit 1.2s linear infinite; }
+.photo-solar-bg .solar i.venus { width: 64px; height: 64px; margin-left: -32px; left: 50%; top: 50%; margin-top: -32px; -webkit-animation: orbit 2.4s linear infinite; animation: orbit 2.4s linear infinite; }
+.photo-solar-bg .solar i.earth { width: 96px; height: 96px; margin-left: -48px; left: 50%; top: 50%; margin-top: -48px; -webkit-animation: orbit 3.6s linear infinite; animation: orbit 3.6s linear infinite; }
+.photo-solar-bg .solar i.mars { width: 130px; height: 130px; margin-left: -65px; left: 50%; top: 50%; margin-top: -65px; -webkit-animation: orbit 4.8s linear infinite; animation: orbit 4.8s linear infinite; }
+
+@media (max-width: 900px) {
+  .photo-solar-bg { display: none; }
 } 
 
 .profile-img {
@@ -320,6 +359,140 @@
   pointer-events: none;
   z-index: 0;
   opacity: 0.16; /* stronger for visibility */
+}
+
+/* --- Left-side Fazer Loader (scoped) --- */
+.left-fazer {
+  position: absolute;
+  /* moved 100px toward the center (left) from previous spot */
+  right: 120px; /* 20px -> 120px = 100px left */
+  /* moved 200px downward from vertical center */
+  top: calc(60% + 200px);
+  transform: translateY(-50%);
+  z-index: 6;
+  pointer-events: none;
+  width: 420px;
+  height: 240px;
+}
+
+.left-fazer .loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  transform: translateY(-50%);
+  animation: speeder 0.4s linear infinite;
+}
+
+.left-fazer .loader > span {
+  height: 5px;
+  width: 35px;
+  background: var(--colorText);
+  position: absolute;
+  top: -19px;
+  left: 60px;
+  border-radius: 2px 10px 1px 0;
+}
+
+.left-fazer .base span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-right: 100px solid var(--colorText);
+  border-bottom: 6px solid transparent;
+}
+.left-fazer .base span:before {
+  content: "";
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: var(--colorText);
+  position: absolute;
+  right: -110px;
+  top: -16px;
+}
+.left-fazer .base span:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-right: 55px solid var(--colorText);
+  border-bottom: 16px solid transparent;
+  top: -16px;
+  right: -98px;
+}
+.left-fazer .face {
+  position: absolute;
+  height: 12px;
+  width: 20px;
+  background: var(--colorText);
+  border-radius: 20px 20px 0 0;
+  transform: rotate(-40deg);
+  right: -125px;
+  top: -15px;
+}
+.left-fazer .face:after {
+  content: "";
+  height: 12px;
+  width: 12px;
+  background: var(--colorText);
+  right: 4px;
+  top: 7px;
+  position: absolute;
+  transform: rotate(40deg);
+  transform-origin: 50% 50%;
+  border-radius: 0 0 0 2px;
+}
+
+.left-fazer .loader > span > span:nth-child(1),
+.left-fazer .loader > span > span:nth-child(2),
+.left-fazer .loader > span > span:nth-child(3),
+.left-fazer .loader > span > span:nth-child(4) {
+  width: 30px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  position: absolute;
+  animation: fazer1 0.2s linear infinite;
+}
+.left-fazer .loader > span > span:nth-child(2) { top: 3px; animation: fazer2 0.4s linear infinite; }
+.left-fazer .loader > span > span:nth-child(3) { top: 1px; animation: fazer3 0.4s linear infinite; animation-delay: -1s; }
+.left-fazer .loader > span > span:nth-child(4) { top: 4px; animation: fazer4 1s linear infinite; animation-delay: -1s; }
+
+@keyframes fazer1 { 0% { left: 0; } 100% { left: -80px; opacity: 0; } }
+@keyframes fazer2 { 0% { left: 0; } 100% { left: -100px; opacity: 0; } }
+@keyframes fazer3 { 0% { left: 0; } 100% { left: -50px; opacity: 0; } }
+@keyframes fazer4 { 0% { left: 0; } 100% { left: -150px; opacity: 0; } }
+
+@keyframes speeder {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -3px) rotate(-1deg); }
+  20% { transform: translate(-2px, 0px) rotate(1deg); }
+  30% { transform: translate(1px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 3px) rotate(-1deg); }
+  60% { transform: translate(-1px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-2px, -1px) rotate(1deg); }
+  90% { transform: translate(2px, 1px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.left-fazer .longfazers { position: absolute; width: 100%; height: 100%; }
+.left-fazer .longfazers span { position: absolute; height: 2px; width: 20%; background: rgba(255,255,255,0.06); }
+.left-fazer .longfazers span:nth-child(1) { top: 20%; animation: lf 0.6s linear infinite; animation-delay: -5s; }
+.left-fazer .longfazers span:nth-child(2) { top: 40%; animation: lf2 0.8s linear infinite; animation-delay: -1s; }
+.left-fazer .longfazers span:nth-child(3) { top: 60%; animation: lf3 0.6s linear infinite; }
+.left-fazer .longfazers span:nth-child(4) { top: 80%; animation: lf4 0.5s linear infinite; animation-delay: -3s; }
+@keyframes lf { 0% { left: 200%; } 100% { left: -200%; opacity: 0; } }
+@keyframes lf2 { 0% { left: 200%; } 100% { left: -200%; opacity: 0; } }
+@keyframes lf3 { 0% { left: 200%; } 100% { left: -100%; opacity: 0; } }
+@keyframes lf4 { 0% { left: 200%; } 100% { left: -100%; opacity: 0; } }
+
+/* hide loader on small screens */
+@media (max-width: 900px) {
+  .left-fazer { display: none; }
 } 
 
 /* Scoped solar animation (copied from provided loader CSS, scoped under .section-solar-bg) */
@@ -363,9 +536,9 @@
 .section-solar-bg .solar i.mars:before { background: red; height: 18px; width: 18px; }
 .section-solar-bg .solar i.belt { box-sizing: border-box; border-width: 50px; width: 600px; height: 600px; margin-left: -300px; border-color: rgba(36, 35, 35, 0.21); left: 50%; top: 50%; margin-top: -300px; }
 .section-solar-bg .solar i.jupiter { width: 650px; height: 650px; margin-left: -325px; left: 50%; top: 50%; margin-top: -325px; -webkit-animation: orbit 5s linear infinite; animation: orbit 5s linear infinite; }
-.section-solar-bg .solar i.jupiter:before { background: #cf9b2b; top: -38px; height: 75px; width: 75px; }
+.section-solar-bg .solar i.jupiter:before { background: #fbf200; top: -38px; height: 75px; width: 75px; }
 .section-solar-bg .solar i.saturn { width: 800px; height: 800px; margin-left: -400px; left: 50%; top: 50%; margin-top: -400px; -webkit-animation: orbit 6s linear infinite; animation: orbit 6s linear infinite; }
-.section-solar-bg .solar i.saturn:before { background: #cf7a2b; top: -25px; height: 50px; width: 50px; }
+.section-solar-bg .solar i.saturn:before { background: #ffffff; top: -25px; height: 50px; width: 50px; }
 .section-solar-bg .solar i.saturn:after { background: #fff; width: 30px; height: 1px; content: ""; position: absolute; display: block; right: 43.5%; -webkit-transform: rotate(20deg); transform: rotate(20deg); }
 .section-solar-bg .solar i.uranus { width: 900px; height: 900px; margin-left: -450px; left: 50%; top: 50%; margin-top: -450px; -webkit-animation: orbit 7s linear infinite; animation: orbit 7s linear infinite; }
 .section-solar-bg .solar i.uranus:before { background: #10c593; top: -20px; height: 38px; width: 38px; }
@@ -374,5 +547,5 @@
 
 @-webkit-keyframes orbit { 0% { -webkit-transform: rotate(0deg); } 50% { -webkit-transform: rotate(-180deg); } 100% { -webkit-transform: rotate(-360deg); } }
 @keyframes orbit { 0% { transform: rotate(0deg); } 50% { transform: rotate(-180deg); } 100% { transform: rotate(-360deg); } }
-@-webkit-keyframes glow { 0% { box-shadow: none; } 50% { background: #ffeb00; box-shadow: 0 0 20px orange; } 100% { box-shadow: none; } }
-@keyframes glow { 0% { box-shadow: none; } 50% { background: #ffeb00; box-shadow: 0 0 20px orange; } 100% { box-shadow: none; } }
+@-webkit-keyframes glow { 0% { box-shadow: none; } 50% { background: #ffffff; box-shadow: 0 0 20px rgb(255, 255, 255); } 100% { box-shadow: none; } }
+@keyframes glow { 0% { box-shadow: none; } 50% { background: #ffffff; box-shadow: 0 0 20px rgb(255, 255, 255); } 100% { box-shadow: none; } }
