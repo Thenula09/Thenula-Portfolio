@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Magentic from "../ui/magentic";
 import { gsap } from "gsap";
 import { AboutMarquee } from "./aboutMarquee";
@@ -58,7 +58,6 @@ export function AboutWrapper({}) {
     return () => io.disconnect();
   }, []);
 
-  const [timelineKind, setTimelineKind] = useState<"All" | "Experience" | "Education">("All");
 
   return (
     <div className="w-full">
@@ -87,24 +86,9 @@ export function AboutWrapper({}) {
         </div>
       </main>
 
-      {/* Small tab control: All / Experience / Education (under About) */}
+      {/* Experience/education tabs removed — default to "All" */}
       <div className="max-w-maxWidth mx-auto px-paddingX mt-8">
-        <div className="about-tabs-container flex items-center justify-center gap-6 mb-6">
-          {(["All", "Experience", "Education"] as const).map((k) => (
-            <button
-              key={k}
-              onClick={() => setTimelineKind(k)}
-              aria-pressed={timelineKind === k}
-              className={`about-tab px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
-                timelineKind === k ? "bg-colorPrimary text-colorDark shadow-md" : "text-colorSecondaryLight hover:opacity-80"
-              }`}
-            >
-              {k}
-            </button>
-          ))}
-        </div>
-
-        <ExperienceEducation kind={timelineKind} />
+        <ExperienceEducation />
       </div>
 
       {/* Skills & Tools (moved above Projects) */}

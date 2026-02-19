@@ -1,10 +1,10 @@
 :root {
   --colorPrimary: #ecef33; /* slightly brighter accent */
   --colorText: #ffffff; /* primary page text — brighter */
-  --colorLight: #cbd6df; /* secondary text — lighter */
+  --colorLight: #ffffff; /* secondary text — lighter */
   --bgWhite: #ffffff;
   --bgDark: #000000; /* page background — pure black */
-  --cardBg: #ffffff; /* dark card background */
+  --cardBg: #a4a584; /* dark card background */
   --about-scale: 1.35;
 }
 
@@ -221,12 +221,40 @@
 
 .center-line {
   position: absolute;
-  height: 100%;
-  width: 2px;
-  background: rgba(255,255,255,0.08);
+  /* slightly shorter so it doesn't touch edges and feels contained */
+  height: calc(100% - 48px);
+  width: 10px; /* thicker */
   left: 50%;
   transform: translateX(-50%);
-} 
+
+  /* nice subtle metallic gradient + inner highlight */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(224, 189, 12, 0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* soft glow accent behind the line */
+.center-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  width: 18px;
+  height: calc(100% - 16px);
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.03), transparent 60%);
+  filter: blur(6px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .center-line { left: 20px; width: 4px; height: calc(100% - 32px); }
+  .center-line::after { width: 12px; height: calc(100% - 8px); }
+}
 
 /* Timeline Wrapper Logic */
 .timeline-card-wrapper {
