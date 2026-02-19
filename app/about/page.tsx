@@ -33,6 +33,26 @@ const timelineData = [
     date: "2024",
     desc: "Placeholder — update details.",
   },
+
+  {
+    id: 104,
+    type: "cert",
+    title: "Placeholder Certification A",
+    institution: "Provider A",
+    link: "#",
+    date: "2024",
+    desc: "Placeholder — replace with real cert details.",
+  },
+  {
+    id: 105,
+    type: "cert",
+    title: "Pine Script Course (Completed)",
+    institution: "Trading Hub ",
+    link: "#",
+    date: "2025",
+    desc: "Successfully completed the Pine Script Course — Trading Hub (2025).",
+    image: "/assets/pine.png",
+  },
    {
     id: 101,
     type: "cert",
@@ -54,6 +74,7 @@ const timelineData = [
     desc: "Introductory web design course —Sep 2025",
     image: "/assets/moratuwa.jpeg",
   },
+  
   {
     id: 2,
     type: "main",
