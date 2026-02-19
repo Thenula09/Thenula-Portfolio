@@ -35,7 +35,7 @@ export function AboutSection({}) {
   }, []);
 
   return (
-    <section className="section section__2 second lightGradient items-center justify-center px-paddingX pt-[calc(var(--paddingY)*2)] pb-[calc(var(--paddingY)*2)] text-colorDark">
+    <section className="section section__2 second bg-black items-center justify-center px-paddingX pt-[calc(var(--paddingY)*2)] pb-[calc(var(--paddingY)*2)] text-colorLight">
       <Bulge type="Dark" />
       
       <header className="nav__container anime px-paddingX absolute z-[5000] left-0 top-0 w-full">
@@ -44,7 +44,7 @@ export function AboutSection({}) {
             <Magentic
               href={links.home}
               strength={50}
-              className="nav__item anime text-xl font-bold text-colorDark before:bg-colorDark"
+              className="nav__item anime text-xl font-bold text-colorLight before:bg-colorDark"
               onMouseEnter={() => {
                 logoAnimationTl.current?.play();
               }}
@@ -75,7 +75,7 @@ export function AboutSection({}) {
             
             <Magentic
               strength={50}
-              className="anime mask nav__item h-8 w-8 cursor-pointer items-center text-colorDark before:bg-colorDark"
+              className="anime mask nav__item h-8 w-8 cursor-pointer items-center text-colorLight before:bg-colorDark"
               onClick={() => {
                 dispatch(toggleMenu({ isMenuOpen: true, color: "Dark" }));
               }}

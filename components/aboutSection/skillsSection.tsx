@@ -151,7 +151,7 @@ export default function SkillsSection() {
           },
         ].map((section) => (
           <div key={section.title}>
-            <h4 className="mb-4 text-lg font-semibold text-colorDark">{section.title}</h4>
+            <h4 className="mb-4 text-lg font-semibold text-colorLight">{section.title}</h4>
             <div className="skill-cards mb-6">
               {section.items.map((label) => (
                 <SkillCard key={label} label={label} r={-8} onToggle={(isExpanded) => handleCardToggle(label, isExpanded)} />

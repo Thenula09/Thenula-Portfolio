@@ -52,6 +52,13 @@ const items: TimelineItem[] = [
   },
 ];
 
+const degreeKeywords = ["BSc", "Diploma", "HND", "Advanced Level", "Higher National Diploma", "DITEC"];
+function highlightDegreeWords(text: string): React.ReactNode {
+  const escaped = degreeKeywords.map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  const parts = text.split(new RegExp(`(${escaped})`, "gi"));
+  return parts.map((part, i) => (new RegExp(`^(${escaped})$`, "i").test(part) ? <strong key={i} className="font-extrabold">{part}</strong> : part));
+}
+
 export default function EducationCareer() {
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -106,14 +113,10 @@ export default function EducationCareer() {
 
   return (
     /* Section eka w-full karala background eka damma */
-    <section
-      ref={containerRef}
-      className="w-full py-32 bg-[#050505] text-white overflow-hidden"
-      style={{ marginLeft: "calc(var(--paddingX) * -1)", marginRight: "calc(var(--paddingX) * -1)" }}
-    >
+    <section ref={containerRef} className="w-full py-32 bg-[#050505] text-white overflow-hidden">
       
       {/* max-width eka wadi kala saha screen full width ekata yana widiyata haduwa */}
-      <div className="w-full max-w-[1980px] mx-auto px-6 md:px-6 lg:px-2">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 lg:px-32">
         
         <div className="flex flex-col items-center mb-36 text-center">
           <span ref={subTitleRef} className="text-yellow-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">
@@ -140,7 +143,7 @@ export default function EducationCareer() {
 
                   <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${isEven ? "md:pr-20 lg:pr-32 text-left md:text-right" : "md:pl-20 lg:pl-32 text-left"}`}>
                     <span className="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase block mb-4">{item.date}</span>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight">{item.title}</h3>
+                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight">{highlightDegreeWords(item.title)}</h3>
                     <p className="text-yellow-400/90 text-lg font-medium mb-6 italic">{item.institution}</p>
                     <p className="text-gray-400 text-base leading-relaxed max-w-xl ml-0 md:ml-auto md:mr-0 mb-8 font-light">{item.desc}</p>
 

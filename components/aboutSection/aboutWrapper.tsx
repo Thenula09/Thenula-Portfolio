@@ -63,9 +63,9 @@ export function AboutWrapper({}) {
     <div className="w-full">
       <main className="flex h-full w-full max-w-maxWidth grow flex-col md:flex-row items-center justify-center gap-8 mt-8 px-paddingX text-[5.8vw] md:text-[clamp(20px,_1vw_+_14px,_32px)]">
         {/* About text on the LEFT (swapped) */}
-        <div className="w-full md:w-1/2 flex flex-col items-start text-colorDark">
-          <h3 className="mb-3 text-[clamp(20px,_2.2vw,_34px)] font-semibold">About</h3>
-          <p className="max-w-prose text-base md:text-lg">
+        <div className="w-full md:w-1/2 flex flex-col items-start text-colorLight">
+          <h3 className="mb-3 text-[clamp(24px,_2.6vw,_42px)] font-semibold">About Me</h3>
+          <p className="max-w-prose text-base md:text-xl">
             Hi — I'm Thenula. Replace this short bio with your real content in
             `aboutWrapper.tsx` or in your data source.
           </p>
@@ -73,7 +73,7 @@ export function AboutWrapper({}) {
 
         {/* Image on the RIGHT (swapped) */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="w-[220px] h-[220px] md:w-[320px] md:h-[320px] rounded-3xl overflow-hidden shadow-lg about-photo">
+          <div className="w-[360px] h-[360px] md:w-[480px] md:h-[580px] rounded-3xl overflow-hidden shadow-lg about-photo">
             <Image
               src={ThenulaAbout}
               alt="Thenula Saja"
@@ -116,7 +116,7 @@ export function AboutWrapper({}) {
 
             <div className="p-4 md:p-6 md:w-2/5 flex flex-col justify-center h-[150px] md:h-[300px]">
               <p className="mb-2 text-xs uppercase tracking-wide text-colorSecondaryDark">Featured • Latest</p>
-              <h4 className="text-lg md:text-xl font-semibold text-colorDark">YieldStone — Page</h4>
+              <h4 className="text-lg md:text-xl font-semibold text-colorLight">YieldStone — Page</h4>
               <p className="mt-2 text-sm md:text-sm text-colorSecondaryLight">Webflow site — landing & marketing pages built for YieldStone.</p>
 
               <div className="mt-4">
