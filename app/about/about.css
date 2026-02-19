@@ -1,22 +1,27 @@
 :root {
-  --colorPrimary: #0070f3;
-  --colorText: #333;
-  --colorLight: #666;
+  --colorPrimary: #0ea5ff; /* slightly brighter accent */
+  --colorText: #ffffff; /* primary page text — brighter */
+  --colorLight: #cbd6df; /* secondary text — lighter */
   --bgWhite: #ffffff;
+  --bgDark: #000000; /* page background — pure black */
+  --cardBg: #071427; /* dark card background */
+  --about-scale: 1.35;
 }
 
 .about-page-container {
   overflow-x: hidden;
-  background-color: #fafafa;
-}
+  background-color: var(--bgDark);
+  color: var(--colorText);
+} 
 
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
+  margin-top: 90px;
 }
 
-/* Profile Hero Section */
+/* --- Profile Hero Section --- */
 .profile-hero-section {
   padding: 120px 0 60px 0;
 }
@@ -31,18 +36,18 @@
 .profile-image-container {
   position: relative;
   width: 100%;
-  max-width: 380px;
-}
+  max-width: 513px; /* ~+35% */
+} 
 
 .profile-img {
   width: 100%;
-  height: 480px;
+  height: 648px; /* increased */
   object-fit: cover;
   border-radius: 24px;
   position: relative;
   z-index: 2;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+} 
 
 .image-border-decoration {
   position: absolute;
@@ -61,29 +66,37 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.9rem;
+  margin-top: 20px;
 }
 
 .main-heading {
-  font-size: 3.5rem;
-  margin: 10px 0 25px 0;
-  color: #1a1a1a;
-}
+  font-size: 4.7rem; /* ~+35% */
+  margin: -200px 0 0px 0;
+  color: var(--colorText);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  font-weight: 800;
+} 
 
 .description {
   font-size: 1.1rem;
   line-height: 1.8;
   color: var(--colorLight);
+  margin-top: 210px;
   margin-bottom: 30px;
-}
+} 
 
 .stats-mini-grid {
   display: flex;
-  gap: 40px;
-  border-top: 1px solid #eee;
+  gap: 54px; /* increased gap */
+  border-top: 1px solid rgba(255,255,255,0.06);
   padding-top: 20px;
+  color: var(--colorLight);
+  font-size: 1.05rem;
 }
+.stats-mini-grid strong { font-size: 1.25rem; color: var(--colorText); }  
 
-/* Timeline Section Styles */
+/* --- Timeline Section --- */
 .experience-education-section {
   padding: 100px 20px;
   max-width: 1100px;
@@ -92,10 +105,11 @@
 
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 80px;
-  color: #1a1a1a;
-}
+  font-size: 3.4rem; /* larger */
+  margin-bottom: 100px;
+  color: var(--colorText);
+  font-weight: 800;
+}  
 
 .timeline-container {
   position: relative;
@@ -105,18 +119,19 @@
   position: absolute;
   height: 100%;
   width: 2px;
-  background: #e0e0e0;
+  background: rgba(255,255,255,0.08);
   left: 50%;
   transform: translateX(-50%);
-}
+} 
 
+/* Timeline Wrapper Logic */
 .timeline-card-wrapper {
   display: flex;
   justify-content: flex-end;
   padding-right: 50%;
-  margin-bottom: 50px;
+  margin-bottom: 108px; /* increased spacing (~+35%) */
   position: relative;
-}
+} 
 
 .timeline-card-wrapper.right {
   justify-content: flex-start;
@@ -124,38 +139,46 @@
   padding-left: 50%;
 }
 
+/* Dots */
 .timeline-dot {
   position: absolute;
-  right: -25px;
-  top: 15px;
-  width: 50px;
-  height: 50px;
+  right: -34px;
+  top: 12px;
+  width: 68px; /* larger */
+  height: 68px;
   background: var(--bgWhite);
-  border: 2px solid var(--colorPrimary);
+  border: 3px solid var(--colorPrimary);
   color: var(--colorPrimary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
-}
+  box-shadow: 0 6px 30px rgba(0, 112, 243, 0.28);
+  transform: scale(1.05);
+} 
 
 .timeline-card-wrapper.right .timeline-dot {
   left: -25px;
 }
 
+/* --- Large Main Cards --- */
 .timeline-card {
-  background: white;
-  padding: 30px;
+  background: var(--cardBg);
+  color: var(--colorText);
+  padding: 40px; /* increased */
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  width: 85%;
-  transition: all 0.3s ease;
-}
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  width: 90%;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 1.05rem;
+} 
 
 .timeline-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border-color: rgba(0, 112, 243, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
 }
 
 .card-date {
@@ -165,11 +188,82 @@
 }
 
 .card-title {
-  margin: 10px 0 5px 0;
-  font-size: 1.3rem;
+  margin: 10px 0 8px 0;
+  font-size: 1.75rem; /* larger */
+  color: var(--colorText);
+  font-weight: 700;
+} 
+
+.card-subtitle {
+  color: var(--colorLight);
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
-/* Mobile Responsiveness */
+/* --- Mini Certification Cards --- */
+.cert-wrapper {
+  margin-bottom: 50px; /* සහතික කාඩ් අතර පරතරය */
+}
+
+.mini-cert-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 27px; /* increased */
+  border-radius: 16px;
+  width: 85%; /* larger */
+  text-decoration: none;
+  transition: all 0.28s ease;
+  display: block;
+  font-size: 1.02rem;
+} 
+
+.mini-cert-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+  border-color: var(--colorPrimary);
+}
+
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  color: var(--colorPrimary);
+}
+
+.cert-issuer {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.cert-title {
+  font-size: 1.5rem; /* larger */
+  color: #fff;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.cert-desc {
+  font-size: 1rem;
+  color: var(--colorLight);
+  line-height: 1.6;
+}
+
+/* සහතික වල dot එක පොඩ්ඩක් කුඩා කළා */
+.cert-wrapper .timeline-dot {
+  width: 36px;
+  height: 36px;
+  right: -18px;
+  background: var(--bgDark);
+}
+
+.timeline-card-wrapper.right.cert-wrapper .timeline-dot {
+  left: -18px;
+}
+
+/* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
   .profile-grid {
     grid-template-columns: 1fr;
@@ -181,17 +275,104 @@
   .stats-mini-grid {
     justify-content: center;
   }
+  .main-heading {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 768px) {
   .center-line { left: 20px; }
-  .timeline-card-wrapper, .timeline-card-wrapper.right {
+  
+  .timeline-card-wrapper, 
+  .timeline-card-wrapper.right {
     padding-left: 60px;
     padding-right: 0;
     width: 100%;
     justify-content: flex-start;
+    margin-bottom: 40px;
   }
-  .timeline-dot, .timeline-card-wrapper.right .timeline-dot {
-    left: -5px;
+
+  .timeline-card, .mini-cert-card {
+    width: 100%;
+  }
+
+  .timeline-dot, 
+  .timeline-card-wrapper.right .timeline-dot,
+  .cert-wrapper .timeline-dot,
+  .timeline-card-wrapper.right.cert-wrapper .timeline-dot {
+    left: 2px;
   }
 }
+
+/* --- Solar background (scoped for About page sections) --- */
+.profile-hero-section,
+.experience-education-section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-solar-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.16; /* stronger for visibility */
+} 
+
+/* Scoped solar animation (copied from provided loader CSS, scoped under .section-solar-bg) */
+.section-solar-bg .solar {
+  margin: 0;
+  height: 240px; /* enlarged */
+  width: 240px;
+  transform: translateX(-300px); /* moved left by 300px */
+  background: orange;
+  border-radius: 120px;
+  position: relative;
+  -webkit-animation: glow 3s linear infinite;
+  -moz-animation: glow 3s linear infinite;
+  animation: glow 3s linear infinite;
+}
+.section-solar-bg .solar i {
+  border-radius: 250px;
+  display: block;
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.section-solar-bg .solar i:before {
+  content: "";
+  border-radius: 25px;
+  background: black;
+  display: block;
+  position: absolute;
+  top: -5px;
+  right: 45%;
+}
+.section-solar-bg .solar i.mercury { width: 200px; height: 200px; margin-left: -100px; left: 50%; top: 50%; margin-top: -100px; -webkit-animation: orbit 1s linear infinite; animation: orbit 1s linear infinite; }
+.section-solar-bg .solar i.mercury:before { background: #6f5f5f; height: 14px; width: 14px; }
+.section-solar-bg .solar i.venus { width: 275px; height: 275px; margin-left: -138px; left: 50%; top: 50%; margin-top: -138px; -webkit-animation: orbit 2s linear infinite; animation: orbit 2s linear infinite; }
+.section-solar-bg .solar i.venus:before { background: #e7a71f; height: 18px; width: 18px; }
+.section-solar-bg .solar i.earth { width: 350px; height: 350px; margin-left: -175px; left: 50%; top: 50%; margin-top: -175px; -webkit-animation: orbit 3s linear infinite; animation: orbit 3s linear infinite; }
+.section-solar-bg .solar i.earth:before { background: #63bee2; height: 18px; width: 18px; }
+.section-solar-bg .solar i.mars { width: 425px; height: 425px; margin-left: -213px; left: 50%; top: 50%; margin-top: -213px; -webkit-animation: orbit 4s linear infinite; animation: orbit 4s linear infinite; }
+.section-solar-bg .solar i.mars:before { background: red; height: 18px; width: 18px; }
+.section-solar-bg .solar i.belt { box-sizing: border-box; border-width: 50px; width: 600px; height: 600px; margin-left: -300px; border-color: rgba(36, 35, 35, 0.21); left: 50%; top: 50%; margin-top: -300px; }
+.section-solar-bg .solar i.jupiter { width: 650px; height: 650px; margin-left: -325px; left: 50%; top: 50%; margin-top: -325px; -webkit-animation: orbit 5s linear infinite; animation: orbit 5s linear infinite; }
+.section-solar-bg .solar i.jupiter:before { background: #cf9b2b; top: -38px; height: 75px; width: 75px; }
+.section-solar-bg .solar i.saturn { width: 800px; height: 800px; margin-left: -400px; left: 50%; top: 50%; margin-top: -400px; -webkit-animation: orbit 6s linear infinite; animation: orbit 6s linear infinite; }
+.section-solar-bg .solar i.saturn:before { background: #cf7a2b; top: -25px; height: 50px; width: 50px; }
+.section-solar-bg .solar i.saturn:after { background: #fff; width: 30px; height: 1px; content: ""; position: absolute; display: block; right: 43.5%; -webkit-transform: rotate(20deg); transform: rotate(20deg); }
+.section-solar-bg .solar i.uranus { width: 900px; height: 900px; margin-left: -450px; left: 50%; top: 50%; margin-top: -450px; -webkit-animation: orbit 7s linear infinite; animation: orbit 7s linear infinite; }
+.section-solar-bg .solar i.uranus:before { background: #10c593; top: -20px; height: 38px; width: 38px; }
+.section-solar-bg .solar i.neptune { width: 1000px; height: 1000px; margin-left: -500px; left: 50%; top: 50%; margin-top: -500px; -webkit-animation: orbit 8s linear infinite; animation: orbit 8s linear infinite; }
+.section-solar-bg .solar i.neptune:before { background: #1470e4; top: -20px; height: 38px; width: 38px; }
+
+@-webkit-keyframes orbit { 0% { -webkit-transform: rotate(0deg); } 50% { -webkit-transform: rotate(-180deg); } 100% { -webkit-transform: rotate(-360deg); } }
+@keyframes orbit { 0% { transform: rotate(0deg); } 50% { transform: rotate(-180deg); } 100% { transform: rotate(-360deg); } }
+@-webkit-keyframes glow { 0% { box-shadow: none; } 50% { background: #ffeb00; box-shadow: 0 0 20px orange; } 100% { box-shadow: none; } }
+@keyframes glow { 0% { box-shadow: none; } 50% { background: #ffeb00; box-shadow: 0 0 20px orange; } 100% { box-shadow: none; } }

@@ -8,6 +8,41 @@
   /* display: none; */
 }
 
+/* Hide embedded SVG wordmark path (we show text "Thenula" instead) */
+.nav__container .logo__anim svg path:not(.logo__rotate) {
+  display: none;
+  margin-left: 50px;
+  color: white;
+}
+
+/* Shift circular SVG logo left by 30px (desktop) */
+.logo__anim svg {
+  transform: translateX(-30px);
+  transition: transform 180ms ease;
+}
+
+/* Move/scale "Thenula" wordmark left and make it larger */
+.logo-text {
+  display: inline-block;
+  transform: translateX(-20px) scale(1.35);
+  transition: transform 180ms ease;
+  color: white;
+  font-size: 15px; /* larger for emphasis */
+  font-weight: 800;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .logo__anim svg {
+    transform: translateX(-15px);
+  }
+
+  .logo-text {
+    transform: translateX(-20px) scale(1.15);
+    font-size: 28px;
+  }
+}
+
 .nav__container .nav__bar {
   width: 100%;
 }

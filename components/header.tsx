@@ -12,7 +12,7 @@ import "@/app/header.css";
 const ease = CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 ");
 
 type HeaderProps = {
-  color: "Dark" | "Light";
+  color: "Light" | "light";
   className?: string;
   mode?: "hamburger" | "cross";
 };
@@ -84,6 +84,8 @@ export function Header({ color, className, mode = "hamburger" }: HeaderProps) {
                   fill="currentColor"
                 />
               </svg>
+
+              <span className="logo-text text-[20px] md:text-[28px] leading-none tracking-tight">Thenula</span>
             </p>
           </Magentic>
           
