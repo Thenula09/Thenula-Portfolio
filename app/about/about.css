@@ -1,5 +1,5 @@
 :root {
-  --colorPrimary: #0ea5ff; /* slightly brighter accent */
+  --colorPrimary: #fff200; /* slightly brighter accent */
   --colorText: #ffffff; /* primary page text — brighter */
   --colorLight: #cbd6df; /* secondary text — lighter */
   --bgWhite: #ffffff;
@@ -32,6 +32,21 @@
   gap: 60px;
   align-items: center;
 }
+
+.orbit-loader-container {
+  position: absolute;
+
+  /* larger and moved 50px further left */
+  left: -10px; /* was 40px */
+  top: 10%;
+  transform: translateY(-50%) scale(1.45);
+  transform-origin: left center;
+  z-index: 1;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* Orbit loader styles moved to `components/orbitLoader.tsx` (styled-components) */
 
 .profile-image-container {
   position: relative;
@@ -493,6 +508,7 @@
 /* hide loader on small screens */
 @media (max-width: 900px) {
   .left-fazer { display: none; }
+  .orbit-loader-container { display: none; }
 } 
 
 /* Scoped solar animation (copied from provided loader CSS, scoped under .section-solar-bg) */

@@ -10,6 +10,7 @@ import { Header } from "@/components/header";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import SolarLoader from "@/components/solarLoader";
 import LeftFazerLoader from "@/components/leftFazerLoader";
+import OrbitLoader from "@/components/orbitLoader";
 import "./about.css";
 
 const timelineData = [
@@ -126,6 +127,9 @@ export default function AboutPage() {
         <LeftFazerLoader />
         <div className="container">
           <div className="profile-grid">
+            <div className="orbit-loader-container">
+              <OrbitLoader />
+            </div>
             <motion.div 
               ref={imgRef}
               className="profile-image-container"
