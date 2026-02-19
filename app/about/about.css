@@ -1,10 +1,10 @@
 :root {
-  --colorPrimary: #fff200; /* slightly brighter accent */
+  --colorPrimary: #ecef33; /* slightly brighter accent */
   --colorText: #ffffff; /* primary page text — brighter */
   --colorLight: #cbd6df; /* secondary text — lighter */
   --bgWhite: #ffffff;
   --bgDark: #000000; /* page background — pure black */
-  --cardBg: #071427; /* dark card background */
+  --cardBg: #afaf98; /* dark card background */
   --about-scale: 1.35;
 }
 
@@ -13,6 +13,28 @@
   background-color: var(--bgDark);
   color: var(--colorText);
 } 
+
+/* Footer: make footer background solid black only on About page */
+.about-page-container .footer__links {
+  background-color: #000000;
+  color: #000000; /* ensure footer text stays readable */
+}
+/* SOCIALS — make the social link items (Email / Twitter / Telegram) pure white text with black background */
+.about-page-container .footer__links .mx-auto > :nth-child(3) ul li p,
+.about-page-container .footer__links .mx-auto > :nth-child(3) ul li .scrambleText,
+.about-page-container .footer__links .mx-auto > :nth-child(3) .mask {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+/* ensure icon/FA inside socials is also visible */
+.about-page-container .footer__links .mx-auto > :nth-child(3) ul li i {
+  color: #ffffff !important;
+}
 
 .container {
   max-width: 1100px;
@@ -163,6 +185,34 @@
   margin-bottom: 100px;
   color: var(--colorText);
   font-weight: 800;
+}
+
+/* timeline card logo (small crest / school image) */
+.timeline-card-logo {
+  width: 56px;
+  height: 56px;
+  margin: 0 0 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.timeline-card-subjects {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.timeline-card-subjects li {
+  background: rgba(255,255,255,0.03);
+  color: var(--colorLight);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.03);
 }  
 
 .timeline-container {
@@ -227,7 +277,68 @@
   transition: all 0.25s ease;
   border: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 1.05rem;
-} 
+}
+
+/* featured (larger) timeline card */
+.timeline-card.featured {
+  padding: 56px;
+  border-radius: 24px;
+  width: 95%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+}
+
+/* specific background for timeline items with id 3 and id 4 */
+.timeline-card.card-id-3,
+.timeline-card.card-id-4 {
+  background: #afaf98;
+  border-color: rgba(0,0,0,0.12);
+  color: var(--colorDark);
+}
+
+/* slightly enlarge the logo in featured cards */
+.timeline-card.featured .timeline-card-logo img,
+.timeline-card.featured .timeline-card-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+}
+
+
+/* school/logo + subjects styling for timeline cards */
+.school-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.school-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.school-header .card-title { margin: 0; }
+
+.school-subjects {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.school-subject {
+  background: rgba(255,255,255,0.03);
+  color: var(--colorLight);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255,255,255,0.04);
+}
 
 .timeline-card:hover {
   transform: translateY(-8px);
@@ -262,14 +373,33 @@
 .mini-cert-card {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 27px; /* increased */
+  padding: 18px 22px; /* tightened for icon layout */
   border-radius: 16px;
   width: 85%; /* larger */
   text-decoration: none;
   transition: all 0.28s ease;
-  display: block;
+  display: flex;
+  gap: 18px;
+  align-items: center;
   font-size: 1.02rem;
-} 
+}
+
+.mini-cert-card .cert-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.mini-cert-card .cert-body { flex: 1; }
+
+@media (max-width: 768px) {
+  .mini-cert-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .mini-cert-card .cert-icon { width: 56px; height: 56px; }
+}
 
 .mini-cert-card:hover {
   background: rgba(255, 255, 255, 0.08);

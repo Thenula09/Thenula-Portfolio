@@ -590,6 +590,9 @@ textPath {
   /* justify-content: space-between; */
   align-items: center;
   /* padding-inline: 20px; */
+
+  /* make footer background solid black */
+  background-color: #000000;
 }
 
 * {
@@ -633,6 +636,7 @@ textPath {
   letter-spacing: 0.05em;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
@@ -721,6 +725,7 @@ textPath {
   }
 
   .section__2_top {
+    line-clamp: 5;
     -webkit-line-clamp: 5;
     padding-right: 28vw;
   }

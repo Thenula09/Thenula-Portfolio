@@ -792,9 +792,7 @@ body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
 .project-card:hover .project-number { transform: scale(1.05); }
 
 /* responsive sizes for project cards (mobile → laptop → desktop) */
-:root {
-  /* sensible mobile-first defaults are already set on the .project-card rule, these media queries override via the CSS variables */
-}
+/* (removed empty :root rule to satisfy the CSS linter) */
 
 @media (min-width: 640px) {
   .project-card {

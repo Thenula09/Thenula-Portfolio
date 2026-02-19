@@ -10,7 +10,8 @@ import { Header } from "@/components/header";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import SolarLoader from "@/components/solarLoader";
 import LeftFazerLoader from "@/components/leftFazerLoader";
-import OrbitLoader from "@/components/orbitLoader";
+import OrbitLoader from "../../components/orbitLoader";
+import { Footer } from "@/components/contactSection/footer";
 import "./about.css";
 
 const timelineData = [
@@ -23,47 +24,69 @@ const timelineData = [
     desc: "Advanced research in cloud computing and distributed systems.",
     icon: <GraduationCap size={22} />,
   },
-  {
+   {
     id: 101,
     type: "cert",
-    title: "AWS Certified Developer",
-    institution: "Amazon Web Services",
-    link: "https://aws.amazon.com",
-    desc: "Cloud architecture and deployment.",
+    title: "Postman API Fundamentals — Student Expert (Completed)",
+    institution: "Postman (Certifications)",
+    link: "#",
+    date: "2025 (completed)",
+    desc: "Postman API Fundamentals — Student Expert certificate 2025.",
+    image: "/assets/postman.jpeg",
   },
+ 
   {
     id: 102,
     type: "cert",
-    title: "Meta Front-End Professional",
-    institution: "Coursera",
-    link: "https://coursera.org",
-    desc: "Advanced React & UI patterns.",
+    title: "Web Design for Beginners (Completed)",
+    institution: "University of Moratuwa (CODL) (Certifications)",
+    link: "#",
+    date: "2025",
+    desc: "Introductory web design course —Sep 2025",
+    image: "/assets/moratuwa.jpeg",
   },
   {
     id: 2,
     type: "main",
-    title: "Senior Full-Stack Developer",
-    institution: "Tech Solutions Ltd",
+    title: "Higher National Diploma in Software Engineering(HND (Completed)",
+ 
+    institution: "National Institute of Business Management (NIBM)",
     date: "2022 - 2024",
-    desc: "Lead developer for enterprise-level Next.js and Node.js applications.",
+    desc: "Also completed Diploma & Higher National Diploma (HND) in Software Engineering at the National Institute of Business Management (NIBM) — 2023–2025 (completed).",
     icon: <Briefcase size={22} />,
+    image: "/assets/nibm.png",
   },
   {
     id: 103,
     type: "cert",
-    title: "Google UX Design",
-    institution: "Google",
+    title: "Database Foundations",
+    institution: "Oracle Academy (Certifications)",
     link: "#",
-    desc: "User-centric design principles.",
+    desc: "Database Foundations — completed Sep 2024.",
+    image: "/assets/oracle.png",
   },
   {
     id: 3,
     type: "main",
-    title: "BSc (Hons) in Computing",
-    institution: "Informatics Institute of Technology",
-    date: "2018 - 2022",
-    desc: "Specialized in Software Engineering. Graduated with First Class honors.",
-    icon: <School size={22} />,
+    title: "Advanced Level (Completed)",
+    institution: "St. Thomas' College, Matara",
+    date: "2022",
+    desc: "Completed A/L (2022) — Foundation of academic and extracurricular excellence.",
+    subjects: ["Chemistry", "Physics", "Mathematics"],
+    image: "/assets/stc.jpeg",
+   
+  },
+  {
+    id: 4,
+     type: "main",
+    title: "Diploma in Information Technology (DITEC) (Completed)",
+    institution: "Pearson",
+    date: "May 2021",
+    desc: "DITEC (Pearson) — practical IT skills and professional certification.",
+
+    image: "/assets/2021.png",
+    featured: true,
+    
   },
 ];
 
@@ -196,31 +219,58 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="timeline-dot">
-                {item.type === 'main' ? item.icon : <Award size={18} />}
-              </div>
+              <div className="timeline-dot" aria-hidden="true"></div>
 
               {item.type === "main" ? (
-                <div className="timeline-card">
+                <div className={`timeline-card ${item.featured ? "featured" : ""} ${item.id === 3 ? 'card-id-3' : ''} ${item.id === 4 ? 'card-id-4' : ''}`}>
+                  {/* optional logo/image for institutions (e.g. school crest) */}
+                  {item.image && (
+                    <div className="timeline-card-logo">
+                      <Image src={item.image} alt={String(item.institution)} width={72} height={72} />
+                    </div>
+                  )}
+
                   <span className="card-date">{item.date}</span>
+
                   <h3 className="card-title">{item.title}</h3>
                   <h4 className="card-subtitle">{item.institution}</h4>
                   <p className="card-text">{item.desc}</p>
+
+                  {/* optional subjects list */}
+                  {Array.isArray(item.subjects) && (
+                    <ul className="timeline-card-subjects">
+                      {item.subjects.map((s) => (
+                        <li key={s}>{s}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ) : (
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="mini-cert-card">
-                   <div className="cert-header">
+                <a href={item.link || '#'} target="_blank" rel="noopener noreferrer" className="mini-cert-card">
+                  {item.image && (
+                    <div className="cert-icon">
+                      <Image src={item.image} alt={`${item.institution} logo`} width={40} height={40} />
+                    </div>
+                  )}
+
+                  <div className="cert-body">
+                    <div className="cert-header">
                       <span className="cert-issuer">{item.institution}</span>
                       <ExternalLink size={14} />
-                   </div>
-                   <h3 className="cert-title">{item.title}</h3>
-                   <p className="cert-desc">{item.desc}</p>
+                    </div>
+
+                    <h3 className="cert-title">{item.title}</h3>
+                    <p className="cert-desc">{item.desc}</p>
+                  </div>
                 </a>
               )}
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Footer from contact section (reused) */}
+      <Footer className="mt-12" />
     </div>
   );
 }
