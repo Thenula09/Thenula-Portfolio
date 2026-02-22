@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -65,6 +66,46 @@ export default function EducationCareer() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLSpanElement>(null);
 
+  const originalTitle = "Education & Career";
+  const [displayTitle, setDisplayTitle] = React.useState(originalTitle);
+  const [hasMoved, setHasMoved] = React.useState(false);
+
+  // scrambling function: replace letters then restore; speed can be varied
+  const scrambleTitle = (speed = 40, rounds = 8) => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let iterations = 0;
+    const interval = setInterval(() => {
+      setDisplayTitle(
+        originalTitle
+          .split("")
+          .map((c, i) => {
+            if (c === " ") return " ";
+            return Math.random() < 0.5
+              ? letters[Math.floor(Math.random() * letters.length)]
+              : originalTitle[i];
+          })
+          .join("")
+      );
+      iterations++;
+      if (iterations > rounds) {
+        clearInterval(interval);
+        setDisplayTitle(originalTitle);
+      }
+    }, speed);
+  };
+
+  // trigger a slow scramble on first mouse movement anywhere
+  React.useEffect(() => {
+    if (hasMoved) return;
+    const handler = () => {
+      scrambleTitle(80, 12); // slower, more rounds
+      setHasMoved(true);
+      window.removeEventListener("mousemove", handler);
+    };
+    window.addEventListener("mousemove", handler);
+    return () => window.removeEventListener("mousemove", handler);
+  }, [hasMoved]);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -122,9 +163,21 @@ export default function EducationCareer() {
           <span ref={subTitleRef} className="text-yellow-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">
             My Journey
           </span>
-          <h2 ref={titleRef} className="text-4xl md:text-7xl font-bold tracking-tight">
-            Education <span className="font-light text-gray-400">&</span> Career
-          </h2>
+          <motion.h2
+            ref={titleRef}
+            className="text-4xl md:text-7xl font-bold tracking-tight cursor-pointer"
+            onMouseEnter={() => scrambleTitle()}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          >
+            {displayTitle.split("&").map((part, idx) => (
+              <React.Fragment key={idx}>
+                {part}
+                {idx === 0 && <span className="font-light text-gray-400">&</span>}
+              </React.Fragment>
+            ))}
+          </motion.h2>
           <div className="heading-line h-[1px] w-24 bg-yellow-500/50 mt-8"></div>
         </div>
 
