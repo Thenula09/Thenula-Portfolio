@@ -227,14 +227,25 @@ export default function AboutPage() {
               </div>
 
               <div className="image-border-decoration"></div>
-              <Image 
-                src={ThenulaAbout}
-                alt="Thenula Hansaja" 
-                className="profile-img"
-                width={380}
-                height={480}
-                priority
-              />
+              <motion.div
+                className="image-inner"
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src={ThenulaAbout}
+                  alt="Thenula Hansaja"
+                  className="profile-img"
+                  width={380}
+                  height={480}
+                  priority
+                />
+              </motion.div>
             </motion.div>
 
             <motion.div 
