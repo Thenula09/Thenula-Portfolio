@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { motion, useScroll, useMotionValue, useSpring } from "framer-motion";
 import Magentic from "../ui/magentic";
 import { gsap } from "gsap";
 import { AboutMarquee } from "./aboutMarquee";
@@ -19,6 +20,49 @@ import DecorativeCard from "@/components/ui/DecorativeCard";
 import DiscoverButton from "@/components/ui/DiscoverButton";
 
 export function AboutWrapper({}) {
+  const { scrollY } = useScroll();
+  const sectionRef = React.useRef<HTMLDivElement | null>(null);
+  const [range, setRange] = React.useState<[number, number]>([0, 0]);
+
+  // map scroll position to a modest vertical shift for the photo
+  const photoY = useMotionValue(0);
+  // softer spring for slower, more gradual motion
+  const smoothPhotoY = useSpring(photoY, { damping: 60, stiffness: 150 });
+
+  // calculate the section's start/end scroll positions
+  React.useLayoutEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const top = el.offsetTop;
+    const height = el.offsetHeight;
+    setRange([top, top + height]);
+  }, []);
+
+  // update photoY based on scrollY within the section range
+  React.useEffect(() => {
+    const unsub = scrollY.onChange((y) => {
+      const [start, end] = range;
+      if (end === start) {
+        // range not calculated yet
+        return;
+      }
+      let val = 0;
+      // keep image locked inside its frame while the section is in view
+      if (y <= end) {
+        val = 0;
+      } else {
+        // after the bottom of the section, move the image slowly upward
+        // over a long scroll distance (e.g. 1000px)
+        const distance = y - end;
+        const maxDist = 1000; // adjust for how long the animation should take
+        const progress = Math.min(distance / maxDist, 1);
+        val = -60 * progress; // only gradually reach -60
+      }
+      photoY.set(val);
+    });
+    return unsub;
+  }, [scrollY, range, photoY]);
+
   useEffect(() => {
     // animate project cards + number badges when they enter viewport
     const cards = document.querySelectorAll<HTMLElement>(".project-card");
@@ -62,7 +106,10 @@ export function AboutWrapper({}) {
 
   return (
     <div className="w-full">
-      <main className="flex h-full w-full max-w-maxWidth grow flex-col md:flex-row items-center justify-center gap-8 mt-8 px-paddingX text-[5.8vw] md:text-[clamp(20px,_1vw_+_14px,_32px)]">
+      <main
+        ref={sectionRef}
+        className="flex h-full w-full max-w-maxWidth grow flex-col md:flex-row items-center justify-center gap-8 mt-8 px-paddingX text-[5.8vw] md:text-[clamp(20px,_1vw_+_14px,_32px)]"
+      >
         {/* About text on the LEFT (swapped) */}
         <div className="w-full md:w-1/2 flex flex-col items-start text-colorLight">
           <h3 className="sr-only">About Me</h3>
@@ -84,15 +131,22 @@ export function AboutWrapper({}) {
 
         {/* Image on the RIGHT (swapped) */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <div className="w-[360px] h-[360px] md:w-[480px] md:h-[580px] rounded-3xl overflow-hidden shadow-lg about-photo">
-            <Image
-              src={ThenulaAbout}
-              alt="Thenula Saja"
-              width={640}
-              height={640}
-              className="h-full w-full object-cover"
-              priority
-            />
+          <div className="photo-frame p-4 rounded-3xl"> {/* decorative box */}
+            <motion.div
+              className="w-[360px] h-[360px] md:w-[480px] md:h-[580px] rounded-3xl overflow-hidden shadow-lg about-photo"
+              style={{ y: smoothPhotoY }}
+              whileHover={{ scale: 1.07, rotateY: 5 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <Image
+                src={ThenulaAbout}
+                alt="Thenula Saja"
+                width={640}
+                height={640}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </motion.div>
           </div>
         </div>
       </main>
