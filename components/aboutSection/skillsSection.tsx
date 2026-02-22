@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { skills as initialSkills, tools as initialTools } from "@/data/data";
-import SkillCard from "./skillCard";
+import SkillBgCard from "./skillBgCard"; // decorative background card
 
 type Skill = { name: string; level?: number };
 
@@ -49,7 +49,13 @@ export default function SkillsSection() {
   }, [expandedSet]);
 
   const handleCardToggle = (label: string, isExpanded: boolean) => {
-    setExpandedSet((prev) => ({ ...prev, [label]: isExpanded }));
+    // whenever a card is clicked, remove it entirely (expansion state becomes irrelevant)
+    setSkills((prev) => prev.filter((s) => s.name !== label));
+    setExpandedSet((prev) => {
+      const copy = { ...prev };
+      delete copy[label];
+      return copy;
+    });
   };
 
   const addSkill = () => {
@@ -91,61 +97,29 @@ export default function SkillsSection() {
         {[
           {
             title: "Frontend Development",
-            items: [
-              "React",
-              "Next.js",
-              "TypeScript",
-              "JavaScript",
-              "HTML5",
-            ],
+            items: [],
           },
           {
             title: "Backend Development",
-            items: [
-              "Node.js",
-              "Express",
-              "REST APIs",
-              "TypeScript (server)",
-              "Authentication",
-              "Prisma / ORM",
-            ],
+            items: [],
           },
           {
             title: "Databases",
-            items: [
-              "PostgreSQL",
-              "MySQL",
-              "MongoDB",
-              "Redis",
-              "SQLite",
-              "Firebase",
-              "Supabase",
-              "Prisma",
-              "CockroachDB",
-              "DynamoDB",
-            ],
+            items: [],
           },
           {
             title: "Version Control & DevOps",
-            items: [
-              "Git",
-              "GitHub",
-              "CI / CD",
-              "Docker",
-              "Docker Compose",
-              "Kubernetes",
-              "Vercel",
-              "Netlify",
-              "GitHub Actions",
-              "Monitoring",
-            ],
+            items: [],
           },
         ].map((section) => (
-          <div key={section.title}>
+          <div key={section.title} className="relative">
             <h4 className="mb-4 text-lg font-semibold text-colorLight">{section.title}</h4>
-            <div className="skill-cards mb-6">
+            <SkillBgCard />
+            <div className="skill-cards mb-6 relative z-10">
               {section.items.map((label) => (
-                <SkillCard key={label} label={label} r={-8} onToggle={(isExpanded) => handleCardToggle(label, isExpanded)} />
+                <div key={label} className="skill-chip p-2 bg-white/[0.05] rounded cursor-default">
+                  {label}
+                </div>
               ))}
             </div>
           </div>
