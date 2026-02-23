@@ -24,8 +24,8 @@ const StyledWrapper = styled.div`
 
   .container .glass {
     position: relative;
-    width: 60px;
-    height: 80px;
+    width: 120px;
+    height: 140px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 
@@ -109,13 +109,13 @@ const StyledWrapper = styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 45px;
+    height: 50px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -126,7 +126,7 @@ const StyledWrapper = styled.div`
   }
 
   .container .glass svg {
-    font-size: 1.5em;
+    font-size: 3em;
     fill: #fff;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     transition: all 0.6s;
@@ -142,8 +142,8 @@ const StyledWrapper = styled.div`
 
   @media (max-width: 768px) {
     .container .glass {
-      width: 50px;
-      height: 70px;
+      width: 100px;
+      height: 120px;
       margin: 0 -20px;
     }
     

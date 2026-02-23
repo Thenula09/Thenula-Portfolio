@@ -26,6 +26,7 @@ import { useState } from "react";
 import { links } from "@/data/data";
 import { useRef } from "react";
 import { gsap } from "gsap";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -46,6 +47,9 @@ export default function ProfileForm() {
     "Initial" | "Loading" | "Success" | "Error"
   >("Initial");
   const bgImagesSharedRef = useRef<gsap.core.Tween | null>(null);
+  const leftCardRef = useRef<HTMLDivElement>(null);
+  const rightTopCardRef = useRef<HTMLDivElement>(null);
+  const rightBottomCardRef = useRef<HTMLDivElement>(null);
   
   const form = useForm<TFormSchema>({
     resolver: zodResolver(formSchema),
@@ -55,6 +59,65 @@ export default function ProfileForm() {
       message: "",
     },
   });
+
+  useEffect(() => {
+    // Animate cards on mount
+    const tl = gsap.timeline();
+    
+    // Left card - slide from left
+    tl.fromTo(leftCardRef.current,
+      {
+        opacity: 0,
+        x: -100,
+        y: 50
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      }
+    );
+    
+    // Right top card - slide from right
+    tl.fromTo(rightTopCardRef.current,
+      {
+        opacity: 0,
+        x: 100,
+        y: 50
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      "-=0.4" // Start 0.4s before previous animation ends
+    );
+    
+    // Right bottom card - slide from right
+    tl.fromTo(rightBottomCardRef.current,
+      {
+        opacity: 0,
+        x: 100,
+        y: 50
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      "-=0.4" // Start 0.4s before previous animation ends
+    );
+    
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   const onMyFormSubmit = async (data: z.infer<typeof formSchema>) => {
     setStatus("Loading");
@@ -114,7 +177,10 @@ export default function ProfileForm() {
         
         <div className="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column: Get In Touch Form */}
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+          <div 
+            ref={leftCardRef}
+            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl"
+          >
             <h1 className="mb-4 text-[clamp(24px,_4vw,_48px)] font-bold leading-[1.1] tracking-tight text-white">
               Get In Touch
             </h1>
@@ -192,7 +258,10 @@ export default function ProfileForm() {
           {/* Right Column */}
           <div className="space-y-8">
             {/* Connect With Me Card */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+            <div 
+              ref={rightTopCardRef}
+              className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl"
+            >
               <h2 className="mb-6 text-[clamp(20px,_3vw,_32px)] font-bold leading-[1.1] tracking-tight text-white">
                 Connect With Me
               </h2>
@@ -234,7 +303,10 @@ export default function ProfileForm() {
             </div>
 
             {/* Let's Work Together Card */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+            <div 
+              ref={rightBottomCardRef}
+              className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl"
+            >
               <h2 className="mb-6 text-[clamp(20px,_3vw,_32px)] font-bold leading-[1.1] tracking-tight text-white">
                 Let's Work Together
               </h2>

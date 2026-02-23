@@ -22,51 +22,74 @@ export default function SkillsSection() {
     const allElements = [...chips, ...cards];
 
     // set initial state for entrance animation
-    gsap.set(allElements, { opacity: 0, y: 40, scale: 0.8 });
+    gsap.set(allElements, { 
+      opacity: 0, 
+      y: 60, 
+      scale: 0.6,
+      rotation: 15,
+      transformOrigin: "center center"
+    });
 
     // when elements scroll into view animate them one-by-one with elastic pop
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const idx = allElements.indexOf(el);
+            const el = entry.target;
+            
+            // Animate cards with dramatic entrance
             gsap.to(el, {
               opacity: 1,
               y: 0,
               scale: 1,
-              duration: 1,
+              rotation: 0,
+              duration: 1.2,
               ease: "elastic.out(1, 0.5)",
-              delay: idx * 0.08,
+              delay: Math.random() * 0.3, // Random delay for staggered effect
+              onStart: () => {
+                // Add a subtle glow effect during animation
+                gsap.to(el, {
+                  boxShadow: "0 0 40px rgba(100, 181, 246, 0.6)",
+                  duration: 0.6,
+                  yoyo: true,
+                  repeat: 1,
+                  ease: "power2.inOut"
+                });
+              }
             });
+            
             io.unobserve(el);
           }
         });
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
 
-    allElements.forEach((c) => io.observe(c));
+    allElements.forEach((el) => io.observe(el));
 
-    // additionally hook up a little hover/tap animation on the cards themselves
-    const enterFn = (card: HTMLElement) => {
-      gsap.to(card, { scale: 1.1, rotation: 0, duration: 0.3, ease: "power2.out" });
-    };
-    const leaveFn = (card: HTMLElement) => {
-      const rot = parseFloat(getComputedStyle(card).getPropertyValue("--r") || "0");
-      gsap.to(card, { scale: 1, rotation: rot, duration: 0.3, ease: "power2.out" });
-    };
+    // Add hover animations for cards
     cards.forEach((card) => {
-      card.addEventListener("mouseenter", () => enterFn(card));
-      card.addEventListener("mouseleave", () => leaveFn(card));
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, {
+          scale: 1.1,
+          rotation: 5,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
     });
 
     return () => {
       io.disconnect();
-      cards.forEach((card) => {
-        card.removeEventListener("mouseenter", () => enterFn(card));
-        card.removeEventListener("mouseleave", () => leaveFn(card));
-      });
     };
   }, [skills, tools]);
 
