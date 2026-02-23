@@ -92,6 +92,84 @@ const bgImagesData = [
     title: "",
     subtitle: "",
   },
+  {
+    id: 15,
+    imgLink: "/svg_logo/kotlin.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 16,
+    imgLink: "/svg_logo/java.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 17,
+    imgLink: "/svg_logo/javascript.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 18,
+    imgLink: "/svg_logo/mongodb-plain-wordmark.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 19,
+    imgLink: "/svg_logo/docker-plain-wordmark.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 20,
+    imgLink: "/svg_logo/firebase-plain.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 21,
+    imgLink: "/svg_logo/flutter.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 22,
+    imgLink: "/svg_logo/cplusplus-original.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 23,
+    imgLink: "/svg_logo/csharp-original.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 24,
+    imgLink: "/svg_logo/html5.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 25,
+    imgLink: "/svg_logo/nodejs.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 26,
+    imgLink: "/svg_logo/python.svg",
+    title: "",
+    subtitle: "",
+  },
+  {
+    id: 27,
+    imgLink: "/svg_logo/supabase-original.svg",
+    title: "",
+    subtitle: "",
+  },
 ];
 
 function getRandDistrubutedTop(index: number, targets: any[]) {
@@ -154,9 +232,9 @@ export const BgImagesContainer = ({
         // filter: "blur(0px)",
 
         // paused: true,
-        delay: 0.8,
-        stagger: 0.08,
-        duration: 1,
+        delay: 0.3,
+        stagger: 0.03,
+        duration: 0.6,
         ease: CustomEase.create("custom", "M0,0,C0.5,0,0,1,1,1"),
       },
     );
