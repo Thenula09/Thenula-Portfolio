@@ -22,6 +22,7 @@ import { Header } from "@/components/header";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import { Footer } from "@/components/contactSection/footer";
 import { useState } from "react";
+import { links } from "@/data/data";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -107,6 +108,12 @@ export default function ProfileForm() {
         <h1 className="mb-[1.5em] mt-[0.5em] text-[12.2vw] font-bold leading-[0.9] tracking-tight md:text-[clamp(16px,_6.3vw_+_8px,_120px)]">
           Let's start a <br /> project together
         </h1>
+        <p className="mb-[1.5em] text-[clamp(16px,_1.3vw_+_12px,_24px)]">
+          You can also reach me directly at{' '}
+          <a href={links.email} className="underline">
+            {links.email.replace('mailto:', '')}
+          </a>
+        </p>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onMyFormSubmit)}
