@@ -20,16 +20,25 @@ export default function SkillsSection() {
     const chips = Array.from(ref.current?.querySelectorAll<HTMLElement>(".skill-chip, .tool-chip") ?? []);
     const cards = Array.from(ref.current?.querySelectorAll<HTMLElement>(".glass") ?? []);
     const allElements = [...chips, ...cards];
-    
-    gsap.set(allElements, { opacity: 0, y: 30, scale: 0.8 });
 
+    // set initial state for entrance animation
+    gsap.set(allElements, { opacity: 0, y: 40, scale: 0.8 });
+
+    // when elements scroll into view animate them one-by-one with elastic pop
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
             const idx = allElements.indexOf(el);
-            gsap.to(el, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)", delay: idx * 0.1 });
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 1,
+              ease: "elastic.out(1, 0.5)",
+              delay: idx * 0.08,
+            });
             io.unobserve(el);
           }
         });
@@ -38,7 +47,27 @@ export default function SkillsSection() {
     );
 
     allElements.forEach((c) => io.observe(c));
-    return () => io.disconnect();
+
+    // additionally hook up a little hover/tap animation on the cards themselves
+    const enterFn = (card: HTMLElement) => {
+      gsap.to(card, { scale: 1.1, rotation: 0, duration: 0.3, ease: "power2.out" });
+    };
+    const leaveFn = (card: HTMLElement) => {
+      const rot = parseFloat(getComputedStyle(card).getPropertyValue("--r") || "0");
+      gsap.to(card, { scale: 1, rotation: rot, duration: 0.3, ease: "power2.out" });
+    };
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", () => enterFn(card));
+      card.addEventListener("mouseleave", () => leaveFn(card));
+    });
+
+    return () => {
+      io.disconnect();
+      cards.forEach((card) => {
+        card.removeEventListener("mouseenter", () => enterFn(card));
+        card.removeEventListener("mouseleave", () => leaveFn(card));
+      });
+    };
   }, [skills, tools]);
 
   // toggle body class when any skill card is expanded (used to push Projects down)
