@@ -72,6 +72,7 @@
 
 .profile-image-container {
   position: relative;
+  margin-top: 50px;
   width: 100%;
   max-width: 513px; /* ~+35% */
   perspective: 1200px;
@@ -170,11 +171,12 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.9rem;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .main-heading {
   font-size: 4.7rem; /* ~+35% */
+  margin-top: 10px;
   margin: -200px 0 0px 0;
   color: var(--colorText);
   letter-spacing: -0.02em;
@@ -188,6 +190,7 @@
   color: var(--colorLight);
   margin-top: 210px;
   margin-bottom: 30px;
+  y-one: 1;
 } 
 
 .stats-mini-grid {
@@ -213,6 +216,7 @@
   margin-bottom: 100px;
   color: var(--colorText);
   font-weight: 800;
+  margin-top: 20px;
 }
 
 /* timeline card logo (small crest / school image) */

@@ -15,8 +15,6 @@ import { Footer } from "@/components/contactSection/footer";
 import "./about.css";
 
 const timelineData = [
-
-
   {
     id: 98,
     type: "cert",
@@ -37,7 +35,6 @@ const timelineData = [
     desc: "Crash Course — AI‑Powered DevOps (completed).",
     image: "/assets/KodeKloud.png",
   },
-  
   {
     id: 5,
     type: "main",
@@ -47,7 +44,6 @@ const timelineData = [
     desc: "Undergraduate program focusing on software development and systems.",
     image: "/assets/coventry.jpeg",
   },
-   
   {
     id: 100,
     type: "cert",
@@ -58,7 +54,6 @@ const timelineData = [
     desc: "Financial Analysis · Stock Market (completed May 2025)",
     image: "/assets/udemy.png",
   },
-
   {
     id: 104,
     type: "cert",
@@ -79,7 +74,7 @@ const timelineData = [
     desc: "Successfully completed the Pine Script Course — Trading Hub (2025).",
     image: "/assets/pine.png",
   },
-   {
+  {
     id: 101,
     type: "cert",
     title: "Postman API Fundamentals — Student Expert (Completed)",
@@ -89,7 +84,6 @@ const timelineData = [
     desc: "Postman API Fundamentals — Student Expert certificate 2025.",
     image: "/assets/postman.jpeg",
   },
- 
   {
     id: 102,
     type: "cert",
@@ -100,12 +94,10 @@ const timelineData = [
     desc: "Introductory web design course —Sep 2025",
     image: "/assets/moratuwa.jpeg",
   },
-  
   {
     id: 2,
     type: "main",
     title: "Higher National Diploma in Software Engineering(HND (Completed)",
- 
     institution: "National Institute of Business Management (NIBM)",
     date: "2022 - 2024",
     desc: "Also completed Diploma & Higher National Diploma (HND) in Software Engineering at the National Institute of Business Management (NIBM) — 2023–2025 (completed).",
@@ -130,19 +122,16 @@ const timelineData = [
     desc: "Completed A/L (2022) — Foundation of academic and extracurricular excellence.",
     subjects: ["Chemistry", "Physics", "Mathematics"],
     image: "/assets/stc.jpeg",
-   
   },
   {
     id: 4,
-     type: "main",
+    type: "main",
     title: "Diploma in Information Technology (DITEC) (Completed)",
     institution: "Pearson",
     date: "May 2021",
     desc: "DITEC (Pearson) — practical IT skills and professional certification.",
-
     image: "/assets/2021.png",
     featured: true,
-    
   },
 ];
 
@@ -181,16 +170,10 @@ export default function AboutPage() {
     const el = imgRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    
-    // Mouse position relative to center of image (-1 to 1)
     const px = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const py = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-
-    // rotateX: Mouse udata yaddi (py < 0) rotateX positive wenna ona (pahala balanna)
-    // rotateY: Mouse dakunata yaddi (px > 0) rotateY positive wenna ona (dakuna balanna)
-    const rotateY = px * 12; 
-    const rotateX = -py * 12; // Inverted for natural tilt
-
+    const rotateY = px * 12;
+    const rotateX = -py * 12;
     setTilt({ rotateX, rotateY, translateY: tilt.translateY });
   };
 
@@ -205,9 +188,9 @@ export default function AboutPage() {
       <section className="profile-hero-section">
         <LeftFazerLoader />
         <div className="container">
-          <div className="profile-grid">
-            <div className="orbit-loader-container">
-            </div>
+          <div className="profile-grid items-center"> {/* added items-center for better alignment */}
+            <div className="orbit-loader-container"></div>
+            
             <motion.div 
               ref={imgRef}
               className="profile-image-container"
@@ -218,10 +201,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               style={{
                 transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(${tilt.translateY}px)`,
-                transition: "transform 0.1s ease-out" // ensures smooth tracking
+                transition: "transform 0.1s ease-out"
               }}
             >
-              {/* Solar background specifically behind the profile photo */}
               <div className="photo-solar-bg1" aria-hidden="true">
                 <SolarLoader className="top" />
               </div>
@@ -253,14 +235,23 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ paddingTop: '200px' }} // Title එක මදක් පහළට ගැනීමට
             >
-              <h1 className="main-heading">About Me</h1>
-              <p className="description">
-                Hello! I'm a passionate developer dedicated to creating high-quality web experiences. 
-                With a strong foundation in both front-end and back-end technologies.
-              </p>
-              <div className="stats-mini-grid">
-                <div><strong>5+</strong> Projects</div>
+              <h1 className="main-heading text-colorLight" style={{ marginBottom: '-140px' }}>
+                About Me
+              </h1>
+              
+              <div className="description-wrapper">
+                <p className="description text-colorLight" style={{ marginBottom: '-200px', lineHeight: '1.7' }}>
+                  I am a dedicated <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Software Engineering undergraduate</span> at <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Coventry University</span>, driven by a passion for solving complex real-world problems through innovative technology. With a solid foundation from a Diploma in IT (<span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Pearson</span>) and an HND in Software Engineering (<span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>NIBM</span>), I specialize in <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Python</span> and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Java</span> while actively expanding my expertise into <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>AI</span>, <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Machine Learning</span>, and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Blockchain</span>.
+                </p>
+                <p className="description text-colorLight" style={{ lineHeight: '1.7' }}>
+                  My primary focus lies in <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Mobile Application Development</span> and creating tech-driven solutions that simplify lives. I pride myself on my analytical mindset and my ability to push boundaries in emerging tech fields. You can explore my technical journey, ongoing projects, and problem-solving capabilities via my <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>GitHub</span> and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>LinkedIn</span>.
+                </p>
+              </div>
+
+              <div className="stats-mini-grid" style={{ marginTop: '30px' }}>
+                <div><strong>8+</strong> Projects</div>
                 <div><strong>3+</strong> Years Exp.</div>
               </div>
             </motion.div>
@@ -289,7 +280,6 @@ export default function AboutPage() {
 
               {item.type === "main" ? (
                 <div className={`timeline-card ${item.featured ? "featured" : ""} ${item.id === 3 ? 'card-id-3' : ''} ${item.id === 4 ? 'card-id-4' : ''} ${item.id === 5 ? 'card-id-5' : ''}`}>
-                  {/* optional logo/image for institutions (e.g. school crest) */}
                   {item.image && (
                     <div className="timeline-card-logo">
                       <Image src={item.image} alt={String(item.institution)} width={72} height={72} />
@@ -303,7 +293,6 @@ export default function AboutPage() {
                   <h4 className="card-subtitle">{item.institution}</h4>
                   <p className="card-text">{item.desc}</p>
 
-                  {/* optional subjects list */}
                   {Array.isArray(item.subjects) && (
                     <ul className="timeline-card-subjects">
                       {item.subjects.map((s) => (
@@ -336,7 +325,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Footer from contact section (reused) */}
       <Footer className="mt-12" />
     </div>
   );
