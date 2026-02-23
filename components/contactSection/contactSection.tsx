@@ -41,7 +41,7 @@ export function ContactSection({}) {
   }, []);
 
   return (
-    <section className="section section__5 third darkGradient ">
+    <section className="section section__5 third darkGradient">
       <Bulge type="Light" />
 
       {/* Contact Form */}

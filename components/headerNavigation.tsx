@@ -79,6 +79,11 @@ export function HeaderNavigation() {
     },
 
     {
+      name: "About",
+      href: links.about,
+    },
+
+    {
       name: "Work",
       href: links.work,
     },
@@ -90,10 +95,6 @@ export function HeaderNavigation() {
       name: "Contact",
       href: links.email,
     },
-    {
-      name: "Twitter/X",
-      href: links.twitter,
-    },
   ];
   return (
     <>
@@ -104,7 +105,7 @@ export function HeaderNavigation() {
         <Header
           mode="cross"
           className="headerAnimate"
-          color={color == "Light" ? "Dark" : "Light"}
+          color={color == "Light" ? "Light" : "Light"}
         />
         <nav>
           <ul className="mask flex flex-col items-center justify-center px-8 py-[10vh]">

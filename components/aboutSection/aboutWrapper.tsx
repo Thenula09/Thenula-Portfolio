@@ -112,8 +112,6 @@ export function AboutWrapper({}) {
       >
         {/* About text on the LEFT (swapped) */}
         <div className="w-full md:w-1/2 flex flex-col items-start text-colorLight">
-          <h3 className="sr-only">About Me</h3>
-
           <TrueFocus
             sentence="About Me"
             manualMode={false}
@@ -124,8 +122,11 @@ export function AboutWrapper({}) {
           />
 
           <p className="max-w-prose text-base md:text-xl">
-            Hi — I'm Thenula. Replace this short bio with your real content in
-            `aboutWrapper.tsx` or in your data source.
+            I am a <span className="text-[hsl(54,100%,50%)] font-semibold">BSc (Hons) Computer Science with Software Engineering</span> student at <span className="text-[hsl(54,100%,50%)] font-semibold">Coventry University</span>, backed by a solid academic foundation from <span className="text-[hsl(54,100%,50%)] font-semibold">Pearson</span> and <span className="text-[hsl(54,100%,50%)] font-semibold">NIBM</span>. With a strong command of Python and Java, I specialize in <span className="text-[hsl(54,100%,50%)] font-semibold">Full Stack Development</span> with a primary focus on building high-performance <span className="text-[hsl(54,100%,50%)] font-semibold">Mobile Applications</span>.
+          </p>
+          
+          <p className="max-w-prose text-base md:text-xl mt-4">
+            My work revolves around strategic problem-solving by integrating emerging technologies like <span className="text-[hsl(54,100%,50%)] font-semibold">AI</span>, <span className="text-[hsl(54,100%,50%)] font-semibold">Machine Learning</span>, and <span className="text-[hsl(54,100%,50%)] font-semibold">Blockchain</span>. I am a lifelong learner committed to delivering innovative, tech-driven solutions. Explore my technical journey and latest projects on <a href="https://github.com/thenula09" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">GitHub (thenula09)</a> and <a href="https://www.linkedin.com/in/thenula-hansaja-317a63301/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">LinkedIn (Thenula Hansaja)</a>.
           </p>
         </div>
 

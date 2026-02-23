@@ -267,37 +267,49 @@ export default function ProfileForm() {
               </h2>
               <div className="space-y-4">
                 <a 
-                  href="mailto:rusirasandulhw@gmail.com" 
+                  href="mailto:thenulahansaja12@gmail.com" 
                   className="flex items-center gap-3 p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300"
                 >
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4.499c0-.732-.397-1.369-.99-1.719L10 2.001a2 2 0 00-1.997.001L2.003 5.884A2 2 0 002 7.001v6a2 2 0 002.003 1.999zM10 11.001l7.997 3.998A2 2 0 0018 14.5v-6a2 2 0 00-.003-.616L10 6.001v5zM8 6.001L2.003 9.999A2 2 0 002 11.501v6a2 2 0 002.003 1.999L8 11.001v-5z"/>
+                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                   </svg>
-                  <span className="text-white/90">rusirasandulhw@gmail.com</span>
+                  <span className="text-white/90">thenulahansaja12@gmail.com</span>
                 </a>
                 
                 <a 
-                  href="https://github.com/yourusername" 
+                  href="https://github.com/Thenula09" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300"
                 >
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.054 0-1.872.867-1.872 1.947v2.234c-.316.192-.694.801-.694.801 0 1.368.673 2.574 1.912 2.574 1.924 0 3.486-.846 4.401-2.236.599-.111.793.261.793.577v2.234c0 .316-.192.694-.801.694-.801 0-1.368-.673-2.574-1.912-2.574-1.924 0-3.486.846-4.401 2.236-.599.111-.793-.261-.793-.577v-2.234c-3.338.726-4.033 1.416-4.033 1.416-.546 1.387-1.333 1.756-1.333 1.054 0 1.872-.867 1.872-1.947v-2.234z"/>
                   </svg>
-                  <span className="text-white/90">GitHub</span>
+                  <span className="text-white/90">thenula09</span>
                 </a>
                 
                 <a 
-                  href="https://linkedin.com/in/yourusername" 
+                  href="https://www.linkedin.com/in/thenula-hansaja-317a63301/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300"
                 >
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-2.432-.14-3.223-.14-1.495 0-2.855.539-3.632 1.426-.878-.798-1.432-1.432-1.432-2.86 0-5.17 3.425-5.17 5.17v2.234h-3.554v-8.147h3.554v-2.234c0-3.425 3.425-5.17 5.17-5.17 1.495 0 2.855-.539 3.632-1.426.878.798 1.432 1.432 1.432 2.86 0 5.17-3.425 5.17-5.17v-2.234z"/>
                   </svg>
-                  <span className="text-white/90">LinkedIn</span>
+                  <span className="text-white/90">Thenula hansaja</span>
+                </a>
+                
+                <a 
+                  href="https://instagram.com/thenula09" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300"
+                >
+                  <svg className="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                  </svg>
+                  <span className="text-white/90">thenula09</span>
                 </a>
               </div>
             </div>

@@ -55,7 +55,7 @@ export function HeroMarquee({}) {
       return tl;
     }
 
-    const marqueeTl = roll(".rollingText", { duration: 15 });
+    const marqueeTl = roll(".rollingText", { duration: 25 });
 
     return () => {
       // kill timeline

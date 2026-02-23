@@ -81,8 +81,8 @@ export function AboutSection({}) {
               }}
             >
               <div className="flex h-[0.9rem] w-full flex-col justify-between">
-                <div className="h-[0.15rem] w-full bg-colorDark"></div>
-                <div className="h-[0.15rem] w-full bg-colorDark"></div>
+                <div className="h-[0.15rem] w-full bg-white"></div>
+                <div className="h-[0.15rem] w-full bg-white"></div>
               </div>
             </Magentic>
           </div>

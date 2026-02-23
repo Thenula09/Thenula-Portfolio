@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
 const ContactForm = () => {
@@ -81,17 +81,21 @@ const ContactForm = () => {
           <div className="connect-section">
             <h3 className="section-title">Connect With Me</h3>
             <div className="contact-links">
-              <a href="mailto:rusirasandulhw@gmail.com" className="contact-link">
-                <MdEmail className="contact-icon" />
-                <span>rusirasandulhw@gmail.com</span>
+              <a href="mailto:thenulahansaja12@gmail.com" className="contact-link">
+                <MdEmail className="contact-icon text-red-500" />
+                <span>thenulahansaja12@gmail.com</span>
               </a>
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="contact-link">
+              <a href="https://github.com/Thenula09" target="_blank" rel="noopener noreferrer" className="contact-link">
                 <FaGithub className="contact-icon" />
-                <span>GitHub</span>
+                <span>thenula09</span>
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <FaLinkedin className="contact-icon" />
-                <span>LinkedIn</span>
+              <a href="https://www.linkedin.com/in/thenula-hansaja-317a63301/" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <FaLinkedin className="contact-icon text-blue-600" />
+                <span>Thenula hansaja</span>
+              </a>
+              <a href="https://instagram.com/thenula09" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <FaInstagram className="contact-icon text-pink-600" />
+                <span>thenula09</span>
               </a>
             </div>
           </div>
