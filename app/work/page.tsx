@@ -69,6 +69,66 @@ const projectsData = [
     link: "https://www.figma.com/proto/Tzz9bwrjHtSza87b1l3D0i/Inner-Strength-UI-Design?type=design&node-id=37-10&t=pq2KDLjYbMU4LFgA-1&scaling=min-zoom&page-id=0%3A1&mode=design",
     imageLink: "/img/projects/6.avif",
   },
+  {
+    title: (
+      <>
+        E-Commerce <br /> Platform
+      </>
+    ),
+    description: "React Application",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
+  {
+    title: (
+      <>
+        Task Manager <br /> App
+      </>
+    ),
+    description: "Mobile Application",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
+  {
+    title: (
+      <>
+        Social Media <br /> Dashboard
+      </>
+    ),
+    description: "Vue.js Application",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
+  {
+    title: (
+      <>
+        Weather <br /> Forecast
+      </>
+    ),
+    description: "Python Application",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
+  {
+    title: (
+      <>
+        Blog <br /> Platform
+      </>
+    ),
+    description: "Next.js Application",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
+  {
+    title: (
+      <>
+        Portfolio <br /> Website
+      </>
+    ),
+    description: "Static Site",
+    link: "#",
+    imageLink: "/img/projects/7.avif",
+  },
 ];
 //test
 export default function WorkPage() {

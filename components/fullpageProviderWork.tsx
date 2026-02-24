@@ -21,7 +21,7 @@ const opts = {
   navigationPosition: "left",
   scrollingSpeed: 1000,
   easingcss3: "cubic-bezier(0.645, 0.045, 0.355, 1)",
-  anchors: ["first", "second", "third", "fourth", "fifth", "sixth"],
+  anchors: ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"],
   licenseKey: "gplv3-license",
   credits: {
     enabled: false,
