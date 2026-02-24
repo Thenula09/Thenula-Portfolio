@@ -36,7 +36,7 @@ export function WorkSection({
       text-color${color} `}
       key={item.link}
     >
-      <Header color={color}></Header>
+      <Header color={color === "Dark" ? "Light" : "light"}></Header>
       <Bulge type={color} />
 
       <div className="flex h-[100dvh] w-full items-center px-paddingX">
@@ -140,6 +140,10 @@ export function WorkSection({
             );
           })}
       </div>
+
+      {/* Add missing elements for FullPage animations */}
+      <div className="rounded__div__down"></div>
+      <div className="rounded__div__up"></div>
     </div>
   );
 }

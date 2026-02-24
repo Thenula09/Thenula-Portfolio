@@ -36,17 +36,17 @@ const projectsData = [
     ),
     description: "Next.js Site",
     link: "https://generator.andytoken.com/",
-    imageLink: "/img/projects/3.avif",
+    imageLink: "/img/SOULBUDDY.png",
   },
   {
     title: (
       <>
-        PonkeSol <br /> Page
+        Rayspire <br /> Solar
       </>
     ),
-    description: "Webflow Site",
-    link: "https://ponkecoin-ninetyeight.webflow.io/",
-    imageLink: "/img/projects/4.avif",
+    description: "Android app for solar power systems with hot deals and tech specs.",
+    link: "https://github.com/Thenula09/Rayspire-Solar",
+    imageLink: "/img/Rayspire_solar.png",
   },
 
   {
@@ -57,7 +57,7 @@ const projectsData = [
     ),
     description: "Webflow Site",
     link: "https://amanfx.webflow.io/",
-    imageLink: "/img/projects/5.avif",
+    imageLink: "/img/Rayspire_solar.png",
   },
   {
     title: (

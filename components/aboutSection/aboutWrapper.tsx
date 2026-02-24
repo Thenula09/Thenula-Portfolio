@@ -203,15 +203,15 @@ export function AboutWrapper({}) {
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/" },
             { title: "Simple Font Replacer", category: "Figma plugin", footer: "Figma plugin published", image: "/img/projects/2.avif", link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer" },
-            { title: "Andy PFP Generator", category: "Next.js", footer: "Generative avatar site", image: "/img/projects/3.avif", link: "https://generator.andytoken.com/" },
-            { title: "PonkeSol Page", category: "Webflow", footer: "Marketing site", image: "/img/projects/4.avif", link: "https://ponkecoin-ninetyeight.webflow.io/" },
+            { title: "SOULBUDDY", category: "Mobile application", footer: "SoulBuddy is a mobile application designed to help users manage stress and monitor their daily emotional well-being. By integrating React Native for a seamless cross-platform experience and OpenAI (Generative AI) for intelligent interactions, it provides users with a supportive digital space to express their feelings.", image: "/img/SOULBUDDY.png", link: "https://generator.andytoken.com/", customClass: "soulbuddy-card" },
+            { title: "Rayspire-Solar", category: "Mobile application", footer: "Rayspire Solar is a feature-rich Android application that allows users to explore solar power systems, view hot deals, and check detailed technical specifications. The app features a high-performance UI with smooth animations and real-time data syncing.", image: "/img/Rayspire_solar.png", link: "https://github.com/Thenula09/Rayspire-Solar", customClass: "rayspire-card" },
             { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/projects/5.avif", link: "https://amanfx.webflow.io/" },
             { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/projects/6.avif", link: "#" },
             { title: "Project 7", category: "Other", footer: "Description here", image: "/img/projects/7.avif", link: "#" },
             { title: "Project 8", category: "Other", footer: "Description here", image: "/img/projects/1.avif", link: "#" },
           ].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noreferrer">
-              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} />
+              <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} customClass={p.customClass} />
             </a>
           ))}
         </div>

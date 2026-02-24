@@ -8,6 +8,7 @@ type ProjectCardProps = {
   footer?: string;
   width?: string | number; // e.g. '190px' or 190
   height?: string | number; // e.g. '254px' or 254
+  customClass?: string;
 };
 
 export default function ProjectCard({
@@ -19,6 +20,7 @@ export default function ProjectCard({
   // use CSS variables by default so card sizing is controlled via CSS breakpoints
   width = "var(--project-card-width)",
   height = "var(--project-card-height)",
+  customClass = "",
 }: ProjectCardProps) {
   const style: React.CSSProperties = {
     width: typeof width === "number" ? `${width}px` : width,
@@ -26,7 +28,7 @@ export default function ProjectCard({
   };
 
   return (
-    <div className="project-card" style={style}>
+    <div className={`project-card ${customClass}`} style={style}>
       <div className="content">
         {/* VISIBLE SIDE: image */}
         <div className="back">
