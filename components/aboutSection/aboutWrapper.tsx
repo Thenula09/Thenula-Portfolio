@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from "react";
 import { motion, useScroll, useMotionValue, useSpring } from "framer-motion";
 import { gsap } from "gsap";

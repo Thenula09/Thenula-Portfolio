@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { skills as initialSkills, tools as initialTools } from "../../data/data";
