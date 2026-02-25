@@ -57,7 +57,7 @@ const projectsData = [
     ),
     description: "Webflow Site",
     link: "https://amanfx.webflow.io/",
-    imageLink: "/img/Rayspire_solar.png",
+    imageLink: "/img/LuxeLese.png",
   },
   {
     title: (
@@ -67,7 +67,7 @@ const projectsData = [
     ),
     description: "UI Design",
     link: "https://www.figma.com/proto/Tzz9bwrjHtSza87b1l3D0i/Inner-Strength-UI-Design?type=design&node-id=37-10&t=pq2KDLjYbMU4LFgA-1&scaling=min-zoom&page-id=0%3A1&mode=design",
-    imageLink: "/img/projects/6.avif",
+    imageLink: "/img/Bus%20Lanka.png",
   },
   {
     title: (
@@ -77,7 +77,7 @@ const projectsData = [
     ),
     description: "React Application",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/smartwaste%20management.png",
   },
   {
     title: (
@@ -87,7 +87,7 @@ const projectsData = [
     ),
     description: "Mobile Application",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/powermonitoring%20plug.png",
   },
   {
     title: (
@@ -97,7 +97,7 @@ const projectsData = [
     ),
     description: "Vue.js Application",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/chess%20game.png",
   },
   {
     title: (
@@ -107,7 +107,7 @@ const projectsData = [
     ),
     description: "Python Application",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/moviehub.png",
   },
   {
     title: (
@@ -117,7 +117,7 @@ const projectsData = [
     ),
     description: "Next.js Application",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/battlefor%20goal.png",
   },
   {
     title: (
@@ -127,7 +127,7 @@ const projectsData = [
     ),
     description: "Static Site",
     link: "#",
-    imageLink: "/img/projects/7.avif",
+    imageLink: "/img/computer%20shop.png",
   },
 ];
 //test

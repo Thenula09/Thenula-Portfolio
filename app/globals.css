@@ -810,13 +810,13 @@ body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
 .project-card:nth-child(5) { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1); transition: all 0.3s ease; }
 .project-card:nth-child(5):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(249, 115, 22, 0.5), 0 0 60px rgba(249, 115, 22, 0.2); }
 
-/* Card 6 - Therapist Website - Dark Blue Theme */
+/* Card 6 - Therapist Website - Yellow Theme (Same as Card 4) */
 .project-card:nth-child(6) .card-footer { margin-top: -160px; }
-.project-card:nth-child(6) .title-text { color: #1e40af !important; text-shadow: 0 0 10px rgba(30, 64, 175, 0.5); animation: card6-glow 2s ease-in-out infinite alternate, card6-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(6) .title-text { color: #fbbf24 !important; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); animation: card6-glow 2s ease-in-out infinite alternate, card6-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
 .project-card:nth-child(6) .card-footer { font-size: 12px !important; animation: card6-footer-fade 2s ease-in-out infinite alternate; }
 .project-card:nth-child(6) .badge { animation: card6-badge-bounce 3s ease-in-out infinite; }
-.project-card:nth-child(6) { box-shadow: 0 0 20px rgba(30, 64, 175, 0.3), 0 0 40px rgba(30, 64, 175, 0.1); transition: all 0.3s ease; transition-delay: 0.4s; }
-.project-card:nth-child(6):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(30, 64, 175, 0.5), 0 0 60px rgba(30, 64, 175, 0.2); }
+.project-card:nth-child(6) { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 40px rgba(251, 191, 36, 0.1); transition: all 0.3s ease; transition-delay: 0.4s; }
+.project-card:nth-child(6):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2); }
 
 /* Card 7 - Project 7 - Green Theme */
 .project-card:nth-child(7) .card-footer { margin-top: -160px; }
@@ -962,8 +962,8 @@ body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
 }
 
 @keyframes card6-glow {
-  0% { text-shadow: 0 0 10px rgba(30, 64, 175, 0.5); }
-  100% { text-shadow: 0 0 20px rgba(30, 64, 175, 0.8), 0 0 30px rgba(30, 64, 175, 0.4); }
+  0% { text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 30px rgba(251, 191, 36, 0.4); }
 }
 
 /* Card 7 Animations */
