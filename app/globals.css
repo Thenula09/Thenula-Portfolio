@@ -788,6 +788,52 @@ body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
 
 .project-card.soulbuddy-card .card-footer { margin-top: -160px; }
 
+/* Card 1 - YieldStone Page - Default Theme (No special color) */
+.project-card:nth-child(1) .card-footer { margin-top: -160px; }
+.project-card:nth-child(1) .title-text { font-size: 14px !important; }
+.project-card:nth-child(1) .card-footer { font-size: 12px !important; animation: card1-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(1) .badge { animation: card1-badge-bounce 3s ease-in-out infinite; }
+
+/* Card 2 - Simple Font Replacer - Orange Theme */
+.project-card:nth-child(2) .card-footer { margin-top: -160px; }
+.project-card:nth-child(2) .title-text { color: #f97316 !important; text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); animation: card2-glow 2s ease-in-out infinite alternate, card2-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(2) .card-footer { font-size: 12px !important; animation: card2-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(2) .badge { animation: card2-badge-bounce 3s ease-in-out infinite; }
+.project-card:nth-child(2) { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1); transition: all 0.3s ease; }
+.project-card:nth-child(2):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(249, 115, 22, 0.5), 0 0 60px rgba(249, 115, 22, 0.2); }
+
+/* Card 5 - AmanFX Portfolio - Orange Theme */
+.project-card:nth-child(5) .card-footer { margin-top: -160px; }
+.project-card:nth-child(5) .title-text { color: #f97316 !important; text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); animation: card5-glow 2s ease-in-out infinite alternate, card5-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(5) .card-footer { font-size: 12px !important; animation: card5-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(5) .badge { animation: card5-badge-bounce 3s ease-in-out infinite; }
+.project-card:nth-child(5) { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1); transition: all 0.3s ease; }
+.project-card:nth-child(5):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(249, 115, 22, 0.5), 0 0 60px rgba(249, 115, 22, 0.2); }
+
+/* Card 6 - Therapist Website - Dark Blue Theme */
+.project-card:nth-child(6) .card-footer { margin-top: -160px; }
+.project-card:nth-child(6) .title-text { color: #1e40af !important; text-shadow: 0 0 10px rgba(30, 64, 175, 0.5); animation: card6-glow 2s ease-in-out infinite alternate, card6-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(6) .card-footer { font-size: 12px !important; animation: card6-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(6) .badge { animation: card6-badge-bounce 3s ease-in-out infinite; }
+.project-card:nth-child(6) { box-shadow: 0 0 20px rgba(30, 64, 175, 0.3), 0 0 40px rgba(30, 64, 175, 0.1); transition: all 0.3s ease; transition-delay: 0.4s; }
+.project-card:nth-child(6):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(30, 64, 175, 0.5), 0 0 60px rgba(30, 64, 175, 0.2); }
+
+/* Card 7 - Project 7 - Green Theme */
+.project-card:nth-child(7) .card-footer { margin-top: -160px; }
+.project-card:nth-child(7) .title-text { color: #10b981 !important; text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); animation: card7-glow 2s ease-in-out infinite alternate, card7-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(7) .card-footer { font-size: 12px !important; animation: card7-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(7) .badge { animation: card7-badge-bounce 3s ease-in-out infinite; }
+.project-card:nth-child(7) { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.1); transition: all 0.3s ease; }
+.project-card:nth-child(7):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 0 60px rgba(16, 185, 129, 0.2); }
+
+/* Card 8 - Project 8 - Light Blue Theme */
+.project-card:nth-child(8) .card-footer { margin-top: -160px; }
+.project-card:nth-child(8) .title-text { color: #06b6d4 !important; text-shadow: 0 0 10px rgba(6, 182, 212, 0.5); animation: card8-glow 2s ease-in-out infinite alternate, card8-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
+.project-card:nth-child(8) .card-footer { font-size: 12px !important; animation: card8-footer-fade 2s ease-in-out infinite alternate; }
+.project-card:nth-child(8) .badge { animation: card8-badge-bounce 3s ease-in-out infinite; }
+.project-card:nth-child(8) { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1); transition: all 0.3s ease; }
+.project-card:nth-child(8):hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.5), 0 0 60px rgba(6, 182, 212, 0.2); }
+
 .project-card.rayspire-card .title-text { color: #fbbf24 !important; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); animation: rayspire-glow 2s ease-in-out infinite alternate, rayspire-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
 
 .project-card.soulbuddy-card .title-text { color: #3b82f6 !important; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); animation: soulbuddy-glow 2s ease-in-out infinite alternate, soulbuddy-text-pulse 1.5s ease-in-out infinite; font-size: 14px !important; }
@@ -830,6 +876,138 @@ body.skill-expanded .projects-wrapper { margin-top: calc(120px + 80px); }
 @keyframes soulbuddy-badge-bounce {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-3px); }
+}
+
+/* Card 1 Animations */
+@keyframes card1-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card1-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card1-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card1-glow {
+  0% { text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.4); }
+}
+
+/* Card 2 Animations */
+@keyframes card2-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card2-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card2-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card2-glow {
+  0% { text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(249, 115, 22, 0.8), 0 0 30px rgba(249, 115, 22, 0.4); }
+}
+
+/* Card 5 Animations */
+@keyframes card5-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card5-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card5-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card5-glow {
+  0% { text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.4); }
+}
+
+/* Card 6 Animations */
+@keyframes card6-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card6-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card6-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card6-glow {
+  0% { text-shadow: 0 0 10px rgba(30, 64, 175, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(30, 64, 175, 0.8), 0 0 30px rgba(30, 64, 175, 0.4); }
+}
+
+/* Card 7 Animations */
+@keyframes card7-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card7-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card7-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card7-glow {
+  0% { text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 0 0 30px rgba(16, 185, 129, 0.4); }
+}
+
+/* Card 8 Animations */
+@keyframes card8-text-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes card8-footer-fade {
+  0% { opacity: 0.7; transform: translateY(0px); }
+  100% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes card8-badge-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes card8-glow {
+  0% { text-shadow: 0 0 10px rgba(6, 182, 212, 0.5); }
+  100% { text-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.4); }
 }
 
 .project-card.rayspire-card { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 40px rgba(251, 191, 36, 0.1); transition: all 0.3s ease; }

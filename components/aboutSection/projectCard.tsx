@@ -59,7 +59,9 @@ export default function ProjectCard({
             </div>
 
             <div className="mt-4">
-              <span className="back-cta px-3 py-2 rounded-md bg-colorPrimary text-colorDark text-sm font-semibold">Open</span>
+              {!customClass.includes('soulbuddy-card') && (
+                <span className="back-cta px-3 py-2 rounded-md bg-colorPrimary text-colorDark text-sm font-semibold">Open</span>
+              )}
             </div>
           </div>
         </div>
