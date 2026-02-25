@@ -202,7 +202,7 @@ export function AboutWrapper({}) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10 justify-items-center">
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/" },
-            { title: "Simple Font Replacer", category: "Figma plugin", footer: "Figma plugin published", image: "/img/projects/2.avif", link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer" },
+            { title: "My Latest Works", category: "Portfolio", footer: "My latest projects and works collection", image: "/img/THWtokn.png", link: "#" },
             { title: "E-Commerce Platform", category: "React Application", footer: "Modern e-commerce solution with payment integration", image: "/img/projects/3.avif", link: "#" },
             { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/projects/4.avif", link: "#" },
             { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/" },

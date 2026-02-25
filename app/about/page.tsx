@@ -10,7 +10,6 @@ import { Header } from "@/components/header";
 import { HeaderNavigation } from "@/components/headerNavigation";
 import SolarLoader from "@/components/solarLoader";
 import LeftFazerLoader from "@/components/leftFazerLoader";
-import OrbitLoader from "../../components/orbitLoader";
 import { Footer } from "@/components/contactSection/footer";
 import "./about.css";
 

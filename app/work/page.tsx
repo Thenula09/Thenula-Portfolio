@@ -26,7 +26,7 @@ const projectsData = [
     ),
     description: "Figma Plugin",
     link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer",
-    imageLink: "/img/projects/2.avif",
+    imageLink: "/img/THWtokn.png",
   },
   {
     title: (
