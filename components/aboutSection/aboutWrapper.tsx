@@ -201,14 +201,14 @@ export function AboutWrapper({}) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10 justify-items-center">
           {[
-            { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/" },
-            { title: "My Latest Works", category: "Portfolio", footer: "My latest projects and works collection", image: "/img/THWtokn.png", link: "#" },
-            { title: "E-Commerce Platform", category: "React Application", footer: "Modern e-commerce solution with payment integration", image: "/img/projects/3.avif", link: "#" },
-            { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/projects/4.avif", link: "#" },
-            { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/" },
-            { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/Bus Lanka.png", link: "#" },
-            { title: "Project 7", category: "Other", footer: "Description here", image: "/img/smartwaste management.png", link: "#" },
-            { title: "Project 8", category: "Other", footer: "Description here", image: "/img/powermonitoring plug.png", link: "#" },
+            { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/", customClass: "" },
+            { title: "My Latest Works", category: "Portfolio", footer: "My latest projects and works collection", image: "/img/THWtokn.png", link: "#", customClass: "" },
+            { title: "E-Commerce Platform", category: "React Application", footer: "Modern e-commerce solution with payment integration", image: "/img/projects/3.avif", link: "#", customClass: "" },
+            { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/projects/4.avif", link: "#", customClass: "" },
+            { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/", customClass: "" },
+            { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/Bus Lanka.png", link: "#", customClass: "" },
+            { title: "Project 7", category: "Other", footer: "Description here", image: "/img/smartwaste management.png", link: "#", customClass: "" },
+            { title: "Project 8", category: "Other", footer: "Description here", image: "/img/powermonitoring plug.png", link: "#", customClass: "" },
           ].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noreferrer">
               <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} customClass={p.customClass} />
