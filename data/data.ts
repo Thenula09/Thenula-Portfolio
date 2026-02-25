@@ -4,13 +4,12 @@ export const links = {
   work: "/work",
   blog: "/blogs",
   contact: "#",
-  email: "mailto:your-email@example.com",
+  email: "mailto:thenulahansaja12@gmail.com",
   resume: "/resume",
   sourceCode: "#",
-  github: "#",
-  linkedin: "#",
-  twitter: "#",
-  telegram: "#",
+  github: "https://github.com/Thenula09",
+  linkedin: "https://www.linkedin.com/in/thenula-hansaja-317a63301/",
+  twitter: "https://x.com/thenulahansaja",
 };
 
 // default skills and tools (used by SkillsSection)

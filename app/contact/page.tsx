@@ -61,58 +61,101 @@ export default function ProfileForm() {
   });
 
   useEffect(() => {
-    // Animate cards on mount
+    // Set initial state - cards hidden
+    gsap.set(leftCardRef.current, { opacity: 0, x: -100, y: 50 });
+    gsap.set(rightTopCardRef.current, { opacity: 0, x: 100, y: 50 });
+    gsap.set(rightBottomCardRef.current, { opacity: 0, x: 100, y: 50 });
+    
+    // Animate cards on mount with yellow color animation
     const tl = gsap.timeline();
     
-    // Left card - slide from left
+    // Add yellow background animation
+    tl.fromTo("main",
+      {
+        backgroundColor: "#1a1a1a"
+      },
+      {
+        backgroundColor: "#2d2d00",
+        duration: 1.5,
+        ease: "power2.inOut"
+      }
+    )
+    .to("main", {
+      backgroundColor: "#0a0a0a",
+      duration: 1.5,
+      ease: "power2.inOut"
+    }, "+=0.5");
+    
+    // Left card - slide from left with yellow glow
     tl.fromTo(leftCardRef.current,
       {
         opacity: 0,
         x: -100,
-        y: 50
+        y: 50,
+        boxShadow: "0 0 0px rgba(251, 191, 36, 0)"
       },
       {
         opacity: 1,
         x: 0,
         y: 0,
         duration: 0.8,
-        ease: "power3.out"
+        ease: "power3.out",
+        boxShadow: "0 0 30px rgba(251, 191, 36, 0.3)"
       }
-    );
+    , "-=0.5")
+    .to(leftCardRef.current, {
+      boxShadow: "0 0 0px rgba(251, 191, 36, 0)",
+      duration: 0.5,
+      ease: "power2.out"
+    }, "+=0.3");
     
-    // Right top card - slide from right
+    // Right top card - slide from right with yellow glow
     tl.fromTo(rightTopCardRef.current,
       {
         opacity: 0,
         x: 100,
-        y: 50
+        y: 50,
+        boxShadow: "0 0 0px rgba(251, 191, 36, 0)"
       },
       {
         opacity: 1,
         x: 0,
         y: 0,
         duration: 0.8,
-        ease: "power3.out"
+        ease: "power3.out",
+        boxShadow: "0 0 30px rgba(251, 191, 36, 0.3)"
       },
       "-=0.4" // Start 0.4s before previous animation ends
-    );
+    )
+    .to(rightTopCardRef.current, {
+      boxShadow: "0 0 0px rgba(251, 191, 36, 0)",
+      duration: 0.5,
+      ease: "power2.out"
+    }, "+=0.3");
     
-    // Right bottom card - slide from right
+    // Right bottom card - slide from right with yellow glow
     tl.fromTo(rightBottomCardRef.current,
       {
         opacity: 0,
         x: 100,
-        y: 50
+        y: 50,
+        boxShadow: "0 0 0px rgba(251, 191, 36, 0)"
       },
       {
         opacity: 1,
         x: 0,
         y: 0,
         duration: 0.8,
-        ease: "power3.out"
+        ease: "power3.out",
+        boxShadow: "0 0 30px rgba(251, 191, 36, 0.3)"
       },
       "-=0.4" // Start 0.4s before previous animation ends
-    );
+    )
+    .to(rightBottomCardRef.current, {
+      boxShadow: "0 0 0px rgba(251, 191, 36, 0)",
+      duration: 0.5,
+      ease: "power2.out"
+    }, "+=0.3");
     
     return () => {
       tl.kill();
@@ -246,7 +289,7 @@ export default function ProfileForm() {
                 />
                 <Button
                   type="submit"
-                  className="w-full h-auto rounded-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold transition-all duration-300 px-6 py-3"
+                  className="w-full h-auto rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold transition-all duration-300 px-6 py-3 shadow-lg hover:shadow-yellow-500/25"
                   disabled={status === "Loading"}
                 >
                   {renderButtonText(status)}

@@ -49,7 +49,7 @@ export function Footer({ className }: { className?: string }) {
           links={[
             { href: links.email, text: "Email" },
             { href: links.twitter, text: "Twitter" },
-            { href: links.telegram, text: "Telegram" },
+            { href: links.linkedin, text: "LinkedIn" },
             { href: links.github, text: "Github" },
           ]}
         />
