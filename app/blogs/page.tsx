@@ -9,6 +9,136 @@ import { HeaderNavigation } from "@/components/headerNavigation";
 import { Footer } from "@/components/contactSection/footer";
 import { links } from "@/data/data";
 import { gsap } from "gsap";
+import { CalendarIcon, FileTextIcon } from "@radix-ui/react-icons";
+import { BellIcon, Share2Icon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import { LayoutGrid } from "@/components/ui/layout-grid";
+
+// Add marquee animation styles
+const marqueeStyle = `
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+`;
+
+if (typeof window !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = marqueeStyle;
+  document.head.appendChild(style);
+}
+
+const files = [
+  {
+    name: "bitcoin.pdf",
+    body: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+  },
+  {
+    name: "finances.xlsx", 
+    body: "A spreadsheet or worksheet is a file made of rows and columns that help sort data, arrange data easily, and calculate numerical data.",
+  },
+  {
+    name: "logo.svg",
+    body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
+  },
+  {
+    name: "keys.gpg",
+    body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
+  },
+  {
+    name: "seed.txt",
+    body: "A seed phrase, seed recovery phrase or backup seed phrase is a list of words which store all the information needed to recover Bitcoin funds on-chain.",
+  },
+];
+
+const features = [
+  {
+    Icon: FileTextIcon,
+    name: "Save your files",
+    description: "We automatically save your files as you type.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute top-10 left-0 right-0 overflow-hidden">
+        <div className="flex animate-marquee">
+          {[...files, ...files].map((f, idx) => (
+            <div
+              key={idx}
+              className={cn(
+                "relative w-32 mx-4 p-4 rounded-xl border",
+                "border-gray-950/[.1] bg-gray-950/[.01]",
+                "dark:border-gray-50/[.1] dark:bg-gray-50/[.10]",
+                "transform-gpu transition-all duration-300"
+              )}
+            >
+              <div className="flex flex-row items-center gap-2">
+                <div className="flex flex-col">
+                  <div className="text-sm font-medium dark:text-white">
+                    {f.name}
+                  </div>
+                </div>
+              </div>
+              <blockquote className="mt-2 text-xs">{f.body}</blockquote>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: BellIcon,
+    name: "Notifications",
+    description: "Get notified when something happens.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-2",
+    background: (
+      <div className="absolute top-4 right-2 h-[300px] w-full flex items-center justify-center">
+        <div className="text-white/50 text-center">
+          <BellIcon className="w-16 h-16 mx-auto mb-4 animate-pulse" />
+          <p>Notification System</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: Share2Icon,
+    name: "Integrations",
+    description: "Supports 100+ integrations and counting.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-2",
+    background: (
+      <div className="absolute top-4 right-2 h-[300px] w-full flex items-center justify-center">
+        <div className="text-white/50 text-center">
+          <Share2Icon className="w-16 h-16 mx-auto mb-4 animate-spin" />
+          <p>Integration Hub</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: CalendarIcon,
+    name: "Calendar",
+    description: "Use calendar to filter your files by date.",
+    className: "col-span-3 lg:col-span-1",
+    href: "#",
+    cta: "Learn more",
+    background: (
+      <div className="absolute top-10 right-0 flex items-center justify-center">
+        <div className="text-white/50 text-center">
+          <CalendarIcon className="w-16 h-16 mx-auto mb-4" />
+          <p>Calendar View</p>
+        </div>
+      </div>
+    ),
+  },
+];
 
 const samplePosts = [
   { id: 1, title: "Building my portfolio with Next.js", excerpt: "How I structured components, styling and deployment.", href: "#" },
@@ -16,19 +146,106 @@ const samplePosts = [
   { id: 3, title: "Design to code workflow", excerpt: "From Figma to production-ready UI.", href: "#" },
 ];
 
-const sampleEventsAndEntries = [
-  { id: 1, title: "Tech Conference 2024", date: "March 15, 2024", location: "Colombo", description: "Annual technology conference featuring latest innovations", type: "event", href: "#" },
-  { id: 2, title: "Project Launch Success", date: "Feb 10, 2024", category: "Portfolio", description: "Successfully launched new portfolio website with modern design", type: "entry", href: "#" },
-  { id: 3, title: "React Meetup", date: "February 28, 2024", location: "Kandy", description: "Community gathering for React developers", type: "event", href: "#" },
-  { id: 4, title: "Learning TypeScript", date: "Feb 5, 2024", category: "Education", description: "Completed advanced TypeScript course and certification", type: "entry", href: "#" },
-  { id: 5, title: "Web Development Workshop", date: "January 20, 2024", location: "Online", description: "Hands-on workshop on modern web technologies", type: "event", href: "#" },
-  { id: 6, title: "Open Source Contribution", date: "Jan 28, 2024", category: "Community", description: "Contributed to popular open source React library", type: "entry", href: "#" },
-];
+// LayoutGrid card components
+const SkeletonOne = () => {
+  return (
+    <div>
+      <p className="font-bold md:text-4xl text-xl text-white">
+        House in woods
+      </p>
+      <p className="font-normal text-base text-white"></p>
+      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+        A serene and tranquil retreat, this house in woods offers a peaceful
+        escape from hustle and bustle of city life.
+      </p>
+    </div>
+  );
+};
 
-const sampleVideos = [
-  { id: 1, title: "Next.js Tutorial Series", duration: "15:30", views: "2.5K", thumbnail: "https://via.placeholder.com/300x200?text=Next.js+Tutorial", href: "#" },
-  { id: 2, title: "React Hooks Explained", duration: "12:45", views: "1.8K", thumbnail: "https://via.placeholder.com/300x200?text=React+Hooks", href: "#" },
-  { id: 3, title: "CSS Animation Tips", duration: "8:20", views: "3.2K", thumbnail: "https://via.placeholder.com/300x200?text=CSS+Animation", href: "#" },
+const SkeletonTwo = () => {
+  return (
+    <div>
+      <p className="font-bold md:text-4xl text-xl text-white">
+        House above clouds
+      </p>
+      <p className="font-normal text-base text-white"></p>
+      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+        Perched high above the world, this house offers breathtaking views and a
+        unique living experience. It&apos;s a place where the sky meets home,
+        and tranquility is a way of life.
+      </p>
+    </div>
+  );
+};
+
+const SkeletonThree = () => {
+  return (
+    <div>
+      <p className="font-bold md:text-4xl text-xl text-white">
+        Greens all over
+      </p>
+      <p className="font-normal text-base text-white"></p>
+      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+        A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
+        perfect place to relax, unwind, and enjoy life.
+      </p>
+    </div>
+  );
+};
+
+const SkeletonFour = () => {
+  return (
+    <div>
+      <p className="font-bold md:text-4xl text-xl text-white">
+        Rivers are serene
+      </p>
+      <p className="font-normal text-base text-white"></p>
+      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+        A house by the river is a place of peace and tranquility. It&apos;s the
+        perfect place to relax, unwind, and enjoy life.
+      </p>
+    </div>
+  );
+};
+
+// LayoutGridDemo component
+function LayoutGridDemo() {
+  return (
+    <div className="h-screen py-20 w-full">
+      <LayoutGrid cards={layoutCards} />
+    </div>
+  );
+}
+
+const layoutCards = [
+  {
+    id: 1,
+    content: <SkeletonOne />,
+    className: "md:col-span-2",
+    thumbnail:
+      "https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 2,
+    content: <SkeletonTwo />,
+    className: "col-span-1",
+    thumbnail:
+      "https://images.unsplash.com/photo-1464457312035-3d7d0e0c058e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 3,
+    content: <SkeletonThree />,
+    className: "col-span-1",
+    thumbnail:
+      "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 4,
+    content: <SkeletonFour />,
+    className: "md:col-span-2",
+    thumbnail:
+      "https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
 ];
 
 export default function BlogsPage() {
@@ -139,6 +356,8 @@ export default function BlogsPage() {
 
   // Scroll detection for active section
   useEffect(() => {
+    let previousSection = 0;
+    
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -163,6 +382,35 @@ export default function BlogsPage() {
         activeIndex = 1; // Events & Entries section
       } else {
         activeIndex = 0; // Blogs section
+      }
+      
+      // Animate section transition
+      if (previousSection !== activeIndex) {
+        // Animate out previous section
+        const allSections = [blogSection, eventsSection, videosSection];
+        if (allSections[previousSection]) {
+          gsap.to(allSections[previousSection].querySelectorAll('article, h1, h2, p'), {
+            opacity: 0.3,
+            y: 20,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+        
+        // Animate in new section
+        setTimeout(() => {
+          if (allSections[activeIndex]) {
+            gsap.to(allSections[activeIndex].querySelectorAll('article, h1, h2, p'), {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "power4.out",
+              stagger: 0.05
+            });
+          }
+        }, 150);
+        
+        previousSection = activeIndex;
       }
       
       setActiveSection(activeIndex);
@@ -270,36 +518,13 @@ export default function BlogsPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">Events & Entries</h2>
             <div 
               ref={eventsAndEntriesRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="w-full"
             >
-              {sampleEventsAndEntries.map((item) => (
-                <article 
-                  key={item.id} 
-                  className={`bg-gradient-to-br ${item.type === 'event' ? 'from-blue-500/10 to-blue-600/5 border-blue-400/20 hover:shadow-blue-500/20' : 'from-green-500/10 to-green-600/5 border-green-400/20 hover:shadow-green-500/20'} backdrop-blur-xl border rounded-3xl p-8 shadow-2xl h-full flex flex-col justify-between min-w-0 transition-all duration-150 hover:scale-105`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`${item.type === 'event' ? 'text-blue-400' : 'text-green-400'} text-sm font-medium`}>
-                        {item.type === 'event' ? (item as any).location : (item as any).category}
-                      </span>
-                      <span className={`${item.type === 'event' ? 'text-blue-300' : 'text-green-300'} text-sm`}>
-                        {item.type === 'event' ? '📅' : '📝'} {item.date}
-                      </span>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">{item.title}</h3>
-                    <p className="text-base text-white/70 line-clamp-3">{item.description}</p>
-                  </div>
-
-                  <div className="flex items-end justify-between mt-6">
-                    <Link 
-                      href={item.href} 
-                      className={`${item.type === 'event' ? 'text-blue-400 hover:text-blue-300' : 'text-green-400 hover:text-green-300'} font-medium transition-colors duration-150`}
-                    >
-                      {item.type === 'event' ? 'Learn More →' : 'Read More →'}
-                    </Link>
-                  </div>
-                </article>
-              ))}
+              <BentoGrid>
+                {features.map((feature, idx) => (
+                  <BentoCard key={idx} {...feature} />
+                ))}
+              </BentoGrid>
             </div>
           </div>
         </section>
@@ -307,40 +532,12 @@ export default function BlogsPage() {
         {/* My Videos Section - Full Screen */}
         <section id="videos" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-paddingX py-paddingY text-colorLight snap-start">
           <div className="relative z-10 w-full max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">My Videos</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">My Gallery</h2>
             <div 
               ref={videosRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="w-full"
             >
-              {sampleVideos.map((video) => (
-                <article 
-                  key={video.id} 
-                  className="bg-gradient-to-br from-red-500/10 to-red-600/5 backdrop-blur-xl border border-red-400/20 rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col justify-between min-w-0 hover:shadow-red-500/20 transition-all duration-150 hover:scale-105"
-                >
-                  <div className="relative">
-                    <img 
-                      src={video.thumbnail} 
-                      alt={video.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
-                      {video.duration}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">{video.title}</h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-red-400 text-sm">{video.views} views</span>
-                      <Link 
-                        href={video.href} 
-                        className="text-red-400 hover:text-red-300 font-medium transition-colors duration-150"
-                      >
-                        Watch →
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
+              <LayoutGridDemo />
             </div>
             
             <div className="mt-16 text-center">
