@@ -1,3 +1,4 @@
+"use client";
 import React, { memo, use, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
@@ -126,7 +127,10 @@ const Magentic = ({
             return;
           }
           const magnetButton = magnet.current as HTMLAnchorElement;
-          gsap.registerPlugin(ScrambleTextPlugin);
+          
+          if (typeof window !== "undefined") {
+            gsap.registerPlugin(ScrambleTextPlugin);
+          }
 
           const scrambleEl = magnetButton.querySelectorAll(".scrambleText");
           if (scrambleParams instanceof Array) {

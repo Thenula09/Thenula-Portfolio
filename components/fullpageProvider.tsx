@@ -164,6 +164,10 @@ const FullpageProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(CustomEase);
+    }
+    
     const ease = CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 ");
     // rotate any number of `.animate__this` items (works with 1..n). Uses the existing GSAP timeline
     const titles = gsap.utils.toArray<HTMLElement>(".left .animate__this");

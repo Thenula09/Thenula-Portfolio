@@ -1,3 +1,4 @@
+"use client";
 import { Footer } from "@/components/contactSection/footer";
 import React, { useRef } from "react";
 import Magentic from "@/components/ui/magentic";
