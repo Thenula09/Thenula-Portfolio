@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { Main } from "@/components/main";
 import { Cursor } from "@/components/cursor";
 import { HeaderNavigation } from "@/components/headerNavigation";
