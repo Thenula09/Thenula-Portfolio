@@ -21,43 +21,48 @@ const projectsData = [
   {
     title: (
       <>
-        Simple Font <br /> Replacer
+       Digital Asset <br /> THW Crypto Token
       </>
     ),
-    description: "Figma Plugin",
-    link: "https://www.figma.com/community/plugin/1380643582596908985/simple-font-replacer",
+    description: "THW Token is an ERC-20 utility asset built with Solidity on the Ethereum (L1) blockchain, operating at the Application Layer (L3). It leverages secure Smart Contracts to enable transparent, decentralized transactions within a DeFi ecosystem. Designed for modern financial applications, it supports seamless wallet-to-wallet transfers and automated real-time price discovery",
+    link: "https://github.com/Thenula09/Personal-Token-THW-",
     imageLink: "/img/THWtokn.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Andy PFP <br /> Generator
+        SOULBUDDY
+       <br /> Mobile app
       </>
     ),
-    description: "Next.js Site",
-    link: "https://generator.andytoken.com/",
-    imageLink: "/img/SOULBUDDY.png",
+    description: "SoulBuddy is an AI-powered mental health and mood tracking platform split into multiple components for better scalability, maintainability, and deployment flexibility. The system combines AI-powered chat assistance with detailed mood analytics to help users better understand and improve their mental well-bein",
+    link: "https://github.com/Thenula09/SOULBUDDY",
+    imageLink: "/img/ChatGPT Image Feb 26, 2026 at 09_18_50 AM.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Rayspire <br /> Solar
+        Rayspire Solar <br /> Mobile app
       </>
     ),
-    description: "Android app for solar power systems with hot deals and tech specs.",
+    description: "Rayspire Solar is a feature-rich Android application that allows users to explore solar power systems, view hot deals, and check detailed technical specifications. The app features a high-performance UI with smooth animations and real-time data syncing.",
     link: "https://github.com/Thenula09/Rayspire-Solar",
     imageLink: "/img/Rayspire_solar.png",
+    customClass: "long-description"
   },
 
   {
     title: (
       <>
-        AmanFX <br /> Portfolio
+        LuxeLese Solutions <br /> Car Rental System 
       </>
     ),
-    description: "Webflow Site",
-    link: "https://amanfx.webflow.io/",
+    description: "LuxeLese Solutions is a full-stack MERN monorepo car rental platform with a React customer site and an admin panel. It integrates JWT auth, MongoDB Atlas, and RESTful APIs for secure user sessions, vehicle CRUD, and booking workflows. Optimized with Vite and Node.js, the system features high performance, smooth UI animations, and RBAC-based security. This project showcases expertise in scalable architecture and database modeling..",
+    link: "https://github.com/Thenula09/LuxeLese_Solutions_web",
     imageLink: "/img/LuxeLese.png",
+    customClass: "long-description"
   },
   {
     title: (

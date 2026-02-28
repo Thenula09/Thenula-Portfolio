@@ -15,6 +15,7 @@ export function WorkSection({
     description: string | React.JSX.Element;
     link: string;
     imageLink: string;
+    customClass?: string;
   };
   color: "Dark" | "Light";
   length: number;
@@ -72,7 +73,7 @@ export function WorkSection({
               <span className={`bg-colorSecondary${color}`}></span>
               <span className={`bg-colorSecondary${color}`}></span>
             </div>
-            <p className="title__lead js-letter anime ">{item.description}</p>
+            <p className={`title__lead js-letter anime ${item.customClass === "long-description" ? "text-[10px] leading-tight max-w-3xl" : ""}`}>{item.description}</p>
             <div className="btn-wrap js-letter anime">
               <Magentic
                 strength={50}

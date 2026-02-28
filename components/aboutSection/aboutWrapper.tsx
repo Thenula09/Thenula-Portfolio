@@ -203,10 +203,10 @@ export function AboutWrapper({}) {
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/", customClass: "" },
             { title: "My Latest Works", category: "Portfolio", footer: "My latest projects and works collection", image: "/img/THWtokn.png", link: "#", customClass: "" },
-            { title: "E-Commerce Platform", category: "React Application", footer: "Modern e-commerce solution with payment integration", image: "/img/projects/3.avif", link: "#", customClass: "" },
-            { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/projects/4.avif", link: "#", customClass: "" },
+            { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/ChatGPT Image Feb 26, 2026 at 09_18_50 AM.png", link: "#", customClass: "" },
             { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/", customClass: "" },
             { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/Bus Lanka.png", link: "#", customClass: "" },
+            { title: "E-Commerce Platform", category: "React Application", footer: "නවීන වාණිජ්‍ය විසඳුම ගෙවීම් ඒකාබද්ධතාවයෙන්", image: "/img/signal.png", link: "#", customClass: "" },
             { title: "Project 7", category: "Other", footer: "Description here", image: "/img/smartwaste management.png", link: "#", customClass: "" },
             { title: "Project 8", category: "Other", footer: "Description here", image: "/img/powermonitoring plug.png", link: "#", customClass: "" },
           ].map((p, i) => (

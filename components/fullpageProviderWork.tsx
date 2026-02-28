@@ -32,95 +32,109 @@ const FullpageProviderWork = ({ children }: { children: React.ReactNode }) => {
   const onLeave = function (index: any, nextIndex: any, direction: any) {
     console.log(nextIndex.index);
 
-    // Check if elements exist before animating
-    const animeElements = document.querySelectorAll(`.s${nextIndex.index} .anime`);
-    const roundedDivDownElements = document.querySelectorAll(`.s${nextIndex.index} .rounded__div__down`);
-    const roundedDivUpElements = document.querySelectorAll(`.s${nextIndex.index} .rounded__div__up`);
+    // Multiple safety checks
+    if (typeof document === 'undefined') return;
+    if (!nextIndex || typeof nextIndex.index === 'undefined') return;
 
-    if (direction == "down") {
-      if (animeElements.length > 0) {
-        gsap
-          .timeline()
-          .from(`.s${nextIndex.index} .anime`, {
-            duration: 0.3,
-          })
-          .fromTo(
-            `.s${nextIndex.index} .anime`,
-            {
-              y: "30vh",
-            },
-            {
-              y: "0vh",
-              duration: 1.1,
-              stagger: 0.03,
-              ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
-            },
-          );
-      }
-    } else {
-      if (animeElements.length > 0) {
-        gsap
-          .timeline()
-          .from(`.s${nextIndex.index} .anime`, {
-            duration: 0.3,
-          })
-          .fromTo(
-            `.s${nextIndex.index} .anime`,
-            {
-              y: "-30vh",
-            },
-            {
-              y: "0vh",
-              duration: 1.1,
-              stagger: -0.03,
-              ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
-            },
-          );
-      }
-    }
+    // Add small delay to ensure DOM is ready
+    setTimeout(() => {
+      try {
+        // Additional safety check before querying
+        if (!document || !document.querySelectorAll) return;
 
-    var flex = screen.width > 540 ? 17 : 5;
-    if (direction == "down") {
-      console.log();
+        // Check if elements exist before animating
+        const animeElements = document.querySelectorAll(`.s${nextIndex.index} .anime`);
+        const roundedDivDownElements = document.querySelectorAll(`.s${nextIndex.index} .rounded__div__down`);
+        const roundedDivUpElements = document.querySelectorAll(`.s${nextIndex.index} .rounded__div__up`);
 
-      if (roundedDivDownElements.length > 0) {
-        gsap
-          .timeline()
-          .from(`.s${nextIndex.index} .rounded__div__down`, {
-            duration: 0.1,
-          })
-          .fromTo(
-            `.s${nextIndex.index} .rounded__div__down`,
-            {
-              height: `${flex}vh`,
-            },
-            {
-              height: "0vh",
-              duration: 1.2,
-              ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
-            },
-          );
+        if (direction == "down") {
+          if (animeElements.length > 0) {
+            gsap
+              .timeline()
+              .from(`.s${nextIndex.index} .anime`, {
+                duration: 0.3,
+              })
+              .fromTo(
+                `.s${nextIndex.index} .anime`,
+                {
+                  y: "30vh",
+                },
+                {
+                  y: "0vh",
+                  duration: 1.1,
+                  stagger: 0.03,
+                  ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
+                },
+              );
+          }
+        } else {
+          if (animeElements.length > 0) {
+            gsap
+              .timeline()
+              .from(`.s${nextIndex.index} .anime`, {
+                duration: 0.3,
+              })
+              .fromTo(
+                `.s${nextIndex.index} .anime`,
+                {
+                  y: "-30vh",
+                },
+                {
+                  y: "0vh",
+                  duration: 1.1,
+                  stagger: -0.03,
+                  ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
+                },
+              );
+          }
+        }
+
+        var flex = screen.width > 540 ? 17 : 5;
+        if (direction == "down") {
+          console.log();
+
+          if (roundedDivDownElements.length > 0) {
+            gsap
+              .timeline()
+              .from(`.s${nextIndex.index} .rounded__div__down`, {
+                duration: 0.1,
+              })
+              .fromTo(
+                `.s${nextIndex.index} .rounded__div__down`,
+                {
+                  height: `${flex}vh`,
+                },
+                {
+                  height: "0vh",
+                  duration: 1.2,
+                  ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
+                },
+              );
+          }
+        } else {
+          if (roundedDivUpElements.length > 0) {
+            gsap
+              .timeline()
+              .from(`.s${nextIndex.index} .rounded__div__up`, {
+                duration: 0.1,
+              })
+              .fromTo(
+                `.s${nextIndex.index} .rounded__div__up`,
+                {
+                  height: `${flex}vh`,
+                },
+                {
+                  height: "0vh",
+                  duration: 1.2,
+                  ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
+                },
+              );
+          }
+        }
+      } catch (error) {
+        console.error('Error in FullPage onLeave:', error);
       }
-    } else {
-      if (roundedDivUpElements.length > 0) {
-        gsap
-          .timeline()
-          .from(`.s${nextIndex.index} .rounded__div__up`, {
-            duration: 0.1,
-          })
-          .fromTo(
-            `.s${nextIndex.index} .rounded__div__up`,
-            {
-              height: `${flex}vh`,
-            },
-            {
-              height: "0vh",
-              duration: 1.2,
-              ease: CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 "),
-            },
-          );
-      }
-    }
+    }, 100); // 100ms delay
   };
 
   return (

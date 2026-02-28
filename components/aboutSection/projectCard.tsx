@@ -28,12 +28,12 @@ export default function ProjectCard({
   };
 
   return (
-    <div className={`project-card ${customClass}`} style={style}>
+    <div className={`project-card group ${customClass} transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:z-50 cursor-pointer`} style={style}>
       <div className="content">
         {/* VISIBLE SIDE: image */}
         <div className="back">
           <div className="img">
-            <img src={imgSrc} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={imgSrc} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
             <div className="circle" />
             <div className="circle" id="right" />
             <div className="circle" id="bottom" />
@@ -55,7 +55,6 @@ export default function ProjectCard({
                   <strong>{title}</strong>
                 </p>
               </div>
-              <p className="card-footer">{footer}</p>
             </div>
 
             <div className="mt-4">
