@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import "../header.css";
 import "../work.css";
 import { Header } from "@/components/header";
@@ -14,6 +15,13 @@ import { BellIcon, Share2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { LayoutGrid } from "@/components/ui/layout-grid";
+
+import galleryImg1 from "./1768669939155.jpeg";
+import galleryImg2 from "./1768669939732.jpeg";
+import galleryImg3 from "./1768669940148.jpeg";
+
+import tallImg1 from "./1770747615535.jpeg";
+import tallImg2 from "./1770747618386.jpeg";
 
 // Add marquee animation styles
 const marqueeStyle = `
@@ -141,9 +149,9 @@ const features = [
 ];
 
 const samplePosts = [
-  { id: 1, title: "Building my portfolio with Next.js", excerpt: "How I structured components, styling and deployment.", href: "#" },
-  { id: 2, title: "Animating with GSAP", excerpt: "Small performance tips & patterns I use.", href: "#" },
-  { id: 3, title: "Design to code workflow", excerpt: "From Figma to production-ready UI.", href: "#" },
+  { id: 1, title: "E=mc² + Energy = Mass", excerpt: "Einstein's famous equation relating mass and energy: E = mc²", href: "#" },
+  { id: 2, title: "Pythagorean Theorem", excerpt: "a² + b² = c² for right-angled triangles", href: "#" },
+  { id: 3, title: "Fibonacci Sequence", excerpt: "Each number is sum of previous two: 0, 1, 1, 2, 3, 5, 8...", href: "#" },
 ];
 
 // LayoutGrid card components
@@ -250,15 +258,15 @@ const layoutCards = [
 
 export default function BlogsPage() {
   const blogCardsRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const eventsAndEntriesRef = useRef<HTMLDivElement>(null);
-  const videosRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [galleryImageIndex, setGalleryImageIndex] = useState(0);
+  const [tallImageIndex, setTallImageIndex] = useState(0);
   
   const sections = [
-    { id: 'blogs', name: 'Blogs', ref: blogCardsRef },
-    { id: 'events-entries', name: 'Events & Entries', ref: eventsAndEntriesRef },
-    { id: 'videos', name: 'My Videos', ref: videosRef }
+    { id: 'gallery', name: 'Gallery', ref: galleryRef },
+    { id: 'blogs', name: 'Blogs', ref: blogCardsRef }
   ];
   
   useEffect(() => {
@@ -313,45 +321,29 @@ export default function BlogsPage() {
       );
     }
     
-    // Events & Entries section animation - faster
-    if (eventsAndEntriesRef.current) {
-      tl.fromTo(eventsAndEntriesRef.current.children,
-        {
-          y: -20,
-          opacity: 0.8
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.2,
-          ease: "power4.out",
-          stagger: 0.04
-        },
-        "-=0.05"
-      );
-    }
     
-    // Videos section animation - faster
-    if (videosRef.current) {
-      tl.fromTo(videosRef.current.children,
-        {
-          y: -20,
-          opacity: 0.8
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.2,
-          ease: "power4.out",
-          stagger: 0.04
-        },
-        "-=0.05"
-      );
-    }
     
     return () => {
       tl.kill();
     };
+  }, []);
+
+  useEffect(() => {
+    const imagesCount = 3;
+    const intervalId = window.setInterval(() => {
+      setGalleryImageIndex((prev) => (prev + 1) % imagesCount);
+    }, 3000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const imagesCount = 2;
+    const intervalId = window.setInterval(() => {
+      setTallImageIndex((prev) => (prev + 1) % imagesCount);
+    }, 3000);
+
+    return () => window.clearInterval(intervalId);
   }, []);
 
   // Scroll detection for active section
@@ -363,31 +355,28 @@ export default function BlogsPage() {
       const windowHeight = window.innerHeight;
       
       // Get all sections
+      const gallerySection = document.getElementById('gallery');
       const blogSection = document.getElementById('blogs');
-      const eventsSection = document.getElementById('events-entries');
-      const videosSection = document.getElementById('videos');
       
-      if (!blogSection || !eventsSection || !videosSection) return;
+      if (!gallerySection || !blogSection) return;
       
       // Get section positions
+      const galleryTop = gallerySection.offsetTop;
       const blogTop = blogSection.offsetTop;
-      const eventsTop = eventsSection.offsetTop;
-      const videosTop = videosSection.offsetTop;
       
       // Determine active section based on scroll position
       let activeIndex = 0;
-      if (scrollPosition >= videosTop - windowHeight/2) {
-        activeIndex = 2; // Videos section
-      } else if (scrollPosition >= eventsTop - windowHeight/2) {
-        activeIndex = 1; // Events & Entries section
-      } else {
-        activeIndex = 0; // Blogs section
+
+      if (scrollPosition >= blogTop - windowHeight * 0.5) {
+        activeIndex = 1;
+      } else if (scrollPosition >= galleryTop - windowHeight * 0.5) {
+        activeIndex = 0;
       }
       
       // Animate section transition
       if (previousSection !== activeIndex) {
         // Animate out previous section
-        const allSections = [blogSection, eventsSection, videosSection];
+        const allSections = [gallerySection, blogSection];
         if (allSections[previousSection]) {
           gsap.to(allSections[previousSection].querySelectorAll('article, h1, h2, p'), {
             opacity: 0.3,
@@ -468,6 +457,113 @@ export default function BlogsPage() {
       </div>
       
       <main className="relative w-full h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth">
+
+        <section id="gallery" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-[50px] py-paddingY text-colorLight snap-start">
+          <div ref={galleryRef} className="relative z-10 w-full">
+            <h1 className="mb-6 text-[clamp(32px,_5vw,_56px)] font-bold leading-[1.1] tracking-tight text-white text-center">
+              Gallery
+            </h1>
+
+            <p className="mb-12 text-[clamp(18px,_2vw,_24px)] text-white/80 text-center max-w-3xl mx-auto">
+              A quick visual grid — you can replace these cards with real blog thumbnails or images.
+            </p>
+
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-10 shadow-2xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 auto-rows-[190px] md:auto-rows-[240px]">
+                <div className="lg:col-span-3 lg:row-span-2 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-yellow-400/20 via-white/5 to-white/5 relative">
+                  <div className="absolute inset-0">
+                    {[galleryImg1, galleryImg2, galleryImg3].map((img, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "absolute inset-0 transition-all duration-700 ease-in-out",
+                          idx === galleryImageIndex
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 translate-x-6"
+                        )}
+                      >
+                        <Image
+                          src={img}
+                          alt="Gallery image"
+                          fill
+                          priority={idx === 0}
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  </div>
+
+                  <div className="relative h-full w-full py-6 px-4 md:px-5 flex flex-col justify-end">
+                    <p className="text-white/90 text-sm mb-2">Featured</p>
+                    <h2 className="text-white font-semibold text-2xl md:text-3xl leading-tight">
+                      Math Notes
+                    </h2>
+                    <p className="text-white/70 mt-2 max-w-md">
+                      Formulas, sketches, and small write-ups.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:row-span-3 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 via-white/5 to-yellow-400/10 relative">
+                  <div className="absolute inset-0">
+                    {[tallImg1, tallImg2].map((img, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "absolute inset-0 transition-all duration-700 ease-in-out",
+                          idx === tallImageIndex
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 translate-x-6"
+                        )}
+                      >
+                        <Image
+                          src={img}
+                          alt="Tall card image"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                  </div>
+
+                  <div className="relative h-full w-full p-8 lg:p-10 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg">Tall Card</h3>
+                      <p className="text-white/70 text-sm mt-2">
+                        Fibonacci
+                      </p>
+                    </div>
+                    <p className="text-white/60 text-sm">
+                      0, 1, 1, 2, 3, 5, 8...
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5">
+                  <div className="h-full w-full p-6 flex items-end justify-between">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg">Snippet 01</h3>
+                      <p className="text-white/70 text-sm mt-2">E = mc²</p>
+                    </div>
+                    <span className="text-yellow-400 text-sm font-medium">View</span>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-1 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5">
+                  <div className="h-full w-full p-6 flex items-end justify-between">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg">Snippet 02</h3>
+                      <p className="text-white/70 text-sm mt-2">a² + b² = c²</p>
+                    </div>
+                    <span className="text-yellow-400 text-sm font-medium">View</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         
         {/* Blogs Section - Full Screen */}
         <section id="blogs" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-paddingX py-paddingY text-colorLight snap-start">
@@ -512,44 +608,6 @@ export default function BlogsPage() {
           </div>
         </section>
 
-        {/* Events & Entries Section - Full Screen */}
-        <section id="events-entries" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-paddingX py-paddingY text-colorLight snap-start">
-          <div className="relative z-10 w-full max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">Events & Entries</h2>
-            <div 
-              ref={eventsAndEntriesRef}
-              className="w-full"
-            >
-              <BentoGrid>
-                {features.map((feature, idx) => (
-                  <BentoCard key={idx} {...feature} />
-                ))}
-              </BentoGrid>
-            </div>
-          </div>
-        </section>
-
-        {/* My Videos Section - Full Screen */}
-        <section id="videos" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-paddingX py-paddingY text-colorLight snap-start">
-          <div className="relative z-10 w-full max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">My Gallery</h2>
-            <div 
-              ref={videosRef}
-              className="w-full"
-            >
-              <LayoutGridDemo />
-            </div>
-            
-            <div className="mt-16 text-center">
-              <Link 
-                href={links.home} 
-                className="inline-flex items-center text-white/70 hover:text-white transition-colors duration-150 text-lg"
-              >
-                ← Back to home
-              </Link>
-            </div>
-          </div>
-        </section>
         
       </main>
       

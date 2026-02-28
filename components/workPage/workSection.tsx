@@ -16,6 +16,7 @@ export function WorkSection({
     link: string;
     imageLink: string;
     customClass?: string;
+    textColor?: string;
   };
   color: "Dark" | "Light";
   length: number;
@@ -65,7 +66,7 @@ export function WorkSection({
             </div>
           </a>
           <div className="title ">
-            <h2 className="title__text js-letter anime mask font-bold tracking-tight">
+            <h2 className={`title__text js-letter anime mask font-bold tracking-tight ${item.textColor || ""}`}>
               {item.title}
               <br />
             </h2>

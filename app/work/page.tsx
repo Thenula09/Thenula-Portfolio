@@ -17,6 +17,7 @@ const projectsData = [
     description: "Webflow Site",
     link: "https://www.yieldstone.ai/",
     imageLink: "/img/projects/1.avif",
+    textColor: "text-black"
   },
   {
     title: (
@@ -44,7 +45,7 @@ const projectsData = [
   {
     title: (
       <>
-        Rayspire Solar <br /> Mobile app
+        Rayspire Solar <br /> Mobile App
       </>
     ),
     description: "Rayspire Solar is a feature-rich Android application that allows users to explore solar power systems, view hot deals, and check detailed technical specifications. The app features a high-performance UI with smooth animations and real-time data syncing.",
@@ -67,72 +68,79 @@ const projectsData = [
   {
     title: (
       <>
-        Therapist <br /> Website
+        BUS LANKA <br /> Mobile App
       </>
     ),
-    description: "UI Design",
-    link: "https://www.figma.com/proto/Tzz9bwrjHtSza87b1l3D0i/Inner-Strength-UI-Design?type=design&node-id=37-10&t=pq2KDLjYbMU4LFgA-1&scaling=min-zoom&page-id=0%3A1&mode=design",
+    description: "BUS Lanka is a React Native mobile platform for real-time highway bus tracking and seat booking, featuring a dual-app system for Drivers and Passengers. It integrates Google Maps API for live tracking and Firebase for Google Auth, real-time database syncing, and dynamic timetables. This project demonstrates expertise in mobile development, cloud integration, and real-time data synchronization",
+    link: "https://github.com/Thenula09/PassengerApp",
     imageLink: "/img/Bus%20Lanka.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        E-Commerce <br /> Platform
+        Smart-Waste-Management-<br /> with-Arduino
       </>
     ),
-    description: "React Application",
-    link: "#",
+    description: "Smart Garbage Vehicle is an Arduino Mega-powered autonomous robot for automated urban waste collection. It features IR-based line following, color sensors for bin detection, and a robotic arm for automated disposal. The system utilizes smart sensors to monitor waste levels and optimize collection. This project showcases expertise in robotics, sensor integration, and embedded systems.",
+    link: "https://github.com/Thenula09/Smart-Waste-Management-with-Arduino-",
     imageLink: "/img/smartwaste%20management.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Task Manager <br /> App
+        Smart-Power-Monitoring-Plug <br /> IoT
       </>
     ),
-    description: "Mobile Application",
-    link: "#",
+    description: "Smart Power Monitoring Plug is an IoT solution using ESP32 and PZEM-004 to monitor and control electrical appliances in real-time. It features remote ON/OFF switching, high-load detection alerts, and data logging via a PHP/SQL Server backend to optimize energy consumption. This project showcases expertise in embedded systems, IoT security, and real-time data analytics.",
+    link: "https://github.com/Thenula09/Smart-Power-Monitoring-Plug-IoT-",
     imageLink: "/img/powermonitoring%20plug.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Social Media <br /> Dashboard
+        Chess-game <br /> Game
       </>
     ),
-    description: "Vue.js Application",
-    link: "#",
+    description: "",
+    link: "https://github.com/Thenula09/Chess-game-full",
     imageLink: "/img/chess%20game.png",
   },
   {
     title: (
       <>
-        Weather <br /> Forecast
+        Movie HUB <br /> Website
       </>
     ),
-    description: "Python Application",
-    link: "#",
+    description: "A comprehensive movie booking system for a single theater, built with Spring Boot microservices backend and React frontend, featuring user authentication, seat booking, and billing.",
+    link: "https://github.com/Thenula09/MOVIE_MATE",
     imageLink: "/img/moviehub.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Blog <br /> Platform
+        Battle for the goal <br /> Game
       </>
     ),
-    description: "Next.js Application",
-    link: "#",
+    description: "This project is a smart, automated Goal Tracking System designed to detect and display game scores in real-time using IoT technology. It eliminates manual scorekeeping by using sensors to track goals as they happen.",
+    link: "https://github.com/Thenula09/Battle_for_the_goal",
     imageLink: "/img/battlefor%20goal.png",
+    customClass: "long-description"
   },
   {
     title: (
       <>
-        Portfolio <br /> Website
+        Computer shop <br></br>
+         management system <br /> POS
       </>
     ),
-    description: "Static Site",
+    description: "pos system ",
     link: "#",
     imageLink: "/img/computer%20shop.png",
+    customClass: "long-description"
   },
 ];
 //test

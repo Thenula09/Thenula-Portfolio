@@ -42,7 +42,7 @@ ul {
 
 .background {
   font-size: 17vw;
-  color: hsl(0, 0%, 98%);
+  color: #000;
   font-weight: 800;
   position: fixed;
   top: 50%;
