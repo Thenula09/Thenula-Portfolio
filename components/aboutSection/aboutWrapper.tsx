@@ -202,13 +202,13 @@ export function AboutWrapper({}) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10 justify-items-center">
           {[
             { title: "YieldStone Page", category: "Webflow", footer: "Landing & marketing pages", image: "/img/projects/1.avif", link: "https://www.yieldstone.ai/", customClass: "" },
-            { title: "My Latest Works", category: "Portfolio", footer: "My latest projects and works collection", image: "/img/THWtokn.png", link: "#", customClass: "" },
-            { title: "Mobile Banking App", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/ChatGPT Image Feb 26, 2026 at 09_18_50 AM.png", link: "#", customClass: "" },
-            { title: "AmanFX Portfolio", category: "Webflow", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/", customClass: "" },
-            { title: "Therapist Website", category: "UI Design", footer: "Prototype in Figma", image: "/img/Bus Lanka.png", link: "#", customClass: "" },
-            { title: "E-Commerce Platform", category: "React Application", footer: "නවීන වාණිජ්‍ය විසඳුම ගෙවීම් ඒකාබද්ධතාවයෙන්", image: "/img/signal.png", link: "#", customClass: "" },
-            { title: "Project 7", category: "Other", footer: "Description here", image: "/img/smartwaste management.png", link: "#", customClass: "" },
-            { title: "Project 8", category: "Other", footer: "Description here", image: "/img/powermonitoring plug.png", link: "#", customClass: "" },
+            { title: "technology = React, TypeScript, Solidity", category: "Personal-Tokens", footer: "React, TypeScript, Solidity", image: "/img/THWtokn.png", link: "https://thenula-hansaja.vercel.app/work#second", customClass: "" },
+            { title: "technology = React, TypeScript,Python,supabase", category: "Mobile Application", footer: "Secure banking application with biometric authentication", image: "/img/ChatGPT Image Feb 26, 2026 at 09_18_50 AM.png", link: "https://thenula-hansaja.vercel.app/work#third", customClass: "" },
+            { title: "technology = React, JavaScript,,Mongo DB", category: "Webf Site", footer: "Portfolio site", image: "/img/LuxeLese.png", link: "https://amanfx.webflow.io/", customClass: "" },
+            { title: "technology = React Native, JavaScript, Firebase", category: "Mobile App", footer: "React Native, JavaScript, Firebase", image: "/img/Bus Lanka.png", link: "https://thenula-hansaja.vercel.app/work#sixth", customClass: "" },
+            { title: "technology = Pine Script", category: "Trading Indicators", footer: "Trading Indicators - Pine Script", image: "/img/signal.png", link: "https://github.com/Thenula09/THW-Trader", customClass: "" },
+            { title: "technology =  C++, Arduino", category: " Arduino Project", footer: "IoT, C++, Arduino", image: "/img/smartwaste management.png", link: "https://thenula-hansaja.vercel.app/work#seventh", customClass: "" },
+            { title: "technology = IoT, C++", category: "IoT Project", footer: "IoT, C++, Arduino", image: "/img/powermonitoring plug.png", link: "https://thenula-hansaja.vercel.app/work#eighth", customClass: "" },
           ].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noreferrer">
               <ProjectCard index={i + 1} imgSrc={p.image} title={p.title} category={p.category} footer={p.footer} customClass={p.customClass} />
