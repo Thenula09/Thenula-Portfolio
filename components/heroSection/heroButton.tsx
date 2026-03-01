@@ -50,7 +50,7 @@ export function HeroButton({}) {
             <span>
               <span className="scrambleText">Location at </span>
               <br />
-              <span className="scrambleText">Sri Lanka</span>
+              <span className="scrambleText text-yellow-400">Sri Lanka</span>
             </span>
           </p>
         </div>

@@ -71,7 +71,10 @@ export function HeroMarquee({}) {
     };
   }, []);
   return (
-    <div className="wrapperRollingText anime pointer-events-none z-20  select-none  rounded-3xl tracking-[-0.1em] ">
+    <div
+      className="wrapperRollingText anime pointer-events-none z-20 select-none rounded-3xl tracking-[-0.1em] "
+      style={{ bottom: -50 }}
+    >
       <div className="rollingText  md:!text-[200px]">
         - WA Thenula Hansaja - WA Thenula Hansaja&nbsp;
       </div>

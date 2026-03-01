@@ -4,91 +4,96 @@ import { HeroButton } from "./heroButton";
 import { HeroMarquee } from "./heroMarquee";
 
 export function HeroWrapper({}) {
-  const titlesTl = useRef<gsap.core.Timeline | null>(null);
+  const [currentTitleIndex, setCurrentTitleIndex] = React.useState(0);
+  const [isHovering, setIsHovering] = React.useState(false);
+  const titleRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement | null>(null);
 
+  const titles = [
+    "Mobile application developer",
+    "Web developer", 
+    "Full‑stack developer",
+    "AI / ML engineer",
+    "Project planner & designer",
+  ];
+
   useEffect(() => {
-    const root = containerRef.current;
-    if (!root) return;
-    const titles = Array.from(root.querySelectorAll<HTMLElement>(".animation__wrapper .animate__this"));
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+    }, 2000);
 
-    console.log("Found titles:", titles.length);
-    console.log("Titles:", titles);
+    return () => clearInterval(interval);
+  }, [titles.length]);
 
-    if (titles.length === 0) return;
+  // Smooth fade animation when title changes
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(titleRef.current,
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, [currentTitleIndex]);
 
-    // Hide all titles initially
-    gsap.set(titles, { opacity: 0 });
+  // Mouse move animation for title
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!titleRef.current) return;
     
-    // Show first title
-    gsap.set(titles[0], { opacity: 1 });
+    const rect = titleRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const rectWidth = rect.width;
+    
+    // Calculate position based on mouse movement
+    const moveX = (x / rectWidth - 0.5) * 20; // Move up to 20px left/right
+    
+    gsap.to(titleRef.current, {
+      x: moveX,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  };
 
-    console.log("First title set to visible");
-
-    let currentIndex = 0;
-
-    const showNextTitle = () => {
-      console.log("Switching from title:", currentIndex);
-      // Hide current title
-      gsap.to(titles[currentIndex], { 
-        opacity: 0, 
-        duration: 1.0,
-        onComplete: () => {
-          // Show next title
-          currentIndex = (currentIndex + 1) % titles.length;
-          console.log("Showing next title:", currentIndex, titles[currentIndex]?.textContent);
-          gsap.fromTo(titles[currentIndex], 
-            { opacity: 0 },
-            { opacity: 1, duration: 1.0 }
-          );
-        }
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    // Reset position
+    if (titleRef.current) {
+      gsap.to(titleRef.current, {
+        x: 0,
+        duration: 0.3,
+        ease: "power2.out"
       });
-    };
-
-    // Start animation cycle immediately
-    console.log("Starting animation cycle immediately");
-    // set to 4000ms so each title is fully visible for 2s (interval = visible time + fadeOut + fadeIn)
-    const interval = setInterval(showNextTitle, 4000);
-      
-    return () => {
-      clearInterval(interval);
-      if (titlesTl.current) titlesTl.current.kill();
-    };
-  }, []);
+    }
+  };
 
   return (
     <main ref={containerRef as any} className="section1__wrapper relative max-w-maxWidth grow ">
       <div className="myImage"></div>
       <HeroButton />
-      <h2 className="left mask pointer-events-none z-20 pt-20">
+      <h2 className="left mask z-20 pt-20" onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <span className="hero-arrow" aria-hidden="true" />
         <div className="free anime sr-only">Hero titles</div>
 
         <div className="animation__wrapper anime" style={{ height: '100px', position: 'relative', zIndex: 50 }}>
-          {[
-            "  ",
-            "Full‑stack developer",
-            "Mobile application developer",
-            "Web developer",
-            "AI / ML engineer",
-            "Project planner & designer",
-          ].map((title, i) => (
-            <span key={i} className={`animate__this animate__this${i + 1} left-0`} style={{ 
+          <span 
+            ref={titleRef}
+            className="animate__this animate__this1 left-0" 
+            style={{ 
               display: 'block', 
               position: 'absolute', 
-              top: '20px',
+              top: '40px',
               left: '0',
               color: '#ffffff',
-              fontSize: 'clamp(25px, 3.5vw, 50px)',
+              fontSize: 'clamp(20px, 2.8vw, 40px)',
               fontWeight: 'bold',
               zIndex: 60,
-              opacity: i === 0 ? 1 : 0
-            }}>
-              {title}
-              <span className="yellow__it">.</span>
-              <br />
-            </span>
-          ))}
+              opacity: 1
+            }}
+          >
+            {titles[currentTitleIndex]}
+            <span className="yellow__it">.</span>
+            <br />
+          </span>
         </div>
       </h2>
       <HeroMarquee />

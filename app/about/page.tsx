@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import ThenulaAbout from "@/components/aboutSection/Thenulabaout.jpg";
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ import { HeaderNavigation } from "@/components/headerNavigation";
 import SolarLoader from "@/components/solarLoader";
 import LeftFazerLoader from "@/components/leftFazerLoader";
 import { Footer } from "@/components/contactSection/footer";
+import gsap from "gsap";
 import "./about.css";
 
 const timelineData = [
@@ -139,6 +140,61 @@ export default function AboutPage() {
   const lastScrollY = React.useRef<number>(0);
   const scrollTimeout = React.useRef<number | null>(null);
   const [tilt, setTilt] = React.useState({ rotateX: 0, rotateY: 0, translateY: 0 });
+  const mainHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  // Smooth scroll animation for main heading
+  useEffect(() => {
+    if (mainHeadingRef.current) {
+      gsap.fromTo(mainHeadingRef.current,
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      );
+    }
+  }, []);
+
+  // Smooth scroll animation for description paragraphs
+  useEffect(() => {
+    const paragraphs = document.querySelectorAll('.description');
+    if (paragraphs.length > 0) {
+      gsap.fromTo(paragraphs,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.2 }
+      );
+    }
+  }, []);
+
+  // Smooth scroll animation for stats grid
+  useEffect(() => {
+    const statsGrid = document.querySelector('.stats-mini-grid');
+    if (statsGrid) {
+      gsap.fromTo(statsGrid,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", delay: 0.4 }
+      );
+    }
+  }, []);
+
+  // Smooth scroll animation for timeline section
+  useEffect(() => {
+    const sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle) {
+      gsap.fromTo(sectionTitle,
+        { opacity: 0, y: -25 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.6 }
+      );
+    }
+  }, []);
+
+  // Smooth scroll animation for timeline cards
+  useEffect(() => {
+    const timelineCards = document.querySelectorAll('.timeline-card-wrapper');
+    if (timelineCards.length > 0) {
+      gsap.fromTo(timelineCards,
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out", stagger: 0.15, delay: 0.8 }
+      );
+    }
+  }, []);
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -235,7 +291,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="main-heading text-colorLight">
+              <h1 ref={mainHeadingRef} className="main-heading text-colorLight">
                 About Me
               </h1>
               

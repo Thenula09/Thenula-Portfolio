@@ -95,16 +95,28 @@ export default function EducationCareer() {
     }, speed);
   };
 
-  // trigger a slow scramble on first mouse movement anywhere
+  // trigger a slow scramble when component comes into view
   React.useEffect(() => {
     if (hasMoved) return;
-    const handler = () => {
-      scrambleTitle(80, 12); // slower, more rounds
-      setHasMoved(true);
-      window.removeEventListener("mousemove", handler);
-    };
-    window.addEventListener("mousemove", handler);
-    return () => window.removeEventListener("mousemove", handler);
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasMoved) {
+            scrambleTitle(80, 12); // slower, more rounds
+            setHasMoved(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => observer.disconnect();
   }, [hasMoved]);
 
   useEffect(() => {
