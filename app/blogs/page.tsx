@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import "../header.css";
 import "../work.css";
 import { Header } from "@/components/header";
@@ -23,20 +23,32 @@ import galleryImg3 from "./1768669940148.jpeg";
 import tallImg1 from "./1770747615535.jpeg";
 import tallImg2 from "./1770747618386.jpeg";
 
-// Add marquee animation styles
-const marqueeStyle = `
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
+import snippetImg1 from "./1772046390723.jpeg";
+import snippetImg2 from "./1772046390156.jpeg";
+import snippetImg3 from "./1772046388637.jpeg";
+
+import snippet02Img from "./1737483732808.jpeg";
+
+// Add animation styles
+const animationStyles = `
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
-  .animate-marquee {
-    animation: marquee 20s linear infinite;
+  .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+  .animation-delay-150 {
+    animation-delay: 150ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
   }
 `;
 
 if (typeof window !== 'undefined') {
   const style = document.createElement('style');
-  style.textContent = marqueeStyle;
+  style.textContent = animationStyles;
   document.head.appendChild(style);
 }
 
@@ -263,6 +275,8 @@ export default function BlogsPage() {
   const [activeSection, setActiveSection] = useState(0);
   const [galleryImageIndex, setGalleryImageIndex] = useState(0);
   const [tallImageIndex, setTallImageIndex] = useState(0);
+  const [snippetImageIndex, setSnippetImageIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | StaticImageData | null>(null);
   
   const sections = [
     { id: 'gallery', name: 'Gallery', ref: galleryRef },
@@ -346,6 +360,50 @@ export default function BlogsPage() {
     return () => window.clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const imagesCount = 3;
+    const intervalId = window.setInterval(() => {
+      setSnippetImageIndex((prev) => (prev + 1) % imagesCount);
+    }, 3000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  // Initial animation for blogs section
+  useEffect(() => {
+    const blogSection = document.getElementById('blogs');
+    if (blogSection) {
+      // Initial state - hidden
+      gsap.set(blogSection.querySelectorAll('h1, p, div'), {
+        opacity: 0,
+        y: 30
+      });
+      
+      // Animate in when section is visible
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(blogSection.querySelectorAll('h1, p, div'), {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power4.out",
+                stagger: 0.1
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      
+      observer.observe(blogSection);
+      
+      return () => observer.disconnect();
+    }
+  }, []);
+
   // Scroll detection for active section
   useEffect(() => {
     let previousSection = 0;
@@ -378,7 +436,7 @@ export default function BlogsPage() {
         // Animate out previous section
         const allSections = [gallerySection, blogSection];
         if (allSections[previousSection]) {
-          gsap.to(allSections[previousSection].querySelectorAll('article, h1, h2, p'), {
+          gsap.to(allSections[previousSection].querySelectorAll('article, h1, h2, p, div'), {
             opacity: 0.3,
             y: 20,
             duration: 0.3,
@@ -389,7 +447,7 @@ export default function BlogsPage() {
         // Animate in new section
         setTimeout(() => {
           if (allSections[activeIndex]) {
-            gsap.to(allSections[activeIndex].querySelectorAll('article, h1, h2, p'), {
+            gsap.to(allSections[activeIndex].querySelectorAll('article, h1, h2, p, div'), {
               opacity: 1,
               y: 0,
               duration: 0.4,
@@ -415,11 +473,14 @@ export default function BlogsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navigate to section
+  // Smooth scroll to section
   const scrollToSection = (index: number) => {
     const sectionElement = document.getElementById(sections[index].id);
     if (sectionElement) {
-      sectionElement.scrollIntoView({ behavior: 'smooth' });
+      sectionElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
 
@@ -460,17 +521,13 @@ export default function BlogsPage() {
 
         <section id="gallery" className="darkGradient min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-[50px] py-paddingY text-colorLight snap-start">
           <div ref={galleryRef} className="relative z-10 w-full">
-            <h1 className="mb-6 text-[clamp(32px,_5vw,_56px)] font-bold leading-[1.1] tracking-tight text-white text-center">
+            <h1 className="mb-12 text-[clamp(32px,_5vw,_56px)] font-bold leading-[1.1] tracking-tight text-white text-center">
               Gallery
             </h1>
 
-            <p className="mb-12 text-[clamp(18px,_2vw,_24px)] text-white/80 text-center max-w-3xl mx-auto">
-              A quick visual grid — you can replace these cards with real blog thumbnails or images.
-            </p>
-
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-10 shadow-2xl">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 auto-rows-[190px] md:auto-rows-[240px]">
-                <div className="lg:col-span-3 lg:row-span-2 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-yellow-400/20 via-white/5 to-white/5 relative">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 auto-rows-[190px] md:auto-rows-[240px]">
+                <div className="lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-400/20 via-white/5 to-white/5 relative cursor-pointer hover:scale-[1.02] transition-transform duration-300" onClick={() => setSelectedImage([galleryImg1, galleryImg2, galleryImg3][galleryImageIndex])}>
                   <div className="absolute inset-0">
                     {[galleryImg1, galleryImg2, galleryImg3].map((img, idx) => (
                       <div
@@ -497,15 +554,15 @@ export default function BlogsPage() {
                   <div className="relative h-full w-full py-6 px-4 md:px-5 flex flex-col justify-end">
                     <p className="text-white/90 text-sm mb-2">Featured</p>
                     <h2 className="text-white font-semibold text-2xl md:text-3xl leading-tight">
-                      Math Notes
+                      RoboRover Workshop
                     </h2>
                     <p className="text-white/70 mt-2 max-w-md">
-                      Formulas, sketches, and small write-ups.
+                      Workshop conducted at NIBM Matara – City University.
                     </p>
                   </div>
                 </div>
 
-                <div className="lg:row-span-3 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 via-white/5 to-yellow-400/10 relative">
+                <div className="lg:row-span-3 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 via-white/5 to-yellow-400/10 relative cursor-pointer hover:scale-[1.02] transition-transform duration-300" onClick={() => setSelectedImage([tallImg1, tallImg2][tallImageIndex])}>
                   <div className="absolute inset-0">
                     {[tallImg1, tallImg2].map((img, idx) => (
                       <div
@@ -530,34 +587,60 @@ export default function BlogsPage() {
 
                   <div className="relative h-full w-full p-8 lg:p-10 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-white font-semibold text-lg">Tall Card</h3>
+                      <h3 className="text-white font-semibold text-lg">NIBM RoboRover Event!</h3>
                       <p className="text-white/70 text-sm mt-2">
-                        Fibonacci
+                        Highlights:
                       </p>
                     </div>
                     <p className="text-white/60 text-sm">
-                      0, 1, 1, 2, 3, 5, 8...
+                      Workshop conducted at NIBM Matara – City University.
                     </p>
                   </div>
                 </div>
 
-                <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5">
-                  <div className="h-full w-full p-6 flex items-end justify-between">
-                    <div>
-                      <h3 className="text-white font-semibold text-lg">Snippet 01</h3>
-                      <p className="text-white/70 text-sm mt-2">E = mc²</p>
-                    </div>
-                    <span className="text-yellow-400 text-sm font-medium">View</span>
+                <div className="lg:col-span-1 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5 relative cursor-pointer hover:scale-[1.02] transition-transform duration-300" onClick={() => setSelectedImage([snippetImg1, snippetImg2, snippetImg3][snippetImageIndex])}>
+                  <div className="absolute inset-0">
+                    {[snippetImg1, snippetImg2, snippetImg3].map((img, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "absolute inset-0 transition-all duration-700 ease-in-out",
+                          idx === snippetImageIndex
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 translate-x-6"
+                        )}
+                      >
+                        <Image
+                          src={img}
+                          alt="Snippet image"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                  </div>
+
+                  <div className="relative h-full w-full p-6 flex flex-col justify-end">
+                    <h3 className="text-white font-semibold text-lg">Industry Visit</h3>
+                    <p className="text-white/70 text-sm mt-2">Wiley IT Company</p>
                   </div>
                 </div>
 
-                <div className="lg:col-span-1 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5">
-                  <div className="h-full w-full p-6 flex items-end justify-between">
-                    <div>
-                      <h3 className="text-white font-semibold text-lg">Snippet 02</h3>
-                      <p className="text-white/70 text-sm mt-2">a² + b² = c²</p>
-                    </div>
-                    <span className="text-yellow-400 text-sm font-medium">View</span>
+                <div className="lg:col-span-1 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-white/5 relative cursor-pointer hover:scale-[1.02] transition-transform duration-300" onClick={() => setSelectedImage(snippet02Img)}>
+                  <div className="absolute inset-0">
+                    <Image
+                      src={snippet02Img}
+                      alt="Snippet 02 image"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                  </div>
+
+                  <div className="relative h-full w-full p-6 flex flex-col justify-end">
+                    <h3 className="text-white font-semibold text-lg">02</h3>
+                    <p className="text-white/70 text-sm mt-2">new</p>
                   </div>
                 </div>
               </div>
@@ -572,44 +655,64 @@ export default function BlogsPage() {
               ref={titleRef}
               className="mb-8 text-[clamp(32px,_5vw,_56px)] font-bold leading-[1.1] tracking-tight text-white text-center"
             >
-              Blogs
+              Coming Soon
             </h1>
 
             <p className="mb-12 text-[clamp(18px,_2vw,_24px)] text-white/80 text-center max-w-3xl mx-auto">
-              Latest posts and write-ups — coming soon. Below are example entries you can replace with real content.
+              Exciting content is on the way! Stay tuned for updates.
             </p>
 
-            <div 
-              ref={blogCardsRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch"
-            >
-              {samplePosts.map((p) => (
-                <article 
-                  key={p.id} 
-                  className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl h-full flex flex-col justify-between min-w-0 hover:shadow-yellow-500/20 transition-all duration-150 hover:scale-105"
-                >
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">{p.title}</h3>
-                    <p className="text-base text-white/70 mb-6 line-clamp-3">{p.excerpt}</p>
-                  </div>
+            {/* Loading Animation */}
+            <div className="flex justify-center items-center">
+              <div className="relative w-24 h-24">
+                <div className="absolute inset-0 border-4 border-yellow-400/20 rounded-full"></div>
+                <div className="absolute inset-0 border-4 border-yellow-400 rounded-full animate-spin border-t-transparent"></div>
+                <div className="absolute inset-2 border-4 border-yellow-400/10 rounded-full"></div>
+                <div className="absolute inset-2 border-4 border-yellow-400/60 rounded-full animate-spin border-t-transparent animation-delay-150"></div>
+                <div className="absolute inset-4 border-4 border-yellow-400/5 rounded-full"></div>
+                <div className="absolute inset-4 border-4 border-yellow-400/40 rounded-full animate-spin border-t-transparent animation-delay-300"></div>
+              </div>
+            </div>
 
-                  <div className="flex items-end justify-between">
-                    <Link 
-                      href={p.href} 
-                      className="text-yellow-400 hover:text-yellow-300 font-medium transition-colors duration-150"
-                    >
-                      Read →
-                    </Link>
-                    <span className="text-sm text-white/50">Feb 18, 2026</span>
-                  </div>
-                </article>
-              ))}
+            <div className="mt-12 text-center">
+              <p className="text-white/60 text-sm animate-pulse">
+                We're working on something amazing...
+              </p>
             </div>
           </div>
         </section>
 
         
       </main>
+      
+      {/* Image Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-6xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <Image
+              src={selectedImage}
+              alt="Selected image"
+              fill
+              className="object-contain"
+              priority
+            />
+            <button
+              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
       
       {/* Footer at bottom of all sections */}
       <Footer className="bottom-0 left-0" />

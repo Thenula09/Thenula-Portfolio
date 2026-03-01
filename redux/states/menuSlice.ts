@@ -12,8 +12,11 @@ const menuSlice = createSlice({
     color: "Light" as "Light" | "Dark",
   },
   reducers: {
-    toggleMenu: (state, { payload }: { payload: menuStateType }) => {
-      return { ...state, ...payload };
+    toggleMenu: (state) => {
+      return { ...state, isMenuOpen: !state.isMenuOpen };
+    },
+    setMenuOpen: (state, { payload }: { payload: boolean }) => {
+      return { ...state, isMenuOpen: payload };
     },
   },
 });

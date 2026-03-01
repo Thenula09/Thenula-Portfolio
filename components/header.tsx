@@ -9,6 +9,7 @@ import { toggleMenu } from "@/redux/states/menuSlice";
 import { cn } from "@/lib/utils";
 import { links } from "@/data/data";
 import "@/app/header.css";
+import { Menu, X } from "lucide-react";
 
 const ease = CustomEase.create("custom", "M0,0 C0.52,0.01 0.16,1 1,1 ");
 
@@ -91,53 +92,69 @@ export function Header({ color, className, mode = "hamburger" }: HeaderProps) {
           </Magentic>
           
           <div className="flex items-center gap-6 md:gap-10">
-            <Magentic
-              href={links.about}
-              strength={40}
-              className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
-              scrambleParams={{
-                text: "About",
-                chars: "-x",
-              }}
-            >
-              <span className="mask scrambleText">About</span>
-            </Magentic>
-            
-            <Magentic
-              href={links.work}
-              strength={40}
-              className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
-              scrambleParams={{
-                text: "Work",
-                chars: "-x",
-              }}
-            >
-              <span className="mask scrambleText">Work</span>
-            </Magentic>
-            
-            <Magentic
-              href={links.blog}
-              strength={40}
-              className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
-              scrambleParams={{
-                text: "Blogs",
-                chars: "-x",
-              }}
-            >
-              <span className="mask scrambleText">Blogs</span>
-            </Magentic>
+            {/* Desktop Navigation - Hidden on mobile */}
+            <div className="hidden md:flex items-center gap-6 md:gap-10">
+              <Magentic
+                href={links.about}
+                strength={40}
+                className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
+                scrambleParams={{
+                  text: "About",
+                  chars: "-x",
+                }}
+              >
+                <span className="mask scrambleText">About</span>
+              </Magentic>
+              
+              <Magentic
+                href={links.work}
+                strength={40}
+                className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
+                scrambleParams={{
+                  text: "Work",
+                  chars: "-x",
+                }}
+              >
+                <span className="mask scrambleText">Work</span>
+              </Magentic>
+              
+              <Magentic
+                href={links.blog}
+                strength={40}
+                className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
+                scrambleParams={{
+                  text: "Blogs",
+                  chars: "-x",
+                }}
+              >
+                <span className="mask scrambleText">Blogs</span>
+              </Magentic>
 
-            <Magentic
-              href="/contact"
-              strength={40}
-              className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
-              scrambleParams={{
-                text: "Contact",
-                chars: "-x",
-              }}
+              <Magentic
+                href="/contact"
+                strength={40}
+                className={`anime nav__item text-sm md:text-base font-medium text-color${color} before:bg-color${color} hover:opacity-70 transition-opacity`}
+                scrambleParams={{
+                  text: "Contact",
+                  chars: "-x",
+                }}
+              >
+                <span className="mask scrambleText">Contact</span>
+              </Magentic>
+            </div>
+
+            {/* Mobile Menu Button - Visible only on mobile */}
+            <button
+              onClick={() => dispatch(toggleMenu())}
+              className={`md:hidden p-2 rounded-lg transition-colors text-color${color} hover:bg-color${color}/10`}
+              aria-label="Toggle menu"
             >
-              <span className="mask scrambleText">Contact</span>
-            </Magentic>
+              {mode === "cross" ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
       </nav>

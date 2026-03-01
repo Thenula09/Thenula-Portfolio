@@ -187,7 +187,7 @@ export default function AboutPage() {
       <section className="profile-hero-section">
         <LeftFazerLoader />
         <div className="container">
-          <div className="profile-grid items-center"> {/* added items-center for better alignment */}
+          <div className="profile-grid items-center">
             <div className="orbit-loader-container"></div>
             
             <motion.div 
@@ -234,22 +234,21 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ paddingTop: '200px' }} // Title එක මදක් පහළට ගැනීමට
             >
-              <h1 className="main-heading text-colorLight" style={{ marginBottom: '-140px' }}>
+              <h1 className="main-heading text-colorLight">
                 About Me
               </h1>
               
               <div className="description-wrapper">
-                <p className="description text-colorLight" style={{ marginBottom: '-200px', lineHeight: '1.7' }}>
+                <p className="description text-colorLight">
                   I am a dedicated <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Software Engineering undergraduate</span> at <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Coventry University</span>, driven by a passion for solving complex real-world problems through innovative technology. With a solid foundation from a Diploma in IT (<span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Pearson</span>) and an HND in Software Engineering (<span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>NIBM</span>), I specialize in <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Python</span> and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Java</span> while actively expanding my expertise into <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>AI</span>, <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Machine Learning</span>, and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Blockchain</span>.
                 </p>
-                <p className="description text-colorLight" style={{ lineHeight: '1.7' }}>
+                <p className="description text-colorLight">
                   My primary focus lies in <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>Mobile Application Development</span> and creating tech-driven solutions that simplify lives. I pride myself on my analytical mindset and my ability to push boundaries in emerging tech fields. You can explore my technical journey, ongoing projects, and problem-solving capabilities via my <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>GitHub</span> and <span style={{ color: 'hsl(54,100%,50%)', fontWeight: 'bold' }}>LinkedIn</span>.
                 </p>
               </div>
 
-              <div className="stats-mini-grid" style={{ marginTop: '30px' }}>
+              <div className="stats-mini-grid">
                 <div><strong>8+</strong> Projects</div>
                 <div><strong>3+</strong> Years Exp.</div>
               </div>
