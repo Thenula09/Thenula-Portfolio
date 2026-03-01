@@ -7,7 +7,7 @@ import { AboutWrapper } from "@/components/aboutSection/aboutWrapper";
 import Magentic from "@/components/ui/magentic";
 import { links } from "@/data/data";
 import { useAppDispatch } from "@/hooks/reduxHooks";
-import { toggleMenu } from "@/redux/states/menuSlice";
+import { setMenuState } from "@/redux/states/menuSlice";
 import { gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 
@@ -79,7 +79,7 @@ export function AboutSection({}) {
               strength={50}
               className="anime mask nav__item h-8 w-8 cursor-pointer items-center text-colorLight before:bg-colorDark"
               onClick={() => {
-                dispatch(toggleMenu({ isMenuOpen: true, color: "Dark" }));
+                dispatch(setMenuState({ isMenuOpen: true, color: "Dark" }));
               }}
             >
               <div className="flex h-[0.9rem] w-full flex-col justify-between">
