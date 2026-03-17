@@ -67,7 +67,7 @@ export default function EducationCareer() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLSpanElement>(null);
 
-  const originalTitle = "Education  & Career";
+  const originalTitle = "Education & Career";
   const [displayTitle, setDisplayTitle] = React.useState(originalTitle);
   const [hasMoved, setHasMoved] = React.useState(false);
 
