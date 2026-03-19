@@ -21,7 +21,7 @@ const ContactForm = () => {
     e.preventDefault();
     // Here you can add the logic to send the email
     console.log('Form data:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
+    alert('Thank  you for your message! I will get back to you soon.');
     setFormData({ name: '', email: '', message: '' });
   };
 
