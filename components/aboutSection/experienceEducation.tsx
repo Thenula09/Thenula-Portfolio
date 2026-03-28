@@ -17,7 +17,7 @@ type TimelineItem = {
 const items: TimelineItem[] = [
   {
     id: 5,
-    title: "BSc (Hons) Computer Science with Software Engineering",
+    title: "BSc  (Hons) Computer Science with Software Engineering",
     institution: "Coventry University",
     date: "2026 - 2028 - Present",
     desc: "Undergraduate program focusing on software development and systems engineering.",
